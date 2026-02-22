@@ -107,7 +107,7 @@ export default function RegisterPage() {
     confirmPassword: '',
     county: '',
     farmName: '',
-    farmSize: string'',
+    farmSize: '',
     crops: [],
     experience: '',
     accountType: 'farmer',
