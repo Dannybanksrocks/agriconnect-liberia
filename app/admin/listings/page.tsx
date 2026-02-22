@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { mockListings } from '@/lib/mock-data/marketplace'
+import { marketplaceListings } from '@/lib/mock-data/marketplace'
 import { MarketplaceListing } from '@/lib/types'
 import { Eye, EyeOff, Flag, Trash2, Star, TrendingUp, ShoppingBag, DollarSign } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function AdminListingsPage() {
-  const [listings, setListings] = useState<MarketplaceListing[]>(mockListings)
+  const [listings, setListings] = useState<MarketplaceListing[]>(marketplaceListings)
   const [filter, setFilter] = useState<'all' | 'available' | 'sold' | 'expired'>('all')
 
   const filteredListings = listings.filter((l) => {
