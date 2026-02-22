@@ -360,6 +360,20 @@ export default function RegisterPage() {
                       </div>
 
                       <div className="space-y-1.5">
+                        <label htmlFor="whatsappNumber" className="text-sm font-medium text-gray-700">
+                          WhatsApp Number <span className="text-gray-400 font-normal">(optional — for buyer contact)</span>
+                        </label>
+                        <div className="relative flex">
+                          <span className="inline-flex items-center px-3 h-11 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-sm font-medium text-gray-500">+231</span>
+                          <div className="relative flex-1">
+                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                            <input id="whatsappNumber" type="tel" placeholder="Same as phone or different" value={formData.whatsappNumber} onChange={(e) => updateField('whatsappNumber', e.target.value)} className="w-full h-11 pl-10 pr-4 rounded-r-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition text-sm" />
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-500">Used for buyers to contact you about marketplace listings</p>
+                      </div>
+
+                      <div className="space-y-1.5">
                         <label htmlFor="email" className="text-sm font-medium text-gray-700">
                           Email <span className="text-gray-400 font-normal">(optional)</span>
                         </label>

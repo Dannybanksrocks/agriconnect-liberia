@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, TrendingUp, Cloud, FileText,
-  Users, Map, BarChart3, LogOut, ChevronLeft, ChevronRight,
+  Users, Map, BarChart3, LogOut, ChevronLeft, ChevronRight, ShoppingBag,
 } from 'lucide-react'
 import Logo, { LogoIcon } from './Logo'
 import { useState } from 'react'
@@ -13,6 +13,7 @@ import { useAuth } from '@/lib/auth'
 const adminNav = [
   { label: 'Dashboard',     icon: LayoutDashboard, href: '/admin/dashboard' },
   { label: 'Market Prices', icon: TrendingUp,       href: '/admin/prices'   },
+  { label: 'Listings',      icon: ShoppingBag,      href: '/admin/listings' },
   { label: 'Weather Data',  icon: Cloud,            href: '/admin/weather'  },
   { label: 'Content',       icon: FileText,         href: '/admin/content'  },
   { label: 'Users',         icon: Users,            href: '/admin/users'    },
