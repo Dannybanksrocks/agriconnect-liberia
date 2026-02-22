@@ -27,7 +27,7 @@ export default function MissionSection() {
             initial={{ opacity: 0, x: -32 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative pb-16 lg:pb-20"
           >
             {/* Main card */}
             <div className="relative bg-[#1B4332] rounded-3xl p-8 shadow-2xl shadow-[#1B4332]/20 overflow-hidden">
@@ -72,8 +72,8 @@ export default function MissionSection() {
               </div>
             </div>
 
-            {/* Floating quote card */}
-            <div className="absolute -bottom-12 -right-4 lg:-right-8 bg-white border border-stone-200 rounded-2xl px-5 py-4 shadow-lg max-w-[240px] z-20">
+            {/* Floating quote card - positioned below the main card */}
+            <div className="absolute -bottom-6 left-4 lg:left-8 right-4 lg:right-auto lg:max-w-[280px] bg-white border border-stone-200 rounded-2xl px-5 py-4 shadow-xl z-20">
               <p className="text-xs text-stone-600 italic leading-relaxed">
                 &ldquo;I earned L$8,000 more on my rice harvest after using AgriHub.&rdquo;
               </p>
