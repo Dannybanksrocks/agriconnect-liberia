@@ -50,9 +50,9 @@ const STEPS = [
 ]
 
 const inputClass =
-  'w-full h-11 px-4 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition text-sm'
-const labelClass = 'block text-sm font-medium text-gray-200 mb-1.5'
-const errorClass = 'text-xs text-red-400 mt-1'
+  'w-full h-11 px-4 rounded-lg border border-stone-300 bg-white text-stone-800 placeholder:text-stone-400 focus:outline-none focus:border-[#2D6A4F] focus:ring-2 focus:ring-[#2D6A4F]/20 transition text-sm'
+const labelClass = 'block text-sm font-medium text-stone-700 mb-1.5'
+const errorClass = 'text-xs text-red-500 mt-1'
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -205,17 +205,21 @@ export default function RegisterPage() {
   const selectedProvider = MOBILE_MONEY_PROVIDERS.find((p) => p.id === formData.mobileMoneyProvider)
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl flex rounded-2xl overflow-hidden shadow-2xl">
+    <div className="min-h-screen bg-stone-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-5xl flex rounded-2xl overflow-hidden shadow-xl border border-stone-200">
 
         {/* Left Sidebar */}
-        <div className="hidden lg:flex w-64 flex-shrink-0 bg-gray-900 flex-col p-6">
+        <div className="hidden lg:flex w-64 flex-shrink-0 bg-[#1B4332] flex-col p-6">
           <div className="mb-8">
-            <div className="flex items-center gap-2 mb-1">
-              <Leaf className="w-6 h-6 text-green-400" />
-              <span className="text-white font-bold text-lg">AgriHub</span>
-            </div>
-            <p className="text-gray-400 text-xs">Liberia's Agricultural Platform</p>
+            <Link href="/" className="flex items-center gap-2 mb-1">
+              <div className="w-8 h-8 rounded-lg bg-[#D8F3DC]/20 flex items-center justify-center">
+                <Leaf className="w-4 h-4 text-[#D8F3DC]" />
+              </div>
+              <span className="text-white font-bold text-lg tracking-tight">
+                Agri <span className="text-[#74C69D]">Hub</span>
+              </span>
+            </Link>
+            <p className="text-[#74C69D]/70 text-xs mt-1">Liberia's Agricultural Platform</p>
           </div>
 
           <nav className="flex-1 space-y-1">
@@ -226,47 +230,51 @@ export default function RegisterPage() {
               return (
                 <div
                   key={s.id}
-                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition ${active ? 'bg-green-600/20 border border-green-600/40' : done ? 'opacity-70' : 'opacity-40'}`}
+                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition ${active ? 'bg-white/10' : done ? 'opacity-70' : 'opacity-40'}`}
                 >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${done ? 'bg-green-500 text-white' : active ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${done ? 'bg-[#52B788] text-white' : active ? 'bg-white text-[#1B4332]' : 'bg-white/10 text-white/50'}`}>
                     {done ? <Check className="w-4 h-4" /> : s.id}
                   </div>
                   <div>
-                    <p className={`text-sm font-medium ${active ? 'text-white' : 'text-gray-400'}`}>{s.label}</p>
+                    <p className={`text-sm font-medium ${active ? 'text-white' : 'text-[#74C69D]'}`}>{s.label}</p>
                   </div>
                 </div>
               )
             })}
           </nav>
 
-          <div className="mt-auto pt-6 border-t border-gray-700">
-            <p className="text-xs text-gray-500">Already have an account?</p>
-            <Link href="/auth/login" className="text-sm text-green-400 hover:text-green-300 font-medium mt-1 inline-block">
+          <div className="mt-auto pt-6 border-t border-white/10">
+            <p className="text-xs text-white/40">Already have an account?</p>
+            <Link href="/auth/login" className="text-sm text-[#74C69D] hover:text-white font-medium mt-1 inline-block transition-colors">
               Sign in instead
             </Link>
           </div>
         </div>
 
         {/* Main Form Area */}
-        <div className="flex-1 bg-gray-800 flex flex-col">
+        <div className="flex-1 bg-white flex flex-col">
           {/* Mobile header */}
-          <div className="lg:hidden flex items-center justify-between px-6 py-4 bg-gray-900 border-b border-gray-700">
-            <div className="flex items-center gap-2">
-              <Leaf className="w-5 h-5 text-green-400" />
-              <span className="text-white font-bold">AgriHub Liberia</span>
-            </div>
+          <div className="lg:hidden flex items-center justify-between px-6 py-4 bg-[#1B4332]">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+                <Leaf className="w-4 h-4 text-[#D8F3DC]" />
+              </div>
+              <span className="text-white font-bold tracking-tight">
+                Agri <span className="text-[#74C69D]">Hub</span>
+              </span>
+            </Link>
             {step < 6 && (
-              <span className="text-xs text-gray-400">Step {step} of 5</span>
+              <span className="text-xs text-white/60 bg-white/10 px-2.5 py-1 rounded-full">Step {step} of 5</span>
             )}
           </div>
 
           {/* Mobile step dots */}
           {step < 6 && (
-            <div className="lg:hidden flex items-center justify-center gap-2 py-3 bg-gray-900 border-b border-gray-700">
+            <div className="lg:hidden flex items-center justify-center gap-2 py-3 bg-stone-50 border-b border-stone-100">
               {STEPS.map((s) => (
                 <div
                   key={s.id}
-                  className={`rounded-full transition-all ${step === s.id ? 'w-6 h-2 bg-green-500' : step > s.id ? 'w-2 h-2 bg-green-600' : 'w-2 h-2 bg-gray-600'}`}
+                  className={`rounded-full transition-all duration-300 ${step === s.id ? 'w-6 h-2 bg-[#1B4332]' : step > s.id ? 'w-2 h-2 bg-[#52B788]' : 'w-2 h-2 bg-stone-300'}`}
                 />
               ))}
             </div>
@@ -286,8 +294,8 @@ export default function RegisterPage() {
                 {step === 1 && (
                   <div className="space-y-5">
                     <div>
-                      <h2 className="text-2xl font-bold text-white">Personal Information</h2>
-                      <p className="text-gray-400 text-sm mt-1">Tell us about yourself to get started</p>
+                      <h2 className="text-2xl font-bold text-stone-800">Personal Information</h2>
+                      <p className="text-stone-500 text-sm mt-1">Tell us about yourself to get started</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -306,7 +314,7 @@ export default function RegisterPage() {
                     <div>
                       <label className={labelClass}>Phone Number</label>
                       <div className="flex gap-2">
-                        <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-gray-600 bg-gray-700 text-white text-sm flex-shrink-0">
+                        <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-stone-300 bg-stone-50 text-stone-700 text-sm flex-shrink-0">
                           <span>🇱🇷</span>
                           <span>+231</span>
                         </div>
@@ -334,7 +342,7 @@ export default function RegisterPage() {
                             key={opt}
                             type="button"
                             onClick={() => set('familiarWithApps', opt.toLowerCase())}
-                            className={`py-2.5 rounded-lg border text-sm font-medium transition ${formData.familiarWithApps === opt.toLowerCase() ? 'border-green-500 bg-green-600/20 text-green-400' : 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500'}`}
+                            className={`py-2.5 rounded-lg border text-sm font-medium transition ${formData.familiarWithApps === opt.toLowerCase() ? 'border-[#1B4332] bg-[#D8F3DC] text-[#1B4332]' : 'border-stone-300 bg-white text-stone-600 hover:border-stone-400'}`}
                           >
                             {opt}
                           </button>
@@ -344,9 +352,9 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>WhatsApp Number <span className="text-gray-500">(optional)</span></label>
+                      <label className={labelClass}>WhatsApp Number <span className="text-stone-400">(optional)</span></label>
                       <div className="flex gap-2">
-                        <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-gray-600 bg-gray-700 text-white text-sm flex-shrink-0">
+                        <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-stone-300 bg-stone-50 text-stone-700 text-sm flex-shrink-0">
                           <span>🇱🇷</span>
                           <span>+231</span>
                         </div>
@@ -354,8 +362,8 @@ export default function RegisterPage() {
                       </div>
                     </div>
 
-                    <div className="border-t border-gray-700 pt-5">
-                      <p className="text-sm font-medium text-gray-200 mb-4">Create your password</p>
+                    <div className="border-t border-stone-100 pt-5">
+                      <p className="text-sm font-medium text-stone-700 mb-4">Create your password</p>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                           <label className={labelClass}>Password</label>
@@ -367,7 +375,7 @@ export default function RegisterPage() {
                               value={formData.password}
                               onChange={(e) => set('password', e.target.value)}
                             />
-                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200">
+                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
                               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                             </button>
                           </div>
@@ -383,7 +391,7 @@ export default function RegisterPage() {
                               value={formData.confirmPassword}
                               onChange={(e) => set('confirmPassword', e.target.value)}
                             />
-                            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200">
+                            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
                               {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                             </button>
                           </div>
@@ -398,8 +406,8 @@ export default function RegisterPage() {
                 {step === 2 && (
                   <div className="space-y-5">
                     <div>
-                      <h2 className="text-2xl font-bold text-white">Farm Details</h2>
-                      <p className="text-gray-400 text-sm mt-1">Tell us about your farm so we can personalise your experience</p>
+                      <h2 className="text-2xl font-bold text-stone-800">Farm Details</h2>
+                      <p className="text-stone-500 text-sm mt-1">Tell us about your farm so we can personalise your experience</p>
                     </div>
 
                     <div>
@@ -429,7 +437,7 @@ export default function RegisterPage() {
                             key={crop}
                             type="button"
                             onClick={() => toggleCrop(crop)}
-                            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${formData.crops.includes(crop) ? 'border-green-500 bg-green-600/20 text-green-400' : 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500'}`}
+                            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${formData.crops.includes(crop) ? 'border-[#1B4332] bg-[#D8F3DC] text-[#1B4332]' : 'border-stone-300 bg-white text-stone-600 hover:border-stone-400'}`}
                           >
                             {formData.crops.includes(crop) && <span className="mr-1">✓</span>}{crop}
                           </button>
@@ -443,16 +451,16 @@ export default function RegisterPage() {
                           onChange={(e) => setCropInput(e.target.value)}
                           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addCustomCrop() } }}
                         />
-                        <button type="button" onClick={addCustomCrop} className="px-4 h-11 rounded-lg bg-green-600 hover:bg-green-700 text-white text-sm font-medium transition flex-shrink-0">
+                        <button type="button" onClick={addCustomCrop} className="px-4 h-11 rounded-lg bg-[#1B4332] hover:bg-[#2D6A4F] text-white text-sm font-medium transition flex-shrink-0">
                           Add
                         </button>
                       </div>
                       {formData.crops.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 mt-2">
                           {formData.crops.map((c) => (
-                            <span key={c} className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-600/20 border border-green-600/40 text-green-400 text-xs">
+                            <span key={c} className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#D8F3DC] border border-[#52B788]/40 text-[#1B4332] text-xs">
                               {c}
-                              <button type="button" onClick={() => toggleCrop(c)} className="hover:text-red-400">&times;</button>
+                              <button type="button" onClick={() => toggleCrop(c)} className="hover:text-red-500">&times;</button>
                             </span>
                           ))}
                         </div>
@@ -472,10 +480,10 @@ export default function RegisterPage() {
                             key={opt.id}
                             type="button"
                             onClick={() => set('experience', opt.id)}
-                            className={`py-3 px-2 rounded-lg border text-center transition ${formData.experience === opt.id ? 'border-green-500 bg-green-600/20' : 'border-gray-600 bg-gray-700 hover:border-gray-500'}`}
+                            className={`py-3 px-2 rounded-lg border text-center transition ${formData.experience === opt.id ? 'border-[#1B4332] bg-[#D8F3DC]' : 'border-stone-300 bg-white hover:border-stone-400'}`}
                           >
-                            <p className={`text-sm font-medium ${formData.experience === opt.id ? 'text-green-400' : 'text-gray-200'}`}>{opt.label}</p>
-                            <p className="text-xs text-gray-400 mt-0.5">{opt.sub}</p>
+                            <p className={`text-sm font-medium ${formData.experience === opt.id ? 'text-[#1B4332]' : 'text-stone-700'}`}>{opt.label}</p>
+                            <p className="text-xs text-stone-400 mt-0.5">{opt.sub}</p>
                           </button>
                         ))}
                       </div>
@@ -483,7 +491,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>What are your goals with AgriHub? <span className="text-gray-500">(optional)</span></label>
+                      <label className={labelClass}>What are your goals with AgriHub? <span className="text-stone-400">(optional)</span></label>
                       <textarea
                         className={`${inputClass} h-20 py-3 resize-none`}
                         placeholder="e.g. Get better prices for my cassava, connect with buyers in Monrovia..."
@@ -498,15 +506,15 @@ export default function RegisterPage() {
                 {step === 3 && (
                   <div className="space-y-5">
                     <div>
-                      <h2 className="text-2xl font-bold text-white">Account Type</h2>
-                      <p className="text-gray-400 text-sm mt-1">Choose the role that best describes how you'll use AgriHub</p>
+                      <h2 className="text-2xl font-bold text-stone-800">Account Type</h2>
+                      <p className="text-stone-500 text-sm mt-1">Choose the role that best describes how you'll use AgriHub</p>
                     </div>
 
                     <div className="space-y-3">
                       {[
-                        { id: 'farmer', icon: Sprout, label: 'Farmer', desc: 'I grow and sell produce', color: 'green' },
-                        { id: 'buyer', icon: TrendingUp, label: 'Buyer', desc: 'I purchase agricultural produce', color: 'blue' },
-                        { id: 'extension-officer', icon: MessageCircle, label: 'Extension Officer', desc: 'I provide advisory services to farmers', color: 'purple' },
+                        { id: 'farmer', icon: Sprout, label: 'Farmer', desc: 'I grow and sell produce' },
+                        { id: 'buyer', icon: TrendingUp, label: 'Buyer', desc: 'I purchase agricultural produce' },
+                        { id: 'extension-officer', icon: MessageCircle, label: 'Extension Officer', desc: 'I provide advisory services to farmers' },
                       ].map((opt) => {
                         const Icon = opt.icon
                         const active = formData.accountType === opt.id
@@ -515,16 +523,16 @@ export default function RegisterPage() {
                             key={opt.id}
                             type="button"
                             onClick={() => set('accountType', opt.id)}
-                            className={`w-full flex items-center gap-4 p-4 rounded-xl border text-left transition ${active ? 'border-green-500 bg-green-600/10' : 'border-gray-600 bg-gray-700 hover:border-gray-500'}`}
+                            className={`w-full flex items-center gap-4 p-4 rounded-xl border text-left transition ${active ? 'border-[#1B4332] bg-[#D8F3DC]/40' : 'border-stone-200 bg-white hover:border-stone-300'}`}
                           >
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${active ? 'bg-green-600' : 'bg-gray-600'}`}>
-                              <Icon className="w-6 h-6 text-white" />
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${active ? 'bg-[#1B4332]' : 'bg-stone-100'}`}>
+                              <Icon className={`w-6 h-6 ${active ? 'text-white' : 'text-stone-500'}`} />
                             </div>
                             <div className="flex-1">
-                              <p className={`font-semibold ${active ? 'text-white' : 'text-gray-200'}`}>{opt.label}</p>
-                              <p className="text-sm text-gray-400">{opt.desc}</p>
+                              <p className={`font-semibold ${active ? 'text-[#1B4332]' : 'text-stone-700'}`}>{opt.label}</p>
+                              <p className="text-sm text-stone-400">{opt.desc}</p>
                             </div>
-                            {active && <Check className="w-5 h-5 text-green-400 flex-shrink-0" />}
+                            {active && <Check className="w-5 h-5 text-[#1B4332] flex-shrink-0" />}
                           </button>
                         )
                       })}
@@ -537,13 +545,13 @@ export default function RegisterPage() {
                 {step === 4 && (
                   <div className="space-y-5">
                     <div>
-                      <h2 className="text-2xl font-bold text-white">Payment Setup</h2>
-                      <p className="text-gray-400 text-sm mt-1">How would you like to receive payments from buyers?</p>
+                      <h2 className="text-2xl font-bold text-stone-800">Payment Setup</h2>
+                      <p className="text-stone-500 text-sm mt-1">How would you like to receive payments from buyers?</p>
                     </div>
 
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-green-900/30 border border-green-700/50">
-                      <Info className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-green-300">
+                    <div className="flex items-start gap-3 p-4 rounded-xl bg-[#D8F3DC] border border-[#52B788]/50">
+                      <Info className="w-5 h-5 text-[#1B4332] flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-[#1B4332]">
                         AgriHub uses mobile money — no bank account needed. Buyers pay directly to your wallet when your produce is sold through the marketplace.
                       </p>
                     </div>
@@ -561,12 +569,12 @@ export default function RegisterPage() {
                                 set('mobileMoneyNumber', formData.phone)
                               }
                             }}
-                            className={`w-full flex items-center gap-3 p-3.5 rounded-lg border text-left transition ${formData.mobileMoneyProvider === provider.id ? 'border-green-500 bg-green-600/10' : 'border-gray-600 bg-gray-700 hover:border-gray-500'}`}
+                            className={`w-full flex items-center gap-3 p-3.5 rounded-lg border text-left transition ${formData.mobileMoneyProvider === provider.id ? 'border-[#1B4332] bg-[#D8F3DC]/40' : 'border-stone-200 bg-white hover:border-stone-300'}`}
                           >
-                            <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${formData.mobileMoneyProvider === provider.id ? 'border-green-500 bg-green-500' : 'border-gray-500'}`} />
+                            <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${formData.mobileMoneyProvider === provider.id ? 'border-[#1B4332] bg-[#1B4332]' : 'border-stone-400'}`} />
                             <div>
-                              <p className={`text-sm font-medium ${formData.mobileMoneyProvider === provider.id ? 'text-white' : 'text-gray-200'}`}>{provider.label}</p>
-                              <p className="text-xs text-gray-400">{provider.description}</p>
+                              <p className={`text-sm font-medium ${formData.mobileMoneyProvider === provider.id ? 'text-[#1B4332]' : 'text-stone-700'}`}>{provider.label}</p>
+                              <p className="text-xs text-stone-400">{provider.description}</p>
                             </div>
                           </button>
                         ))}
@@ -578,7 +586,7 @@ export default function RegisterPage() {
                         <div>
                           <label className={labelClass}>Mobile Money Number</label>
                           <div className="flex gap-2">
-                            <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-gray-600 bg-gray-700 text-white text-sm flex-shrink-0">
+                            <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-stone-300 bg-stone-50 text-stone-700 text-sm flex-shrink-0">
                               <span>🇱🇷</span>
                               <span>+231</span>
                             </div>
@@ -589,8 +597,8 @@ export default function RegisterPage() {
                               onChange={(e) => set('mobileMoneyNumber', e.target.value.replace(/\D/g, ''))}
                             />
                           </div>
-                          <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                            <Check className="w-3 h-3 text-green-400" /> This is the number buyers will use to pay you
+                          <p className="text-xs text-stone-400 mt-1 flex items-center gap-1">
+                            <Check className="w-3 h-3 text-[#52B788]" /> This is the number buyers will use to pay you
                           </p>
                           {errors.mobileMoneyNumber && <p className={errorClass}>{errors.mobileMoneyNumber}</p>}
                         </div>
@@ -609,36 +617,36 @@ export default function RegisterPage() {
                                 key={cur}
                                 type="button"
                                 onClick={() => set('currencyPreference', cur)}
-                                className={`py-3 rounded-lg border text-sm font-medium transition ${formData.currencyPreference === cur ? 'border-green-500 bg-green-600/20 text-green-400' : 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500'}`}
+                                className={`py-3 rounded-lg border text-sm font-medium transition ${formData.currencyPreference === cur ? 'border-[#1B4332] bg-[#D8F3DC] text-[#1B4332]' : 'border-stone-300 bg-white text-stone-600 hover:border-stone-400'}`}
                               >
                                 {cur === 'LRD' ? 'L$ Liberian Dollars' : '$ US Dollars'}
                               </button>
                             ))}
                           </div>
-                          <p className="text-xs text-gray-400 mt-2">Most market transactions in Liberia are in LRD. USD available for export crops (rubber, cocoa).</p>
+                          <p className="text-xs text-stone-400 mt-2">Most market transactions in Liberia are in LRD. USD available for export crops (rubber, cocoa).</p>
                         </div>
 
                         <div>
-                          <label className={labelClass}>Minimum payout threshold <span className="text-gray-500">(optional)</span></label>
+                          <label className={labelClass}>Minimum payout threshold <span className="text-stone-400">(optional)</span></label>
                           <div className="relative">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">L$</span>
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">L$</span>
                             <input className={`${inputClass} pl-8`} placeholder="e.g. 500" value={formData.minPayoutThreshold} onChange={(e) => set('minPayoutThreshold', e.target.value.replace(/\D/g, ''))} />
                           </div>
-                          <p className="text-xs text-gray-400 mt-1">Notify me when my balance reaches this amount</p>
+                          <p className="text-xs text-stone-400 mt-1">Notify me when my balance reaches this amount</p>
                         </div>
                       </>
                     )}
 
-                    <div className="p-4 rounded-xl bg-gray-700/50 border border-gray-600 space-y-2">
-                      <p className="text-xs font-semibold text-gray-300 uppercase tracking-wide">Payment Terms</p>
+                    <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-2">
+                      <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide">Payment Terms</p>
                       {[
                         'Buyers pay via mobile money before or on delivery',
                         'AgriHub does NOT hold funds — payments go directly to your wallet',
                         'Transaction confirmation sent via SMS to your registered number',
                       ].map((item) => (
                         <div key={item} className="flex items-start gap-2">
-                          <Check className="w-3.5 h-3.5 text-green-400 flex-shrink-0 mt-0.5" />
-                          <p className="text-xs text-gray-400">{item}</p>
+                          <Check className="w-3.5 h-3.5 text-[#52B788] flex-shrink-0 mt-0.5" />
+                          <p className="text-xs text-stone-500">{item}</p>
                         </div>
                       ))}
                     </div>
@@ -649,8 +657,8 @@ export default function RegisterPage() {
                 {step === 5 && (
                   <div className="space-y-5">
                     <div>
-                      <h2 className="text-2xl font-bold text-white">Preferences</h2>
-                      <p className="text-gray-400 text-sm mt-1">Customise how AgriHub works for you</p>
+                      <h2 className="text-2xl font-bold text-stone-800">Preferences</h2>
+                      <p className="text-stone-500 text-sm mt-1">Customise how AgriHub works for you</p>
                     </div>
 
                     <div>
@@ -667,7 +675,7 @@ export default function RegisterPage() {
                             key={lang.id}
                             type="button"
                             onClick={() => set('language', lang.id)}
-                            className={`py-2.5 rounded-lg border text-sm font-medium transition ${formData.language === lang.id ? 'border-green-500 bg-green-600/20 text-green-400' : 'border-gray-600 bg-gray-700 text-gray-300 hover:border-gray-500'}`}
+                            className={`py-2.5 rounded-lg border text-sm font-medium transition ${formData.language === lang.id ? 'border-[#1B4332] bg-[#D8F3DC] text-[#1B4332]' : 'border-stone-300 bg-white text-stone-600 hover:border-stone-400'}`}
                           >
                             {lang.label}
                           </button>
@@ -681,15 +689,15 @@ export default function RegisterPage() {
                         { key: 'weatherAlerts' as const, label: 'Weather Alerts', desc: 'Daily county weather updates' },
                         { key: 'marketplaceNotifications' as const, label: 'Marketplace Inquiry Notifications', desc: 'When buyers contact you' },
                       ].map((item) => (
-                        <div key={item.key} className="flex items-center justify-between p-4 rounded-xl bg-gray-700 border border-gray-600">
+                        <div key={item.key} className="flex items-center justify-between p-4 rounded-xl bg-stone-50 border border-stone-200">
                           <div>
-                            <p className="text-sm font-medium text-gray-200">{item.label}</p>
-                            <p className="text-xs text-gray-400">{item.desc}</p>
+                            <p className="text-sm font-medium text-stone-700">{item.label}</p>
+                            <p className="text-xs text-stone-400">{item.desc}</p>
                           </div>
                           <button
                             type="button"
                             onClick={() => set(item.key, !formData[item.key])}
-                            className={`w-11 h-6 rounded-full transition-colors flex-shrink-0 relative ${formData[item.key] ? 'bg-green-600' : 'bg-gray-600'}`}
+                            className={`w-11 h-6 rounded-full transition-colors flex-shrink-0 relative ${formData[item.key] ? 'bg-[#1B4332]' : 'bg-stone-300'}`}
                           >
                             <span className={`block w-4 h-4 rounded-full bg-white shadow absolute top-1 transition-transform ${formData[item.key] ? 'translate-x-6' : 'translate-x-1'}`} />
                           </button>
@@ -697,11 +705,11 @@ export default function RegisterPage() {
                       ))}
                     </div>
 
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-blue-900/20 border border-blue-700/40">
-                      <Smartphone className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-3 p-4 rounded-xl bg-blue-50 border border-blue-100">
+                      <Smartphone className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-blue-300">Offline Access Available</p>
-                        <p className="text-xs text-blue-400 mt-0.5">You can access AgriHub offline via <span className="font-bold">*347#</span> on any Liberian phone</p>
+                        <p className="text-sm font-medium text-blue-700">Offline Access Available</p>
+                        <p className="text-xs text-blue-500 mt-0.5">You can access AgriHub offline via <span className="font-bold">*347#</span> on any Liberian phone</p>
                       </div>
                     </div>
 
@@ -711,13 +719,13 @@ export default function RegisterPage() {
                           type="checkbox"
                           checked={formData.acceptTerms}
                           onChange={(e) => set('acceptTerms', e.target.checked)}
-                          className="mt-0.5 h-4 w-4 rounded border-gray-500 accent-green-600 flex-shrink-0"
+                          className="mt-0.5 h-4 w-4 rounded border-stone-400 accent-[#1B4332] flex-shrink-0"
                         />
-                        <span className="text-sm text-gray-300">
+                        <span className="text-sm text-stone-600">
                           I agree to the{' '}
-                          <Link href="/terms" className="text-green-400 hover:text-green-300 underline">Terms of Service</Link>
+                          <Link href="/terms" className="text-[#1B4332] hover:text-[#2D6A4F] underline">Terms of Service</Link>
                           {' '}and{' '}
-                          <Link href="/privacy" className="text-green-400 hover:text-green-300 underline">Privacy Policy</Link>
+                          <Link href="/privacy" className="text-[#1B4332] hover:text-[#2D6A4F] underline">Privacy Policy</Link>
                         </span>
                       </label>
                       {errors.acceptTerms && <p className={errorClass}>{errors.acceptTerms}</p>}
@@ -732,18 +740,18 @@ export default function RegisterPage() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                      className="w-24 h-24 rounded-full bg-green-500 flex items-center justify-center"
+                      className="w-24 h-24 rounded-full bg-[#1B4332] flex items-center justify-center"
                     >
                       <Check className="w-12 h-12 text-white" />
                     </motion.div>
 
                     <div>
-                      <h2 className="text-3xl font-bold text-white">Welcome to AgriHub!</h2>
-                      <p className="text-gray-400 mt-2">Your account has been created successfully</p>
+                      <h2 className="text-3xl font-bold text-stone-800">Welcome to AgriHub!</h2>
+                      <p className="text-stone-500 mt-2">Your account has been created successfully</p>
                     </div>
 
-                    <div className="w-full max-w-sm bg-gray-700 rounded-xl border border-gray-600 p-5 text-left space-y-3">
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Account Summary</p>
+                    <div className="w-full max-w-sm bg-stone-50 rounded-xl border border-stone-200 p-5 text-left space-y-3">
+                      <p className="text-xs font-semibold text-stone-400 uppercase tracking-wide">Account Summary</p>
                       {[
                         { label: 'Name', value: `${formData.firstName} ${formData.lastName}` },
                         { label: 'County', value: formData.county },
@@ -752,20 +760,20 @@ export default function RegisterPage() {
                         { label: 'Mobile Money', value: selectedProvider?.id !== 'none' ? selectedProvider?.label || 'Not set up' : 'Not set up' },
                       ].map((row) => (
                         <div key={row.label} className="flex justify-between text-sm">
-                          <span className="text-gray-400">{row.label}</span>
-                          <span className="text-white font-medium capitalize">{row.value}</span>
+                          <span className="text-stone-400">{row.label}</span>
+                          <span className="text-stone-700 font-medium capitalize">{row.value}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="flex items-start gap-3 p-4 rounded-xl bg-green-900/30 border border-green-700/50 w-full max-w-sm text-left">
-                      <Smartphone className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-green-300">Dial <span className="font-bold">*347#</span> anytime on any Liberian phone to access market prices offline.</p>
+                    <div className="flex items-start gap-3 p-4 rounded-xl bg-[#D8F3DC] border border-[#52B788]/50 w-full max-w-sm text-left">
+                      <Smartphone className="w-5 h-5 text-[#1B4332] flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-[#1B4332]">Dial <span className="font-bold">*347#</span> anytime on any Liberian phone to access market prices offline.</p>
                     </div>
 
                     <button
                       onClick={goToDashboard}
-                      className="w-full max-w-sm h-12 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition text-base"
+                      className="w-full max-w-sm h-12 bg-[#1B4332] hover:bg-[#2D6A4F] text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition text-base"
                     >
                       Go to your Dashboard <ArrowRight className="w-5 h-5" />
                     </button>
@@ -778,19 +786,19 @@ export default function RegisterPage() {
 
           {/* Footer Nav Buttons */}
           {step < 6 && (
-            <div className="px-6 lg:px-8 py-5 border-t border-gray-700 flex items-center justify-between gap-4">
+            <div className="px-6 lg:px-8 py-5 border-t border-stone-100 flex items-center justify-between gap-4 bg-stone-50/50">
               {step > 1 ? (
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="flex items-center gap-2 px-5 h-11 rounded-xl border border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 text-sm font-medium transition"
+                  className="flex items-center gap-2 px-5 h-11 rounded-xl border border-stone-300 bg-white text-stone-600 hover:bg-stone-50 text-sm font-medium transition"
                 >
                   <ChevronLeft className="w-4 h-4" /> Back
                 </button>
               ) : (
                 <Link
                   href="/auth/login"
-                  className="flex items-center gap-2 px-5 h-11 rounded-xl border border-gray-600 bg-gray-700 text-gray-200 hover:bg-gray-600 text-sm font-medium transition"
+                  className="flex items-center gap-2 px-5 h-11 rounded-xl border border-stone-300 bg-white text-stone-600 hover:bg-stone-50 text-sm font-medium transition"
                 >
                   Sign In
                 </Link>
@@ -801,7 +809,7 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     onClick={() => { set('mobileMoneyProvider', ''); setStep(5) }}
-                    className="px-4 h-11 text-sm text-gray-400 hover:text-gray-200 transition"
+                    className="px-4 h-11 text-sm text-stone-400 hover:text-stone-600 transition"
                   >
                     Set up later
                   </button>
@@ -810,7 +818,7 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 h-11 rounded-xl bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition"
+                    className="flex items-center gap-2 px-6 h-11 rounded-xl bg-[#1B4332] hover:bg-[#2D6A4F] text-white text-sm font-semibold transition shadow-sm"
                   >
                     Continue <ChevronRight className="w-4 h-4" />
                   </button>
@@ -819,7 +827,7 @@ export default function RegisterPage() {
                     type="button"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="flex items-center gap-2 px-6 h-11 rounded-xl bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition disabled:opacity-60"
+                    className="flex items-center gap-2 px-6 h-11 rounded-xl bg-[#1B4332] hover:bg-[#2D6A4F] text-white text-sm font-semibold transition disabled:opacity-60 shadow-sm"
                   >
                     {isSubmitting ? (
                       <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
