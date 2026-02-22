@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Search, Filter, MapPin, Phone, Calendar, TrendingUp, CheckCircle, ExternalLink } from 'lucide-react'
 import { marketplaceListings } from '@/lib/mock-data/marketplace'
-import { COUNTIES } from '@/lib/mock-data/counties'
+import { countyNames } from '@/lib/mock-data/counties'
 import type { MarketplaceListing } from '@/lib/types'
 
 export default function MarketplacePage() {
@@ -74,9 +74,9 @@ export default function MarketplacePage() {
             className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white appearance-none cursor-pointer"
           >
             <option value="all">All Counties</option>
-            {COUNTIES.map((county) => (
-              <option key={county.id} value={county.name}>
-                {county.name}
+            {countyNames.map((county) => (
+              <option key={county} value={county}>
+                {county}
               </option>
             ))}
           </select>
