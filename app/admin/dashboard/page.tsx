@@ -158,8 +158,8 @@ export default function AdminDashboardPage() {
 
       {/* DAU Chart + Top Crops */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card">
-          <h2 className="mb-4 text-lg font-bold text-agri-text dark:text-foreground">
+        <div className="lg:col-span-2 rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
+          <h2 className="mb-4 text-base font-semibold text-gray-900 dark:text-foreground">
             Daily Active Users (30 Days)
           </h2>
           {mounted && (
@@ -167,16 +167,8 @@ export default function AdminDashboardPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={dauData}>
                   <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
-                  <XAxis
-                    dataKey="date"
-                    tick={{ fontSize: 11 }}
-                    interval={4}
-                    className="text-agri-muted dark:text-muted-foreground"
-                  />
-                  <YAxis
-                    tick={{ fontSize: 11 }}
-                    className="text-agri-muted dark:text-muted-foreground"
-                  />
+                  <XAxis dataKey="date" tick={{ fontSize: 11 }} interval={4} />
+                  <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: 'var(--card)',
@@ -188,7 +180,7 @@ export default function AdminDashboardPage() {
                   <Line
                     type="monotone"
                     dataKey="users"
-                    stroke="#2E7D32"
+                    stroke="#16A34A"
                     strokeWidth={2}
                     dot={false}
                     activeDot={{ r: 5 }}
@@ -199,26 +191,23 @@ export default function AdminDashboardPage() {
           )}
         </div>
 
-        <div className="rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card">
-          <h2 className="mb-4 text-lg font-bold text-agri-text dark:text-foreground">
+        <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
+          <h2 className="mb-4 text-base font-semibold text-gray-900 dark:text-foreground">
             Top 10 Crops Searched
           </h2>
           <ul className="space-y-3">
             {topCrops.map((crop) => (
-              <li
-                key={crop.rank}
-                className="flex items-center justify-between text-sm"
-              >
+              <li key={crop.rank} className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
-                  <span className="w-5 text-right text-xs font-medium text-agri-muted dark:text-muted-foreground">
+                  <span className="w-5 text-right text-xs font-medium text-gray-400 dark:text-muted-foreground">
                     {crop.rank}
                   </span>
                   <span>{crop.emoji}</span>
-                  <span className="font-medium text-agri-text dark:text-foreground">
+                  <span className="font-medium text-gray-900 dark:text-foreground">
                     {crop.name}
                   </span>
                 </div>
-                <span className="text-agri-muted dark:text-muted-foreground">
+                <span className="text-gray-500 dark:text-muted-foreground">
                   {crop.count.toLocaleString()}
                 </span>
               </li>
@@ -229,31 +218,17 @@ export default function AdminDashboardPage() {
 
       {/* County Distribution + Recent Actions */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card">
-          <h2 className="mb-4 text-lg font-bold text-agri-text dark:text-foreground">
+        <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
+          <h2 className="mb-4 text-base font-semibold text-gray-900 dark:text-foreground">
             Users by County
           </h2>
           {mounted && (
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={countyUsers}
-                  layout="vertical"
-                  margin={{ left: 10 }}
-                >
+                <BarChart data={countyUsers} layout="vertical" margin={{ left: 10 }}>
                   <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
-                  <XAxis
-                    type="number"
-                    tick={{ fontSize: 11 }}
-                    className="text-agri-muted dark:text-muted-foreground"
-                  />
-                  <YAxis
-                    dataKey="county"
-                    type="category"
-                    tick={{ fontSize: 10 }}
-                    width={110}
-                    className="text-agri-muted dark:text-muted-foreground"
-                  />
+                  <XAxis type="number" tick={{ fontSize: 11 }} />
+                  <YAxis dataKey="county" type="category" tick={{ fontSize: 10 }} width={110} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: 'var(--card)',
@@ -262,26 +237,26 @@ export default function AdminDashboardPage() {
                       color: 'var(--foreground)',
                     }}
                   />
-                  <Bar dataKey="users" fill="#4CAF50" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="users" fill="#16A34A" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           )}
         </div>
 
-        <div className="rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card">
-          <h2 className="mb-4 text-lg font-bold text-agri-text dark:text-foreground">
+        <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
+          <h2 className="mb-4 text-base font-semibold text-gray-900 dark:text-foreground">
             Recent Admin Actions
           </h2>
           <ul className="space-y-4">
             {recentActions.map((item, i) => (
               <li key={i} className="flex items-start gap-3">
-                <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-green-600" />
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-agri-text dark:text-foreground">
+                  <p className="text-sm font-medium text-gray-900 dark:text-foreground">
                     {item.action}
                   </p>
-                  <p className="text-xs text-agri-muted dark:text-muted-foreground">
+                  <p className="text-xs text-gray-500 dark:text-muted-foreground">
                     {item.time}
                   </p>
                 </div>
