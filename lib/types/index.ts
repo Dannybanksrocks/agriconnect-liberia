@@ -137,10 +137,12 @@ export interface User {
   county: string
   farmSizeAcres: number
   primaryCrops: string[]
-  role: 'farmer' | 'admin' | 'extension-officer'
+  role: 'farmer' | 'admin' | 'extension-officer' | 'buyer' | 'supplier'
   language: 'en' | 'kpelle' | 'bassa' | 'mende' | 'vai'
   status: 'active' | 'inactive' | 'suspended'
   joinedAt: string
+  businessName?: string
+  businessType?: 'buyer' | 'supplier' | 'cooperative'
 }
 
 export interface ActivityItem {
@@ -155,4 +157,52 @@ export interface ColumnDef<T> {
   sortable?: boolean
   render?: (value: unknown, row: T) => React.ReactNode
   className?: string
+}
+
+export interface MarketplaceListing {
+  id: string
+  farmerId: string
+  farmerName: string
+  farmerPhone: string
+  farmerCounty: string
+  cropId: string
+  cropName: string
+  emoji: string
+  quantityKg: number
+  unit: string
+  pricePerUnitLRD: number
+  pricePerUnitUSD: number
+  totalPriceLRD: number
+  totalPriceUSD: number
+  quality: 'premium' | 'standard' | 'basic'
+  qualityVerified: boolean
+  harvestDate: string
+  availableUntil: string
+  description: string
+  location: string
+  county: string
+  photos: string[]
+  status: 'available' | 'reserved' | 'sold' | 'expired'
+  views: number
+  inquiries: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface MarketplaceInquiry {
+  id: string
+  listingId: string
+  buyerId: string
+  buyerName: string
+  buyerPhone: string
+  message: string
+  status: 'pending' | 'replied' | 'closed'
+  createdAt: string
+}
+
+export interface PaymentInfo {
+  userId: string
+  mobileMoneyProvider: 'mtn-momo' | 'orange-money' | 'lonestar-momo' | null
+  mobileMoneyNumber: string | null
+  accountName: string | null
 }

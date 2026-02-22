@@ -2,15 +2,15 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, TrendingUp, Cloud, BookOpen, User } from 'lucide-react'
+import { Home, ShoppingCart, TrendingUp, Cloud, User } from 'lucide-react'
 import { useAppStore } from '@/lib/store/useAppStore'
 
 const navItems = [
-  { label: 'Home',    icon: Home,       href: '/dashboard' },
-  { label: 'Market',  icon: TrendingUp, href: '/market'    },
-  { label: 'Weather', icon: Cloud,      href: '/weather'   },
-  { label: 'Tips',    icon: BookOpen,   href: '/tips'      },
-  { label: 'Profile', icon: User,       href: '/settings'  },
+  { label: 'Home',    icon: Home,         href: '/dashboard'    },
+  { label: 'Shop',    icon: ShoppingCart, href: '/marketplace'  },
+  { label: 'Prices',  icon: TrendingUp,   href: '/market'       },
+  { label: 'Weather', icon: Cloud,        href: '/weather'      },
+  { label: 'Profile', icon: User,         href: '/settings'     },
 ]
 
 export default function MobileBottomNav() {
