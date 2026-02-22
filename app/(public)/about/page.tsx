@@ -5,6 +5,7 @@ import { Leaf, Target, Heart, Users, BarChart3, Globe } from 'lucide-react'
 import Navbar from '@/components/shared/Navbar'
 import LandingFooter from '@/components/landing/LandingFooter'
 
+
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay = 0) => ({
@@ -48,13 +49,6 @@ const stats = [
   { value: '40%', label: 'Avg. Income Increase' },
 ]
 
-const team = [
-  { name: 'Abraham Johnson', role: 'Founder & CEO', initials: 'AJ' },
-  { name: 'Grace Doe', role: 'Head of Content', initials: 'GD' },
-  { name: 'Samuel Weah', role: 'Lead Engineer', initials: 'SW' },
-  { name: 'Martha Kpangbah', role: 'County Operations', initials: 'MK' },
-]
-
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -85,7 +79,7 @@ export default function AboutPage() {
               Empowering Liberian Farmers with Data
             </h1>
               <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
-                AgriHub is a platform built by Liberians, for Liberians. We provide smallholder farmers with the same market intelligence, weather data, and agronomic expertise once reserved for large agribusinesses.
+                AgriHub is built by Tech 231 Liberia Limited — an innovative Liberian ICT company committed to empowering businesses and communities through technology. AgriHub gives smallholder farmers the same market intelligence, weather data, and agronomic expertise once reserved for large agribusinesses.
               </p>
           </motion.div>
         </div>
@@ -125,7 +119,7 @@ export default function AboutPage() {
           >
             <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight">Our Mission</h2>
             <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-              For too long, large agribusinesses had exclusive access to price data, weather forecasts, and agronomy expertise. AgriHub puts the same tools in every farmer&apos;s hands &mdash; for free. Our mission is to close the information gap in Liberian agriculture and help every farmer earn a fair price for their harvest.
+              Tech 231 Liberia Limited is an innovative, dynamic, and progressive Liberian ICT company with a mission to be a global leader in providing innovative IT solutions that empower businesses to thrive in the digital age. AgriHub is our flagship agricultural platform — closing the information gap in Liberian farming and helping every farmer earn a fair price for their harvest.
             </p>
           </motion.div>
 
@@ -181,41 +175,6 @@ export default function AboutPage() {
                 </motion.div>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="py-20 bg-gray-50">
-        <div className="container">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight">Our Team</h2>
-            <p className="mt-3 text-gray-500">The people behind AgriHub Liberia</p>
-          </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-            {team.map((member, i) => (
-              <motion.div
-                key={member.name}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i * 0.1}
-                className="text-center"
-              >
-                <div className="w-16 h-16 rounded-full bg-[#1B4332] flex items-center justify-center mx-auto text-white font-bold text-lg">
-                  {member.initials}
-                </div>
-                <p className="mt-3 text-sm font-semibold text-gray-900">{member.name}</p>
-                <p className="text-xs text-gray-500">{member.role}</p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>

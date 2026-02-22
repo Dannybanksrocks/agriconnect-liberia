@@ -20,19 +20,19 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'info@farmpulse.lr',
-    href: 'mailto:info@farmpulse.lr',
+    value: 'info@tech231liberialtd.com',
+    href: 'mailto:info@tech231liberialtd.com',
   },
   {
     icon: Phone,
     label: 'Phone',
-    value: '+231 770 000 001',
-    href: 'tel:+231770000001',
+    value: '+231 888 999 334 / +231 880 209 996',
+    href: 'tel:+2318889993334',
   },
   {
     icon: MapPin,
     label: 'Address',
-    value: 'Monrovia, Liberia',
+    value: 'Neezoe Community, Paynesville, P.O. Box 1362, Monrovia, Liberia',
     href: undefined,
   },
   {
@@ -62,13 +62,13 @@ export default function ContactPage() {
     setSending(true)
 
     // Store to localStorage
-    const contacts = JSON.parse(localStorage.getItem('farmpulse_contacts') || '[]')
+    const contacts = JSON.parse(localStorage.getItem('agrihub_contacts') || '[]')
     contacts.push({
       ...formData,
       id: Date.now(),
       createdAt: new Date().toISOString(),
     })
-    localStorage.setItem('farmpulse_contacts', JSON.stringify(contacts))
+    localStorage.setItem('agrihub_contacts', JSON.stringify(contacts))
 
     setTimeout(() => {
       setSending(false)
