@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Search, Filter, MapPin, Phone, Calendar, TrendingUp, CheckCircle, ExternalLink } from 'lucide-react'
+import { Search, Filter, MapPin, Phone, CheckCircle } from 'lucide-react'
 import { marketplaceListings } from '@/lib/mock-data/marketplace'
 import { countyNames } from '@/lib/mock-data/counties'
+import { getCropImage } from '@/lib/constants/cropImages'
 import type { MarketplaceListing } from '@/lib/types'
 
 export default function MarketplacePage() {
