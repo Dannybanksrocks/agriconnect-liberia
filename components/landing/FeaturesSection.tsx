@@ -9,31 +9,20 @@ const features = [
   {
     icon: TrendingUp,
     tag: 'Market Intelligence',
-    title: 'Know Your Prices Before You Travel',
+    title: 'Market Prices',
     description:
-      'Compare crop prices across all 15 counties in real time. Never leave the farm without knowing exactly where to sell for the highest return.',
+      'Know the price before you sell across all 15 counties',
     cta: 'View Market Prices',
     href: '/market',
     accent: '#D8F3DC',
     image: '/images/liberia-market-scene.jpg',
   },
   {
-    icon: ShoppingCart,
-    tag: 'Direct Marketplace',
-    title: 'Connect Directly With Buyers',
-    description:
-      'List your produce and connect with verified buyers across Liberia. No middlemen. Better prices. Mobile money payments go straight to your wallet.',
-    cta: 'Browse Marketplace',
-    href: '/marketplace',
-    accent: '#D8F3DC',
-    image: '/images/farmer-checking-phone.jpg',
-  },
-  {
     icon: CloudSun,
     tag: 'Weather Intelligence',
-    title: 'Plan Every Season With Confidence',
+    title: 'Weather Forecasts',
     description:
-      'County-specific 7-day forecasts with planting windows and rainfall alerts. Know precisely when to sow, irrigate, and harvest.',
+      'County-specific 7-day forecasts with planting alerts',
     cta: 'Check Weather',
     href: '/weather',
     accent: '#FEF9E7',
@@ -42,13 +31,24 @@ const features = [
   {
     icon: BookOpen,
     tag: 'Agronomy Knowledge',
-    title: 'Expert Tips In Your Language',
+    title: 'Agronomy Tips',
     description:
-      "Step-by-step farming guides for Liberia's most important crops — offline-capable, with audio in local dialects.",
+      'Expert guidance in your language — available offline with audio',
     cta: 'Browse Tips',
     href: '/tips',
     accent: '#D8F3DC',
     image: null,
+  },
+  {
+    icon: ShoppingCart,
+    tag: 'Direct Marketplace',
+    title: 'Marketplace',
+    description:
+      'Connect directly with buyers. No middlemen. Better prices.',
+    cta: 'Browse Marketplace',
+    href: '/marketplace',
+    accent: '#D8F3DC',
+    image: '/images/farmer-checking-phone.jpg',
   },
 ]
 
