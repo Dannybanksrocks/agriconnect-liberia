@@ -31,11 +31,11 @@ export default function PoweredBy({
       </div>
       <div className="flex items-center gap-2">
         <Image
-          src="/ministry-commerce-logo.jpg"
+          src="/images/ministry-commerce-liberia.jpg"
           alt="Ministry of Commerce & Industry"
           width={logoSize}
           height={logoSize}
-          className="shrink-0 rounded-full"
+          className="shrink-0 rounded-full object-cover"
         />
         <span>Supported by Ministry of Commerce &amp; Industry</span>
       </div>
