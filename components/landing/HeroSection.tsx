@@ -88,12 +88,24 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           {/* Left content */}
           <div className="text-center lg:text-left">
-          {/* Badge */}
+          {/* Ministry of Commerce Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 mb-8"
+            custom={0.1}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full px-4 py-2 text-xs font-medium mb-6"
+          >
+            <img src="/images/ministry-commerce-liberia.jpg" alt="Ministry of Commerce" className="w-5 h-5 rounded-full" />
+            Supported by Ministry of Commerce & Industry, Republic of Liberia
+          </motion.div>
+          
+          <motion.h1
+            custom={0.2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.1] tracking-tight"
           >
             <span className="inline-flex items-center gap-2 bg-[#E9C46A]/15 border border-[#E9C46A]/30 text-[#E9C46A] rounded-full px-4 py-1.5 text-sm font-semibold">
               <Leaf className="w-3.5 h-3.5" />
@@ -163,15 +175,24 @@ export default function HeroSection() {
             </Link>
           </motion.div>
 
-          {/* Trust text */}
+          {/* Trust text and USSD */}
           <motion.p
             custom={0.55}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-5 text-sm text-white/40"
+            className="mt-5 text-sm text-white/60"
           >
             Trusted by 2,400+ farmers across all 15 counties
+          </motion.p>
+          <motion.p
+            custom={0.6}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="mt-2 text-xs text-white/40"
+          >
+            Access via web, mobile app, or dial <span className="font-mono font-bold text-white/70">*347#</span> on any phone
           </motion.p>
           </div>
 

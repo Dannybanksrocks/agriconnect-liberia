@@ -46,7 +46,14 @@ const LANGUAGES = [
   { value: 'bassa', label: 'Bassa' },
 ] as const
 
-const STEP_TITLES = ['Personal Info', 'Farm Details', 'Account Type', 'Preferences', 'Complete']
+const STEP_TITLES = ['Personal Info', 'Farm Details', 'Account Type', 'Payment Setup', 'Preferences', 'Complete']
+
+const MOBILE_MONEY_PROVIDERS = [
+  { value: 'mtn-momo', label: 'MTN MoMo', desc: 'Most widely used across Liberia' },
+  { value: 'orange-money', label: 'Orange Money', desc: 'Strong in Monrovia and coastal counties' },
+  { value: 'lonestar-momo', label: 'Lonestar MoneyGO', desc: 'Available on Lonestar Cell network' },
+  { value: 'none', label: "I don't have mobile money", desc: 'Show me how to set it up' },
+] as const
 
 const slideVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 240 : -240, opacity: 0 }),
@@ -60,6 +67,7 @@ const inputClass =
 interface FormData {
   fullName: string
   phone: string
+  whatsappNumber: string
   email: string
   password: string
   confirmPassword: string
@@ -70,6 +78,10 @@ interface FormData {
   experience: string
   accountType: string
   familiarWithApps: string
+  mobileMoneyProvider: string
+  mobileMoneyNumber: string
+  accountName: string
+  currencyPreference: string
   language: string
   smsAlerts: boolean
   priceAlerts: boolean
@@ -89,16 +101,21 @@ export default function RegisterPage() {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
+    whatsappNumber: '',
     email: '',
     password: '',
     confirmPassword: '',
     county: '',
     farmName: '',
-    farmSize: '',
+    farmSize: string'',
     crops: [],
     experience: '',
     accountType: 'farmer',
     familiarWithApps: '',
+    mobileMoneyProvider: '',
+    mobileMoneyNumber: '',
+    accountName: '',
+    currencyPreference: 'LRD',
     language: 'english',
     smsAlerts: true,
     priceAlerts: true,
@@ -107,7 +124,7 @@ export default function RegisterPage() {
   })
 
   useEffect(() => {
-    if (isAuthenticated && user && step !== 5) {
+    if (isAuthenticated && user && step !== 6) {
       if (user.role === 'admin') router.replace('/admin/dashboard')
       else router.replace('/dashboard')
     }
@@ -146,6 +163,14 @@ export default function RegisterPage() {
     }
 
     if (s === 4) {
+      // Payment setup - optional but if provider selected, validate number
+      if (formData.mobileMoneyProvider && formData.mobileMoneyProvider !== 'none') {
+        if (!formData.mobileMoneyNumber.trim()) errs.mobileMoneyNumber = 'Mobile money number is required'
+        if (!formData.accountName.trim()) errs.accountName = 'Account name is required'
+      }
+    }
+
+    if (s === 5) {
       if (!formData.acceptTerms) errs.acceptTerms = 'You must accept the terms'
     }
 
@@ -156,11 +181,12 @@ export default function RegisterPage() {
   const goNext = () => {
     if (!validateStep(step)) return
 
-    if (step === 4) {
+    if (step === 5) {
       // Submit registration
       const result = doRegister({
         fullName: formData.fullName,
         phone: formData.phone,
+        whatsappNumber: formData.whatsappNumber || undefined,
         email: formData.email || undefined,
         password: formData.password,
         county: formData.county,
@@ -172,6 +198,10 @@ export default function RegisterPage() {
         accountType: formData.accountType,
         priceAlerts: formData.priceAlerts,
         weatherAlerts: formData.weatherAlerts,
+        mobileMoneyProvider: formData.mobileMoneyProvider || undefined,
+        mobileMoneyNumber: formData.mobileMoneyNumber || undefined,
+        accountName: formData.accountName || undefined,
+        currencyPreference: formData.currencyPreference,
       })
 
       if (!result.success) {
@@ -181,12 +211,12 @@ export default function RegisterPage() {
 
       toast.success('Account created successfully!')
       setDirection(1)
-      setStep(5)
+      setStep(6)
       return
     }
 
     setDirection(1)
-    setStep((s) => Math.min(s + 1, 5))
+    setStep((s) => Math.min(s + 1, 6))
   }
 
   const goBack = () => {
