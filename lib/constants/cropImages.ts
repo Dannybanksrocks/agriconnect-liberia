@@ -10,9 +10,9 @@ export const CROP_IMAGES: Record<string, string> = {
   Sugarcane: 'https://images.unsplash.com/photo-1576313232430-8e42c6bfed5d?w=800&h=500&fit=crop',
   Plantain: 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=800&h=500&fit=crop',
   Banana: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&h=500&fit=crop',
-  Yam: 'https://images.unsplash.com/photo-1638354435552-e8b5b9b4d4a6?w=800&h=500&fit=crop',
-  'Sweet Potato': 'https://images.unsplash.com/photo-1596097635121-14b63b7a0c19?w=800&h=500&fit=crop',
-  Groundnut: 'https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?w=800&h=500&fit=crop',
+  Yam: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&h=500&fit=crop&auto=format',
+  'Sweet Potato': 'https://images.unsplash.com/photo-1596097635121-14b63b7a0c19?w=800&h=500&fit=crop&auto=format',
+  Groundnut: 'https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?w=800&h=500&fit=crop&auto=format',
   Tomato: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&h=500&fit=crop',
   'Hot Pepper': 'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=800&h=500&fit=crop',
   Pepper: 'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=800&h=500&fit=crop',
@@ -22,8 +22,8 @@ export const CROP_IMAGES: Record<string, string> = {
   Onion: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=800&h=500&fit=crop',
   Watermelon: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&h=500&fit=crop',
   Pineapple: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=800&h=500&fit=crop',
-  Maize: 'https://images.unsplash.com/photo-1601593768799-76f5a2a19f3f?w=800&h=500&fit=crop',
-  Corn: 'https://images.unsplash.com/photo-1601593768799-76f5a2a19f3f?w=800&h=500&fit=crop',
+  Maize: 'https://images.unsplash.com/photo-1551888138-d18ed4cbdcbb?w=800&h=500&fit=crop&auto=format',
+  Corn: 'https://images.unsplash.com/photo-1551888138-d18ed4cbdcbb?w=800&h=500&fit=crop&auto=format',
   Cocoyam: 'https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=800&h=500&fit=crop',
 }
 

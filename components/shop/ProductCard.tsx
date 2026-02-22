@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ShoppingCart, MapPin, CheckCircle, Star } from 'lucide-react'
 import { toast } from 'sonner'
 import { useShopStore } from '@/lib/store/useShopStore'
-import { getCropImage } from '@/lib/constants/cropImages'
+import { getCropImage, FALLBACK_CROP_IMAGE } from '@/lib/constants/cropImages'
 import { getAverageRating, getReviewsForListing } from '@/lib/mock-data/shop-reviews'
 import type { MarketplaceListing } from '@/lib/types'
 
@@ -18,8 +18,20 @@ export default function ProductCard({ listing }: Props) {
   const isSaved = savedItems.includes(listing.id)
   const avg = getAverageRating(listing.id)
   const count = getReviewsForListing(listing.id).length
-  const fallback = getCropImage(listing.cropName)
-  const [imgSrc, setImgSrc] = useState(listing.photos[0] || fallback)
+
+  const cropFallback = getCropImage(listing.cropName)
+  const photos = listing.photos.filter(Boolean)
+  const [imgSrc, setImgSrc] = useState(photos[0] || cropFallback)
+  const [fallbackIdx, setFallbackIdx] = useState(0)
+
+  const handleImgError = () => {
+    const chain = [...photos.slice(1), cropFallback, FALLBACK_CROP_IMAGE]
+    const next = chain[fallbackIdx]
+    if (next && next !== imgSrc) {
+      setImgSrc(next)
+      setFallbackIdx((i) => i + 1)
+    }
+  }
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -48,7 +60,7 @@ export default function ProductCard({ listing }: Props) {
             src={imgSrc}
             alt={listing.cropName}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onError={() => setImgSrc(fallback)}
+            onError={handleImgError}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           {listing.qualityVerified && (
