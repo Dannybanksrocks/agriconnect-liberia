@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   Home,
   TrendingUp,
@@ -17,6 +17,7 @@ import {
 import Logo, { LogoIcon } from './Logo'
 import MobileBottomNav from './MobileBottomNav'
 import { useAppStore } from '@/lib/store/useAppStore'
+import { useAuth } from '@/lib/auth'
 
 const sidebarItems = [
   { label: 'Dashboard', icon: Home, href: '/dashboard' },
@@ -31,6 +32,13 @@ const sidebarItems = [
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { sidebarCollapsed, toggleSidebar, user, unreadAlertCount } = useAppStore()
+  const { logout } = useAuth()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    logout()
+    router.push('/auth/login')
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-background">
@@ -112,6 +120,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 </p>
               </div>
               <button
+                onClick={handleLogout}
                 className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-50 hover:text-red-500 dark:text-muted-foreground dark:hover:bg-muted"
                 aria-label="Log out"
               >

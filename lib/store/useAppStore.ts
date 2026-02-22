@@ -1,6 +1,5 @@
 import { create } from 'zustand'
 import type { User, FarmCrop } from '@/lib/types'
-import { defaultUser } from '@/lib/mock-data/users'
 
 interface AppState {
   user: User | null
@@ -28,12 +27,12 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  user: defaultUser,
-  isAuthenticated: true,
+  user: null,
+  isAuthenticated: false,
   setUser: (user) => set({ user, isAuthenticated: !!user }),
   logout: () => set({ user: null, isAuthenticated: false }),
 
-  selectedCounty: defaultUser.county,
+  selectedCounty: 'Montserrado',
   setSelectedCounty: (county) => set({ selectedCounty: county }),
   sidebarCollapsed: false,
   toggleSidebar: () =>

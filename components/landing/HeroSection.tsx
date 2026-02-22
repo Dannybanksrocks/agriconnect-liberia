@@ -107,9 +107,9 @@ export default function HeroSection() {
             animate="visible"
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.06]"
           >
-            Growing Liberia&apos;s
+            Giving every Liberian farmer
             <span className="block mt-1 text-[#95D5B2]">
-              Agricultural Future
+              the data advantage
             </span>
           </motion.h1>
 

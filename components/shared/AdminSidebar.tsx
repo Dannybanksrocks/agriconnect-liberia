@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, TrendingUp, Cloud, FileText,
   Users, Map, BarChart3, LogOut, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 import Logo, { LogoIcon } from './Logo'
 import { useState } from 'react'
+import { useAuth } from '@/lib/auth'
 
 const adminNav = [
   { label: 'Dashboard',     icon: LayoutDashboard, href: '/admin/dashboard' },
@@ -21,7 +22,17 @@ const adminNav = [
 
 export default function AdminSidebar() {
   const pathname = usePathname()
+  const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
+  const { logout, user } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    router.push('/auth/login')
+  }
+
+  const adminName = user?.name || 'Admin'
+  const initials = adminName.split(' ').map((n) => n[0]).join('').toUpperCase()
 
   return (
     <aside
@@ -69,17 +80,18 @@ export default function AdminSidebar() {
         <div className="border-t border-gray-100 p-3 dark:border-border">
           <div className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-600 text-xs font-bold text-white">
-              AJ
+              {initials}
             </div>
             <div className="flex-1 truncate">
               <p className="truncate text-sm font-medium text-gray-900 dark:text-foreground">
-                Abraham Johnson
+                {adminName}
               </p>
               <p className="truncate text-xs text-gray-500 dark:text-muted-foreground">
                 Super Admin
               </p>
             </div>
             <button
+              onClick={handleLogout}
               className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-50 hover:text-red-500 dark:text-muted-foreground"
               aria-label="Log out"
             >

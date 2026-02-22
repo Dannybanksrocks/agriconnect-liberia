@@ -19,8 +19,8 @@ const companyLinks = [
 ]
 
 const resourceLinks = [
-  { label: 'USSD Guide (*347#)', href: '#' },
-  { label: 'Farmer Handbook', href: '#' },
+  { label: 'USSD Guide (*347#)', href: '/resources/ussd' },
+  { label: 'Farmer Guide', href: '/resources/guide' },
   { label: 'Admin Portal', href: '/admin/dashboard' },
 ]
 
@@ -43,7 +43,7 @@ export default function LandingFooter() {
                 <Leaf className="w-4 h-4 text-[#95D5B2]" />
               </div>
               <span className="font-bold text-lg text-white tracking-tight">
-                Agri<span className="text-[#95D5B2]">Connect</span>
+                Farm<span className="text-[#95D5B2]">Pulse</span>
               </span>
             </Link>
 
@@ -139,7 +139,7 @@ export default function LandingFooter() {
       <div className="border-t border-white/[0.06]">
         <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30">
           <span>&copy; 2026 Tech 231 Liberia Limited. All rights reserved.</span>
-          <span>AgriConnect Liberia v1.0.0</span>
+          <span>FarmPulse Liberia v1.0.0</span>
         </div>
       </div>
     </footer>

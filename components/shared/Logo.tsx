@@ -100,7 +100,7 @@ export default function Logo({
           className={`${s.text} font-bold tracking-tight`}
           style={{ color: c.text }}
         >
-          AgriConnect
+          FarmPulse
         </span>
         <span
           className={`${s.sub} font-medium -mt-0.5`}
@@ -114,7 +114,7 @@ export default function Logo({
 
   if (linkTo) {
     return (
-      <Link href={linkTo} aria-label="AgriConnect Liberia home">
+      <Link href={linkTo} aria-label="FarmPulse Liberia home">
         {content}
       </Link>
     )

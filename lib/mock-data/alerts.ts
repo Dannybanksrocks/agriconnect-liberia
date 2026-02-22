@@ -138,7 +138,7 @@ export const alerts: Alert[] = [
     id: 'alert-13',
     type: 'system',
     severity: 'info',
-    title: 'AgriConnect App Update Available',
+    title: 'FarmPulse App Update Available',
     description:
       'Version 1.1 is now available with improved offline support, faster market price loading, and audio tips in Kpelle. Update from your app store or refresh the web app.',
     read: true,
