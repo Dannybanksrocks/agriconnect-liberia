@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { Users, Activity, Phone, BookOpen, Search, Bell } from 'lucide-react'
+import { Users, Activity, Phone, BookOpen, Search, Bell, ShoppingBag, PackageCheck, TrendingUp, DollarSign } from 'lucide-react'
+import Link from 'next/link'
 import PageHeader from '@/components/shared/PageHeader'
 import StatCard from '@/components/shared/StatCard'
 
@@ -70,6 +71,22 @@ const recentActions = [
   { action: 'Generated monthly analytics report',          time: '5 days ago'  },
 ]
 
+const shopOrders = [
+  { id: 'ORD-8821', buyer: 'Mary Kollie',   farmer: 'Fatu Kamara',  crop: '🌾 Rice',    qty: '50 kg',  totalLRD: 16000, status: 'pending',   time: '2h ago'     },
+  { id: 'ORD-8817', buyer: 'John Dolo',     farmer: 'Moses Kollie', crop: '🥔 Cassava',  qty: '80 kg',  totalLRD: 9600,  status: 'confirmed', time: '5h ago'     },
+  { id: 'ORD-8809', buyer: 'Sia Kamara',    farmer: 'Fatu Kamara',  crop: '🌶️ Pepper',  qty: '20 kg',  totalLRD: 7000,  status: 'shipped',   time: 'Yesterday'  },
+  { id: 'ORD-8800', buyer: 'George Wolo',   farmer: 'James Boakai', crop: '🍌 Plantain', qty: '100 kg', totalLRD: 18000, status: 'delivered', time: '2 days ago' },
+  { id: 'ORD-8795', buyer: 'Fatu Barclay',  farmer: 'Moses Kollie', crop: '🌾 Rice',    qty: '30 kg',  totalLRD: 9600,  status: 'delivered', time: '3 days ago' },
+]
+
+const ORDER_STATUS_CFG: Record<string, { cls: string }> = {
+  pending:   { cls: 'bg-amber-50 text-amber-700 border-amber-200' },
+  confirmed: { cls: 'bg-blue-50 text-blue-700 border-blue-200' },
+  shipped:   { cls: 'bg-[#D8F3DC] text-[#2D6A4F] border-[#52B788]/40' },
+  delivered: { cls: 'bg-[#D8F3DC] text-[#1B4332] border-[#52B788]/50' },
+  cancelled: { cls: 'bg-red-50 text-red-600 border-red-200' },
+}
+
 const tooltipStyle = {
   backgroundColor: 'var(--card)',
   border: '1px solid var(--border)',
@@ -96,6 +113,82 @@ export default function AdminDashboardPage() {
         <StatCard icon={BookOpen} iconColor="text-success"       iconBg="bg-success/10"       label="Tips Read Today"          value="456"    />
         <StatCard icon={Search}   iconColor="text-purple-600"    iconBg="bg-purple-500/10"    label="Price Queries Today"      value="2,103"  />
         <StatCard icon={Bell}     iconColor="text-warning"       iconBg="bg-warning/10"       label="Alerts Sent This Week"    value="1,872"  />
+      </div>
+
+      {/* E-Commerce Section */}
+      <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-[#D8F3DC] flex items-center justify-center">
+              <ShoppingBag className="w-5 h-5 text-[#1B4332]" />
+            </div>
+            <div>
+              <h2 className="text-base font-bold text-stone-800">E-Commerce Dashboard</h2>
+              <p className="text-xs text-stone-400">Consumer shop orders placed for farmer produce</p>
+            </div>
+          </div>
+          <Link href="/admin/listings" className="text-sm text-[#1B4332] font-semibold hover:underline">Manage Listings →</Link>
+        </div>
+
+        {/* Shop KPIs */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          {[
+            { icon: ShoppingBag,  label: 'Total Orders',      value: '248',       sub: 'All time',         bg: 'bg-amber-50',    color: 'text-amber-600'   },
+            { icon: DollarSign,   label: 'Total Revenue',     value: 'L$3.2M',    sub: 'All time',         bg: 'bg-[#D8F3DC]',   color: 'text-[#1B4332]'  },
+            { icon: TrendingUp,   label: 'Avg. Order Value',  value: 'L$12,900',  sub: 'Per order',        bg: 'bg-[#D8F3DC]',   color: 'text-[#2D6A4F]'  },
+            { icon: PackageCheck, label: 'Delivered',         value: '187',       sub: '75% of all orders',bg: 'bg-blue-50',     color: 'text-blue-600'    },
+          ].map((kpi) => {
+            const Icon = kpi.icon
+            return (
+              <div key={kpi.label} className="bg-stone-50 rounded-xl p-4 border border-stone-100">
+                <div className={`w-8 h-8 rounded-lg ${kpi.bg} flex items-center justify-center mb-3`}>
+                  <Icon className={`w-4 h-4 ${kpi.color}`} />
+                </div>
+                <p className="text-xl font-extrabold text-stone-800">{kpi.value}</p>
+                <p className="text-xs font-semibold text-stone-600 mt-0.5">{kpi.label}</p>
+                <p className="text-xs text-stone-400">{kpi.sub}</p>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Recent shop orders table */}
+        <div>
+          <h3 className="text-sm font-semibold text-stone-600 mb-3">Recent Orders</h3>
+          <div className="rounded-xl border border-stone-200 overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="bg-stone-50 border-b border-stone-200">
+                <tr>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-stone-500">Order</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-stone-500 hidden sm:table-cell">Buyer</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-stone-500 hidden md:table-cell">Farmer</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-stone-500">Crop</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-stone-500">Amount</th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold text-stone-500">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-stone-100">
+                {shopOrders.map((order) => (
+                  <tr key={order.id} className="hover:bg-stone-50 transition">
+                    <td className="px-4 py-3">
+                      <p className="text-xs font-bold text-stone-700">{order.id}</p>
+                      <p className="text-xs text-stone-400">{order.time}</p>
+                    </td>
+                    <td className="px-4 py-3 text-xs text-stone-600 hidden sm:table-cell">{order.buyer}</td>
+                    <td className="px-4 py-3 text-xs text-stone-600 hidden md:table-cell">{order.farmer}</td>
+                    <td className="px-4 py-3 text-xs text-stone-700">{order.crop} · {order.qty}</td>
+                    <td className="px-4 py-3 text-right text-xs font-bold text-[#1B4332]">L${order.totalLRD.toLocaleString()}</td>
+                    <td className="px-4 py-3 text-right">
+                      <span className={`inline-block px-2 py-0.5 rounded-full border text-xs font-medium capitalize ${ORDER_STATUS_CFG[order.status]?.cls}`}>
+                        {order.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {/* DAU Chart + Top Crops */}
