@@ -132,7 +132,7 @@ export const marketPrices: MarketPrice[] = crops.flatMap((crop) =>
     const hour = Math.floor(seededRandom(seed + 3) * 12 + 6)
     const minute = Math.floor(seededRandom(seed + 4) * 60)
     const second = Math.floor(seededRandom(seed + 5) * 60)
-    const updatedAt = `2025-02-21T${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}.000Z`
+    const updatedAt = `2024-11-15T${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}.000Z`
 
     return {
       id: `${crop.id}-${countyId}`,

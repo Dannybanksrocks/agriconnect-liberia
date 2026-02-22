@@ -10,7 +10,7 @@ export const alerts: Alert[] = [
       'The Liberia Meteorological Service warns of heavy rainfall (80-120mm) expected in Nimba County from February 24-26. Lowland farms are at risk of flash flooding. Move harvested crops to higher ground immediately.',
     county: 'Nimba',
     read: false,
-    createdAt: '2025-02-21T06:00:00Z',
+    createdAt: '2024-11-21T06:00:00Z',
   },
   {
     id: 'alert-2',
@@ -21,7 +21,7 @@ export const alerts: Alert[] = [
       'Harmattan winds gusting up to 45 km/h forecast for Bong County over the next 48 hours. Secure crop drying areas and protect newly planted seedlings with windbreaks.',
     county: 'Bong',
     read: false,
-    createdAt: '2025-02-20T14:30:00Z',
+    createdAt: '2024-11-20T14:30:00Z',
   },
   {
     id: 'alert-3',
@@ -32,7 +32,7 @@ export const alerts: Alert[] = [
       'River levels near Buchanan are rising following upstream rainfall. Farms along the St. John River basin should prepare for possible minor flooding within 72 hours.',
     county: 'Grand Bassa',
     read: true,
-    createdAt: '2025-02-19T09:15:00Z',
+    createdAt: '2024-11-19T09:15:00Z',
   },
   {
     id: 'alert-4',
@@ -44,7 +44,7 @@ export const alerts: Alert[] = [
     county: 'Montserrado',
     crop: 'Rice',
     read: false,
-    createdAt: '2025-02-21T08:00:00Z',
+    createdAt: '2024-11-21T08:00:00Z',
   },
   {
     id: 'alert-5',
@@ -55,7 +55,7 @@ export const alerts: Alert[] = [
       'Well-fermented and properly dried cocoa is fetching L$420/kg in Nimba and Lofa counties — a 12% increase. Ensure proper fermentation (5-7 days) and drying to get premium prices.',
     crop: 'Cocoa',
     read: false,
-    createdAt: '2025-02-20T10:00:00Z',
+    createdAt: '2024-11-20T10:00:00Z',
   },
   {
     id: 'alert-6',
@@ -67,7 +67,7 @@ export const alerts: Alert[] = [
     county: 'Margibi',
     crop: 'Palm Oil',
     read: true,
-    createdAt: '2025-02-19T16:00:00Z',
+    createdAt: '2024-11-19T16:00:00Z',
   },
   {
     id: 'alert-7',
@@ -78,7 +78,7 @@ export const alerts: Alert[] = [
       'Hot pepper prices remain stable at L$180-210/kg across most counties. Dry season supply is adequate. No significant changes expected in the next two weeks.',
     crop: 'Hot Pepper',
     read: true,
-    createdAt: '2025-02-18T12:00:00Z',
+    createdAt: '2024-11-18T12:00:00Z',
   },
   {
     id: 'alert-8',
@@ -90,7 +90,7 @@ export const alerts: Alert[] = [
     county: 'Bong',
     crop: 'Corn',
     read: false,
-    createdAt: '2025-02-21T07:00:00Z',
+    createdAt: '2024-11-21T07:00:00Z',
   },
   {
     id: 'alert-9',
@@ -100,7 +100,7 @@ export const alerts: Alert[] = [
     description:
       'The optimal window for cassava planting in interior counties begins in late March as early rains arrive. Prepare your land now — clear, till, and apply compost for best results.',
     read: false,
-    createdAt: '2025-02-20T09:00:00Z',
+    createdAt: '2024-11-20T09:00:00Z',
   },
   {
     id: 'alert-10',
@@ -112,7 +112,7 @@ export const alerts: Alert[] = [
     county: 'Lofa',
     crop: 'Cassava',
     read: true,
-    createdAt: '2025-02-18T11:00:00Z',
+    createdAt: '2024-11-18T11:00:00Z',
   },
   {
     id: 'alert-11',
@@ -122,7 +122,7 @@ export const alerts: Alert[] = [
     description:
       'A new comprehensive guide on dry season vegetable gardening using raised beds and mulching is now available in the Tips section. Includes water-saving techniques ideal for February-April planting.',
     read: false,
-    createdAt: '2025-02-19T08:00:00Z',
+    createdAt: '2024-11-19T08:00:00Z',
   },
   {
     id: 'alert-12',
@@ -132,7 +132,7 @@ export const alerts: Alert[] = [
     description:
       'Five new expert agronomy tips have been added covering cocoa fermentation, rubber tapping, fish farming integration, solar dryers, and cooperative pricing strategies. Check the Tips section.',
     read: false,
-    createdAt: '2025-02-20T07:00:00Z',
+    createdAt: '2024-11-20T07:00:00Z',
   },
   {
     id: 'alert-13',
@@ -142,7 +142,7 @@ export const alerts: Alert[] = [
     description:
       'Version 1.1 is now available with improved offline support, faster market price loading, and audio tips in Kpelle. Update from your app store or refresh the web app.',
     read: true,
-    createdAt: '2025-02-17T12:00:00Z',
+    createdAt: '2024-11-17T12:00:00Z',
   },
   {
     id: 'alert-14',
@@ -153,7 +153,7 @@ export const alerts: Alert[] = [
       'Weekly market day in Gbarnga, Bong County is tomorrow (Saturday). Rice and cassava demand is typically high. Check current prices before transporting your crops.',
     county: 'Bong',
     read: false,
-    createdAt: '2025-02-21T05:00:00Z',
+    createdAt: '2024-11-21T05:00:00Z',
   },
   {
     id: 'alert-15',
@@ -161,9 +161,9 @@ export const alerts: Alert[] = [
     severity: 'info',
     title: 'Extension Officer Visit — Nimba County',
     description:
-      'Ministry of Agriculture extension officers will be visiting farms in Sanniquellie district next week (Feb 24-28). Free soil testing and pest identification services available. Register at your local agriculture office.',
+      'Ministry of Agriculture extension officers will be visiting farms in Sanniquellie district next week. Free soil testing and pest identification services available. Register at your local agriculture office.',
     county: 'Nimba',
     read: false,
-    createdAt: '2025-02-20T15:00:00Z',
+    createdAt: '2024-11-20T15:00:00Z',
   },
 ]

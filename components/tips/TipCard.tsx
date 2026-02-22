@@ -42,16 +42,16 @@ export default function TipCard({ tip }: TipCardProps) {
       <div className="mt-3 space-y-2">
         <CropBadge category={cropCat} label={categoryLabel} size="sm" />
 
-        <h3 className="text-base font-semibold text-agri-text line-clamp-2 leading-snug dark:text-foreground">
+        <h3 className="card-heading line-clamp-2 leading-snug">
           {tip.title}
         </h3>
 
-        <p className="text-sm text-agri-muted line-clamp-3 dark:text-muted-foreground">
+        <p className="body-text line-clamp-3">
           {tip.summary}
         </p>
 
         <div className="flex items-center justify-between pt-1">
-          <div className="flex items-center gap-3 text-xs text-agri-muted dark:text-muted-foreground">
+          <div className="flex items-center gap-3 caption-text">
             <span className="inline-flex items-center gap-1">
               <Clock className="h-3.5 w-3.5" />
               {tip.readTimeMinutes} min
@@ -59,7 +59,7 @@ export default function TipCard({ tip }: TipCardProps) {
             {tip.audioAvailable && <span>🎧 Audio</span>}
           </div>
 
-          <span className="text-sm font-medium text-primary transition-colors group-hover:text-primary/80">
+          <span className="body-text font-semibold text-primary transition-colors group-hover:text-primary/80">
             Read More →
           </span>
         </div>

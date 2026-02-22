@@ -43,11 +43,11 @@ export default function FeaturedTip({ tip }: FeaturedTipProps) {
             />
           </div>
 
-          <h2 className="text-xl font-bold text-white sm:text-2xl leading-tight">
+          <h2 className="text-xl font-bold text-white sm:text-2xl leading-snug">
             {tip.title}
           </h2>
 
-          <p className="text-white/80 text-sm sm:text-base line-clamp-2 max-w-2xl">
+          <p className="text-sm text-white/75 sm:text-base line-clamp-2 max-w-2xl leading-relaxed">
             {tip.summary}
           </p>
 
