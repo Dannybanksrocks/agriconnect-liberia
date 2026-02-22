@@ -9,6 +9,7 @@ const productLinks = [
   { label: 'Marketplace', href: '/marketplace' },
   { label: 'Weather Forecasts', href: '/weather' },
   { label: 'Agronomy Tips', href: '/tips' },
+  { label: 'AI Crop Advisor', href: '/ai-advisor' },
   { label: 'My Farm', href: '/my-farm' },
 ]
 

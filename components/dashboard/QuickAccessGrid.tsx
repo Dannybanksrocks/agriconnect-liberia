@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { TrendingUp, Cloud, Sprout, BookOpen } from 'lucide-react'
+import { TrendingUp, Cloud, Sprout, BookOpen, Sparkles, ShoppingBasket } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 interface Tile {
@@ -35,6 +35,18 @@ const tiles: Tile[] = [
     subtitle: 'Guides & best practices',
     icon: BookOpen,
     href: '/tips',
+  },
+  {
+    label: 'Marketplace',
+    subtitle: 'Buy & sell produce',
+    icon: ShoppingBasket,
+    href: '/marketplace',
+  },
+  {
+    label: 'AI Advisor',
+    subtitle: 'Smart crop recommendations',
+    icon: Sparkles,
+    href: '/ai-advisor',
   },
 ]
 

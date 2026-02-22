@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
       { label: 'Marketplace', href: '/marketplace' },
       { label: 'Weather Forecasts', href: '/weather' },
       { label: 'Agronomy Tips', href: '/tips' },
+      { label: 'AI Crop Advisor', href: '/ai-advisor' },
       { label: 'USSD Guide', href: '/resources/ussd' },
     ],
   },
