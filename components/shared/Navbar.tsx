@@ -20,6 +20,7 @@ const navItems: NavItem[] = [
     label: 'Product',
     children: [
       { label: 'Market Prices', href: '/market' },
+      { label: 'Marketplace', href: '/marketplace' },
       { label: 'Weather Forecasts', href: '/weather' },
       { label: 'Agronomy Tips', href: '/tips' },
       { label: 'USSD Guide', href: '/resources/ussd' },

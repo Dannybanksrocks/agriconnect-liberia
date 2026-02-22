@@ -27,7 +27,7 @@ export default function TipCard({ tip }: TipCardProps) {
   return (
     <Link
       href={`/tips/${tip.slug}`}
-      className="group block rounded-2xl border border-agri-border bg-white p-4 transition-all hover:shadow-md dark:border-border dark:bg-card"
+      className="group block rounded-xl border border-border bg-card p-4 transition-all hover:shadow-md"
     >
       <div className="relative aspect-video w-full overflow-hidden rounded-xl">
         <Image

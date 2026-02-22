@@ -14,50 +14,18 @@ interface CropRow {
 }
 
 const crops: CropRow[] = [
-  {
-    name: 'Rice',
-    emoji: '🌾',
-    price: 320,
-    change: 2.4,
-    sparkline: [295, 300, 305, 310, 308, 315, 320],
-  },
-  {
-    name: 'Cocoa',
-    emoji: '🫘',
-    price: 385,
-    change: 5.1,
-    sparkline: [350, 355, 360, 365, 370, 378, 385],
-  },
-  {
-    name: 'Hot Pepper',
-    emoji: '🌶️',
-    price: 195,
-    change: 1.8,
-    sparkline: [185, 188, 186, 190, 188, 192, 195],
-  },
-  {
-    name: 'Cassava',
-    emoji: '🥔',
-    price: 55,
-    change: -0.9,
-    sparkline: [58, 57, 56, 56, 55, 55, 55],
-  },
-  {
-    name: 'Groundnut',
-    emoji: '🥜',
-    price: 200,
-    change: 3.2,
-    sparkline: [185, 188, 190, 192, 195, 198, 200],
-  },
+  { name: 'Rice',       emoji: '🌾', price: 320, change:  2.4, sparkline: [295,300,305,310,308,315,320] },
+  { name: 'Cocoa',      emoji: '🫘', price: 385, change:  5.1, sparkline: [350,355,360,365,370,378,385] },
+  { name: 'Hot Pepper', emoji: '🌶️', price: 195, change:  1.8, sparkline: [185,188,186,190,188,192,195] },
+  { name: 'Cassava',    emoji: '🥔', price:  55, change: -0.9, sparkline: [58,57,56,56,55,55,55]       },
+  { name: 'Groundnut',  emoji: '🥜', price: 200, change:  3.2, sparkline: [185,188,190,192,195,198,200] },
 ]
 
 function MiniSparkline({ data, positive }: { data: number[]; positive: boolean }) {
-  const chartData = data.map((v, i) => ({ v, i }))
-
   return (
     <div className="h-6 w-[60px]">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={chartData}>
+        <LineChart data={data.map((v, i) => ({ v, i }))}>
           <Line
             type="monotone"
             dataKey="v"
@@ -73,39 +41,34 @@ function MiniSparkline({ data, positive }: { data: number[]; positive: boolean }
 
 export default function MarketWidget() {
   return (
-    <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
+    <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-foreground">
-          Market Prices
-        </h2>
-        <Link
-          href="/market"
-          className="text-sm font-medium text-primary hover:underline"
-        >
+        <h2 className="card-heading">Market Prices</h2>
+        <Link href="/market" className="body-text font-medium text-primary hover:underline">
           View all →
         </Link>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-100 text-left text-xs font-medium uppercase tracking-wide text-gray-400 dark:border-border dark:text-muted-foreground">
-              <th className="pb-2">Crop</th>
-              <th className="pb-2 text-right">Price</th>
-              <th className="hidden pb-2 text-right sm:table-cell">Trend</th>
-              <th className="pb-2 text-right">Change</th>
+            <tr className="border-b border-border text-left">
+              <th className="pb-2 table-header">Crop</th>
+              <th className="pb-2 text-right table-header">Price</th>
+              <th className="hidden pb-2 text-right sm:table-cell table-header">Trend</th>
+              <th className="pb-2 text-right table-header">Change</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 dark:divide-border">
+          <tbody className="divide-y divide-border">
             {crops.map((crop) => (
               <tr key={crop.name} className="group">
                 <td className="py-3">
-                  <span className="flex items-center gap-2 font-medium text-gray-900 dark:text-foreground">
+                  <span className="flex items-center gap-2 body-text-strong">
                     <span className="text-base">{crop.emoji}</span>
                     {crop.name}
                   </span>
                 </td>
-                <td className="py-3 text-right font-medium text-gray-900 dark:text-foreground">
+                <td className="py-3 text-right body-text-strong">
                   {formatLRD(crop.price)}
                 </td>
                 <td className="hidden py-3 sm:table-cell">
@@ -115,7 +78,7 @@ export default function MarketWidget() {
                 </td>
                 <td className="py-3 text-right">
                   <span
-                    className={`inline-flex items-center gap-1 text-xs font-medium ${
+                    className={`inline-flex items-center gap-1 badge-text font-semibold ${
                       crop.change >= 0 ? 'text-success' : 'text-danger'
                     }`}
                   >

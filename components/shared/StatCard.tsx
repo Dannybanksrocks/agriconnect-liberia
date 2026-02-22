@@ -18,8 +18,8 @@ interface StatCardProps {
 
 export default function StatCard({
   icon: Icon,
-  iconColor = 'text-green-600',
-  iconBg = 'bg-green-50',
+  iconColor = 'text-primary',
+  iconBg = 'bg-primary/10',
   label,
   value,
   subValue,
@@ -30,13 +30,13 @@ export default function StatCard({
 }: Readonly<StatCardProps>) {
   if (loading) {
     return (
-      <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm dark:border-border dark:bg-card animate-pulse">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-sm animate-pulse">
         <div className="flex items-start justify-between">
-          <div className="h-10 w-10 rounded-lg bg-gray-100" />
-          <div className="h-4 w-16 rounded bg-gray-100" />
+          <div className="h-10 w-10 rounded-lg bg-muted" />
+          <div className="h-4 w-16 rounded bg-muted" />
         </div>
-        <div className="mt-4 h-7 w-24 rounded bg-gray-100" />
-        <div className="mt-1 h-4 w-32 rounded bg-gray-100" />
+        <div className="mt-4 h-7 w-24 rounded bg-muted" />
+        <div className="mt-1 h-4 w-32 rounded bg-muted" />
       </div>
     )
   }
@@ -48,9 +48,9 @@ export default function StatCard({
           <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>
         {trend !== undefined && (
-          <div
-            className={`flex items-center gap-1 text-xs font-medium ${
-              trend >= 0 ? 'text-green-600' : 'text-red-500'
+          <span
+            className={`flex items-center gap-1 caption-text font-semibold ${
+              trend >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400'
             }`}
           >
             {trend >= 0 ? (
@@ -58,20 +58,20 @@ export default function StatCard({
             ) : (
               <TrendingDown className="h-3.5 w-3.5" />
             )}
-            <span>{trend > 0 ? '+' : ''}{trend.toFixed(1)}%</span>
-          </div>
+            {trend > 0 ? '+' : ''}{trend.toFixed(1)}%
+          </span>
         )}
       </div>
       <div className="mt-4">
-        <p className="text-2xl font-bold text-gray-900 dark:text-foreground">
-          {value}
-        </p>
-        <p className="mt-0.5 text-sm text-gray-500 dark:text-muted-foreground">
+        <p className="stat-value">{value}</p>
+        <p className="mt-0.5 body-text">
           {label}
-          {subValue && <span className="ml-1 text-xs opacity-75">{subValue}</span>}
+          {subValue && (
+            <span className="ml-1 caption-text">{subValue}</span>
+          )}
         </p>
         {trendLabel && (
-          <p className="mt-1 text-xs text-gray-400 dark:text-muted-foreground">{trendLabel}</p>
+          <p className="mt-1 caption-text">{trendLabel}</p>
         )}
       </div>
     </>
@@ -81,7 +81,7 @@ export default function StatCard({
     return (
       <button
         type="button"
-        className="w-full rounded-xl border border-gray-100 bg-white p-5 text-left shadow-sm dark:border-border dark:bg-card transition-shadow cursor-pointer hover:shadow-md"
+        className="w-full rounded-xl border border-border bg-card p-5 text-left shadow-sm transition-shadow hover:shadow-md cursor-pointer"
         onClick={onClick}
         aria-label={`${label}: ${value}`}
       >
@@ -91,7 +91,7 @@ export default function StatCard({
   }
 
   return (
-    <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm dark:border-border dark:bg-card">
+    <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
       {cardContent}
     </div>
   )

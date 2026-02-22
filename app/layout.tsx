@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, DM_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import './globals.css'
 
@@ -7,18 +7,13 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Agri Hub Liberia',
-    template: '%s | Agri Hub Liberia',
+    default: 'AgriConnect Liberia',
+    template: '%s | AgriConnect Liberia',
   },
   description:
     'Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers. Giving every Liberian farmer the data advantage.',
@@ -36,12 +31,12 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Agri Hub',
+    title: 'AgriConnect',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#2E7D32',
+  themeColor: '#1B4332',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -58,7 +53,7 @@ export default function RootLayout({
       <head>
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
-      <body className={`${inter.variable} ${dmSans.variable} antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} antialiased`} suppressHydrationWarning>
         {children}
         <Toaster position="top-right" richColors closeButton />
       </body>

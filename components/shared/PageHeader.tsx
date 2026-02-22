@@ -1,3 +1,6 @@
+import Link from 'next/link'
+import { ChevronRight } from 'lucide-react'
+
 interface PageHeaderProps {
   title: string
   description?: string
@@ -14,38 +17,40 @@ export default function PageHeader({
   return (
     <div className="mb-6">
       {breadcrumb && breadcrumb.length > 0 && (
-        <nav className="mb-2 flex items-center gap-1.5 text-sm text-agri-muted dark:text-muted-foreground">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-2 flex flex-wrap items-center gap-1 caption-text"
+        >
           {breadcrumb.map((item, i) => (
-            <span key={i} className="flex items-center gap-1.5">
-              {i > 0 && <span>/</span>}
+            <span key={i} className="flex items-center gap-1">
+              {i > 0 && (
+                <ChevronRight className="h-3 w-3 text-muted-foreground/50" aria-hidden />
+              )}
               {item.href ? (
-                <a
+                <Link
                   href={item.href}
-                  className="hover:text-primary transition-colors"
+                  className="hover:text-foreground transition-colors"
                 >
                   {item.label}
-                </a>
+                </Link>
               ) : (
-                <span className="text-agri-text dark:text-foreground font-medium">
-                  {item.label}
-                </span>
+                <span className="font-medium text-foreground">{item.label}</span>
               )}
             </span>
           ))}
         </nav>
       )}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-agri-text dark:text-foreground md:text-3xl">
-            {title}
-          </h1>
+          <h1 className="page-title">{title}</h1>
           {description && (
-            <p className="mt-1 text-sm text-agri-muted dark:text-muted-foreground">
-              {description}
-            </p>
+            <p className="mt-1 body-text">{description}</p>
           )}
         </div>
-        {actions && <div className="flex items-center gap-2">{actions}</div>}
+        {actions && (
+          <div className="flex shrink-0 items-center gap-2">{actions}</div>
+        )}
       </div>
     </div>
   )

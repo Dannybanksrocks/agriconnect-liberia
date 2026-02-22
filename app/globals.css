@@ -179,9 +179,138 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans text-sm leading-relaxed antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  /* ── Canonical heading scale ─────────────────────────────────────── */
+  /* Used via PageHeader, section headings and all <hN> in app pages.  */
+  /* Landing/marketing pages may override for display-weight headlines. */
+
+  h1 {
+    @apply text-2xl font-bold tracking-tight text-foreground md:text-3xl;
+    line-height: 1.2;
+  }
+  h2 {
+    @apply text-lg font-semibold tracking-tight text-foreground;
+    line-height: 1.3;
+  }
+  h3 {
+    @apply text-base font-semibold text-foreground;
+    line-height: 1.4;
+  }
+  h4 {
+    @apply text-sm font-semibold text-foreground;
+  }
+  h5, h6 {
+    @apply text-xs font-semibold text-foreground uppercase tracking-wider;
+  }
+
+  p {
+    @apply text-sm text-muted-foreground leading-relaxed;
+  }
+
+  label {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  /* Keep paragraph colour inside cards white-bg contexts */
+  .card p, [data-card] p {
+    @apply text-muted-foreground;
+  }
+}
+
+/* ── Semantic typography utilities ──────────────────────────────────── */
+/* Use these classes instead of raw Tailwind combos to ensure            */
+/* font size + weight + colour stay consistent across every page.        */
+
+@utility page-title {
+  /* Page-level <h1> — PageHeader title */
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--foreground);
+}
+@media (min-width: 768px) {
+  .page-title { font-size: 1.875rem; }
+}
+
+@utility section-heading {
+  /* <h2> inside app pages — "My Crops", "Market Overview", etc. */
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: var(--foreground);
+}
+
+@utility card-heading {
+  /* Widget / card <h3> — "Market Prices", "Weather", "Activity" */
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--foreground);
+}
+
+@utility body-text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+@utility body-text-strong {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+@utility caption-text {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+@utility micro-label {
+  /* Section labels: "PLATFORM FEATURES", "HOW IT WORKS" */
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+@utility nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: color 0.15s;
+}
+
+@utility table-header {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility stat-value {
+  /* Large numeric display in StatCard, weather temp, etc. */
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--foreground);
+}
+
+@utility badge-text {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
 }
 
 @utility container {
