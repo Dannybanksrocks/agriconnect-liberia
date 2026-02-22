@@ -7,9 +7,12 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
 }
 
+type IOSBrowser = 'safari' | 'chrome' | 'firefox' | 'edge' | 'other'
+
 interface PWAContextValue {
   canInstall: boolean
   isIOS: boolean
+  iosBrowser: IOSBrowser
   isStandalone: boolean
   install: () => Promise<void>
   dismissed: boolean
@@ -19,6 +22,7 @@ interface PWAContextValue {
 const PWAContext = createContext<PWAContextValue>({
   canInstall: false,
   isIOS: false,
+  iosBrowser: 'safari',
   isStandalone: false,
   install: async () => {},
   dismissed: false,
@@ -29,9 +33,18 @@ export function usePWA() {
   return useContext(PWAContext)
 }
 
+function detectIOSBrowser(ua: string): IOSBrowser {
+  if (/CriOS/.test(ua)) return 'chrome'
+  if (/FxiOS/.test(ua)) return 'firefox'
+  if (/EdgiOS/.test(ua)) return 'edge'
+  if (/Safari/.test(ua) && /AppleWebKit/.test(ua)) return 'safari'
+  return 'other'
+}
+
 export function PWAProvider({ children }: { children: React.ReactNode }) {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [isIOS, setIsIOS] = useState(false)
+  const [iosBrowser, setIOSBrowser] = useState<IOSBrowser>('safari')
   const [isStandalone, setIsStandalone] = useState(false)
   const [dismissed, setDismissed] = useState(false)
 
@@ -45,6 +58,7 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
     const ua = navigator.userAgent
     const ios = /iPad|iPhone|iPod/.test(ua) && !(window as Window & { MSStream?: unknown }).MSStream
     setIsIOS(ios)
+    if (ios) setIOSBrowser(detectIOSBrowser(ua))
 
     const standalone =
       window.matchMedia('(display-mode: standalone)').matches ||
@@ -66,9 +80,7 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
     if (!deferredPrompt) return
     await deferredPrompt.prompt()
     const choice = await deferredPrompt.userChoice
-    if (choice.outcome === 'accepted') {
-      setDeferredPrompt(null)
-    }
+    if (choice.outcome === 'accepted') setDeferredPrompt(null)
   }, [deferredPrompt])
 
   const dismiss = useCallback(() => {
@@ -77,16 +89,7 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <PWAContext.Provider
-      value={{
-        canInstall: !!deferredPrompt,
-        isIOS,
-        isStandalone,
-        install,
-        dismissed,
-        dismiss,
-      }}
-    >
+    <PWAContext.Provider value={{ canInstall: !!deferredPrompt, isIOS, iosBrowser, isStandalone, install, dismissed, dismiss }}>
       {children}
     </PWAContext.Provider>
   )

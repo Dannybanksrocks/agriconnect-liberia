@@ -65,7 +65,7 @@ export default function ShopNavbar() {
             </Link>
 
             <Link
-              href={consumer ? '/shop/account' : '/auth/login'}
+              href={consumer ? '/shop/account' : '/shop/auth/login'}
               className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#1B4332] hover:bg-[#2D6A4F] text-white text-sm font-medium transition"
             >
               <User className="w-4 h-4" />
@@ -130,7 +130,7 @@ export default function ShopNavbar() {
                 ))}
                 <div className="pt-2 px-4 pb-2">
                   <Link
-                    href={consumer ? '/shop/account' : '/auth/login'}
+                    href={consumer ? '/shop/account' : '/shop/auth/login'}
                     onClick={() => setMenuOpen(false)}
                     className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#1B4332] hover:bg-[#2D6A4F] text-white text-sm font-semibold transition"
                   >

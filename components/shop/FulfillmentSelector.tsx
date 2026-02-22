@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, MapPin, RefreshCw, Package, Truck, Calendar } from 'lucide-react'
+import { Check, MapPin, Package, Truck, Calendar } from 'lucide-react'
 import type { FulfillmentType } from '@/lib/types/shop'
 
 const OPTIONS: { id: FulfillmentType; label: string; desc: string; icon: any; badge?: string }[] = [
@@ -26,22 +26,22 @@ export default function FulfillmentSelector({ value, onChange }: Props) {
             key={opt.id}
             type="button"
             onClick={() => onChange(opt.id)}
-            className={`w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition ${active ? 'border-green-500 bg-green-50' : 'border-gray-200 bg-white hover:border-gray-300'}`}
+            className={`w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition ${active ? 'border-[#1B4332] bg-[#D8F3DC]/40' : 'border-stone-200 bg-white hover:border-stone-300'}`}
           >
-            <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${active ? 'bg-green-600' : 'bg-gray-100'}`}>
-              <Icon className={`w-5 h-5 ${active ? 'text-white' : 'text-gray-500'}`} />
+            <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${active ? 'bg-[#1B4332]' : 'bg-stone-100'}`}>
+              <Icon className={`w-5 h-5 ${active ? 'text-white' : 'text-stone-500'}`} />
             </div>
             <div className="flex-1">
-              <p className={`text-sm font-semibold ${active ? 'text-green-800' : 'text-gray-900'}`}>{opt.label}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{opt.desc}</p>
+              <p className={`text-sm font-semibold ${active ? 'text-[#1B4332]' : 'text-stone-800'}`}>{opt.label}</p>
+              <p className="text-xs text-stone-500 mt-0.5">{opt.desc}</p>
             </div>
             <div className="flex items-center gap-2">
               {opt.badge && (
-                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${active ? 'bg-[#D8F3DC] text-[#1B4332]' : 'bg-stone-100 text-stone-600'}`}>
                   {opt.badge}
                 </span>
               )}
-              {active && <Check className="w-4 h-4 text-green-600 flex-shrink-0" />}
+              {active && <Check className="w-4 h-4 text-[#1B4332] flex-shrink-0" />}
             </div>
           </button>
         )

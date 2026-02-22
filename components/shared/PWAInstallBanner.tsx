@@ -1,10 +1,62 @@
 'use client'
 
-import { Leaf, X, Share, Download } from 'lucide-react'
+import { Leaf, X, Share, Download, MoreHorizontal, AlignJustify } from 'lucide-react'
 import { usePWA } from '@/components/shared/PWAProvider'
 
+type Step = { icon?: React.ReactNode; text: React.ReactNode }
+
+function IOSSteps({ steps }: { steps: Step[] }) {
+  return (
+    <div className="mt-3 bg-white/10 rounded-xl px-4 py-3 text-xs text-white/80 space-y-2">
+      {steps.map((s, i) => (
+        <div key={i} className="flex items-start gap-2">
+          <span className="w-5 h-5 rounded-full bg-white/20 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+            {i + 1}
+          </span>
+          <span className="leading-snug">{s.text}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const BROWSER_STEPS = {
+  safari: [
+    { text: <>Tap the <Share className="w-3 h-3 inline mb-0.5" /> <strong>Share</strong> button at the bottom of Safari</> },
+    { text: <>Scroll down and tap <strong>"Add to Home Screen"</strong></> },
+    { text: <>Tap <strong>"Add"</strong> — AgriHub appears on your home screen</> },
+  ],
+  chrome: [
+    { text: <>Tap the <MoreHorizontal className="w-3 h-3 inline mb-0.5" /> <strong>three-dot menu</strong> at the bottom right</> },
+    { text: <>Tap <strong>"Add to Home Screen"</strong></> },
+    { text: <>Tap <strong>"Add"</strong> to confirm</> },
+  ],
+  firefox: [
+    { text: <>Tap the <AlignJustify className="w-3 h-3 inline mb-0.5" /> <strong>menu</strong> button at the bottom right</> },
+    { text: <>Tap <strong>"Share"</strong> then <strong>"Add to Home Screen"</strong></> },
+    { text: <>Tap <strong>"Add"</strong> to confirm</> },
+  ],
+  edge: [
+    { text: <>Tap the <MoreHorizontal className="w-3 h-3 inline mb-0.5" /> <strong>three-dot menu</strong> at the bottom</> },
+    { text: <>Tap <strong>"Add to Phone"</strong> or <strong>"Add to Home Screen"</strong></> },
+    { text: <>Tap <strong>"Add"</strong> to confirm</> },
+  ],
+  other: [
+    { text: <>Open <strong>Safari</strong> on your iPhone and visit this page for the best install experience</> },
+    { text: <>Tap the <Share className="w-3 h-3 inline mb-0.5" /> <strong>Share</strong> button, then <strong>"Add to Home Screen"</strong></> },
+  ],
+}
+
+const BROWSER_LABELS: Record<string, string> = {
+  safari: 'Safari',
+  chrome: 'Chrome',
+  firefox: 'Firefox',
+  edge: 'Edge',
+  other: 'your browser',
+}
+
 export default function PWAInstallBanner() {
-  const { canInstall, isIOS, isStandalone, install, dismissed, dismiss } = usePWA()
+  const { canInstall, isIOS, iosBrowser, isStandalone, install, dismissed, dismiss } = usePWA()
 
   if (isStandalone || dismissed) return null
   if (!canInstall && !isIOS) return null
@@ -28,28 +80,21 @@ export default function PWAInstallBanner() {
             <p className="font-bold text-sm leading-snug">Install AgriHub</p>
             <p className="text-xs text-white/60 mt-0.5 leading-snug">
               {isIOS
-                ? 'Add to your Home Screen for quick access — works offline too.'
-                : 'Install the app for faster access, offline prices, and no browser bar.'}
+                ? `Add to your Home Screen from ${BROWSER_LABELS[iosBrowser]} — works offline too.`
+                : 'Install for faster access, offline prices, and no browser bar.'}
             </p>
           </div>
         </div>
 
         {isIOS ? (
-          <div className="mt-3 bg-white/10 rounded-xl px-4 py-3 text-xs text-white/80 space-y-1.5">
-            <p className="font-semibold text-white text-xs">How to install on iPhone / iPad:</p>
-            <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-white/20 text-[10px] font-bold flex items-center justify-center flex-shrink-0">1</span>
-              <span>Tap the <Share className="w-3 h-3 inline mb-0.5" /> Share button in Safari</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-white/20 text-[10px] font-bold flex items-center justify-center flex-shrink-0">2</span>
-              <span>Scroll down and tap <strong>"Add to Home Screen"</strong></span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-white/20 text-[10px] font-bold flex items-center justify-center flex-shrink-0">3</span>
-              <span>Tap <strong>"Add"</strong> — AgriHub appears on your home screen</span>
-            </div>
-          </div>
+          <>
+            <IOSSteps steps={BROWSER_STEPS[iosBrowser]} />
+            {iosBrowser !== 'safari' && (
+              <p className="text-center text-[10px] text-[#74C69D]/60 mt-2">
+                Tip: opening in Safari gives the best install experience
+              </p>
+            )}
+          </>
         ) : (
           <button
             onClick={install}
