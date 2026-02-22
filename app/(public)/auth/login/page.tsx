@@ -85,7 +85,7 @@ export default function LoginPage() {
 
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-6">
             <p className="text-white/80 leading-relaxed text-sm italic">
-              &ldquo;I earned L$8,000 more on my rice harvest after using FarmPulse.&rdquo;
+              &ldquo;I earned L$8,000 more on my rice harvest after using AgriHub.&rdquo;
             </p>
             <div className="mt-4 flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center text-xs font-bold">

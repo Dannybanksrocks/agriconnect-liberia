@@ -5,7 +5,7 @@ import { Star, Quote } from 'lucide-react'
 const testimonials = [
   {
     quote:
-      'FarmPulse showed me that rice prices in Gbarnga market were L$40 higher than my village buyer. I transported my harvest and earned an extra L$8,000 that season.',
+      'AgriHub showed me that rice prices in Gbarnga market were L$40 higher than my village buyer. I transported my harvest and earned an extra L$8,000 that season.',
     name: 'Fatu Kamara',
     role: 'Rice Farmer',
     county: 'Bong County',
@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
               Voices from the field
             </h2>
             <p className="mt-3 text-lg text-stone-500">
-              Real results from Liberian farmers using FarmPulse
+              Real results from Liberian farmers using AgriHub
             </p>
           </div>
 
@@ -112,7 +112,7 @@ export default function TestimonialsSection() {
             No Smartphone Required
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-            Access FarmPulse from any mobile phone
+            Access AgriHub from any mobile phone
           </h2>
           <p className="text-white/60 text-base mb-8 max-w-md mx-auto">
             No internet? No problem. Just dial from MTN, Orange, or Lonestar — anywhere in Liberia.

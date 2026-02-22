@@ -31,7 +31,7 @@ const values = [
     icon: Users,
     title: 'Community Impact',
     description:
-      'We partner with county agricultural offices, farmer cooperatives, and extension officers to ensure FarmPulse reaches every community.',
+      'We partner with county agricultural offices, farmer cooperatives, and extension officers to ensure AgriHub reaches every community.',
   },
   {
     icon: BarChart3,
@@ -77,16 +77,16 @@ export default function AboutPage() {
             custom={0.1}
             className="max-w-3xl mx-auto text-center"
           >
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-              <Leaf className="w-3.5 h-3.5" />
-              About FarmPulse
-            </div>
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-6">
+                <Leaf className="w-3.5 h-3.5" />
+                About AgriHub
+              </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
               Empowering Liberian Farmers with Data
             </h1>
-            <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
-              FarmPulse is a platform built by Liberians, for Liberians. We provide smallholder farmers with the same market intelligence, weather data, and agronomic expertise once reserved for large agribusinesses.
-            </p>
+              <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+                AgriHub is a platform built by Liberians, for Liberians. We provide smallholder farmers with the same market intelligence, weather data, and agronomic expertise once reserved for large agribusinesses.
+              </p>
           </motion.div>
         </div>
       </section>
@@ -125,7 +125,7 @@ export default function AboutPage() {
           >
             <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight">Our Mission</h2>
             <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-              For too long, large agribusinesses had exclusive access to price data, weather forecasts, and agronomy expertise. FarmPulse puts the same tools in every farmer&apos;s hands &mdash; for free. Our mission is to close the information gap in Liberian agriculture and help every farmer earn a fair price for their harvest.
+              For too long, large agribusinesses had exclusive access to price data, weather forecasts, and agronomy expertise. AgriHub puts the same tools in every farmer&apos;s hands &mdash; for free. Our mission is to close the information gap in Liberian agriculture and help every farmer earn a fair price for their harvest.
             </p>
           </motion.div>
 
@@ -196,7 +196,7 @@ export default function AboutPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight">Our Team</h2>
-            <p className="mt-3 text-gray-500">The people behind FarmPulse Liberia</p>
+            <p className="mt-3 text-gray-500">The people behind AgriHub Liberia</p>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
             {team.map((member, i) => (

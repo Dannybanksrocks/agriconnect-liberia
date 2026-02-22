@@ -89,10 +89,10 @@ export default function FarmerGuidePage() {
               Farmer Guide
             </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Getting Started with FarmPulse
+              Getting Started with AgriHub
             </h1>
             <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
-              A step-by-step guide to help you get the most out of FarmPulse Liberia.
+              A step-by-step guide to help you get the most out of AgriHub Liberia.
             </p>
           </motion.div>
         </div>
@@ -139,7 +139,7 @@ export default function FarmerGuidePage() {
             className="max-w-3xl mx-auto"
           >
             <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight text-center mb-12">
-              What You Get with FarmPulse
+              What You Get with AgriHub
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {features.map((feature) => (
@@ -167,7 +167,7 @@ export default function FarmerGuidePage() {
             className="text-center"
           >
             <h2 className="text-2xl font-bold text-gray-900">Ready to start?</h2>
-            <p className="mt-2 text-gray-500">Join 2,400+ farmers already using FarmPulse</p>
+            <p className="mt-2 text-gray-500">Join 2,400+ farmers already using AgriHub</p>
             <div className="mt-6 flex items-center justify-center gap-4">
               <Link
                 href="/auth/register"

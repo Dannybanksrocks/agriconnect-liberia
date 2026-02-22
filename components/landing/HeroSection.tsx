@@ -85,7 +85,9 @@ export default function HeroSection() {
       />
 
       <div className="container relative z-10 flex-1 flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+          {/* Left content */}
+          <div className="text-center lg:text-left">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -144,7 +146,7 @@ export default function HeroSection() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="mt-10 flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4"
           >
             <Link
               href="/auth/register"
@@ -171,6 +173,38 @@ export default function HeroSection() {
           >
             Trusted by 2,400+ farmers across all 15 counties
           </motion.p>
+          </div>
+
+          {/* Right image */}
+          <motion.div
+            custom={0.6}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="relative hidden lg:block"
+          >
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+              <img
+                src="/images/liberian-farmer.jpg"
+                alt="Liberian farmer using mobile phone in rice field"
+                className="w-full h-[500px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1B4332]/60 to-transparent" />
+            </div>
+            
+            {/* Floating badge on image */}
+            <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-5 py-3 border border-stone-200">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#95D5B2] flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-[#1B4332]" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-[#1B4332]">40%</p>
+                  <p className="text-xs text-stone-500">Income Increase</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         {/* Floating stat cards */}
@@ -179,7 +213,7 @@ export default function HeroSection() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
         >
           <FloatStatCard icon={Users}       label="Active Farmers"    value="2,400+"  trend="+18%"   delay={0.7}  />
           <FloatStatCard icon={TrendingUp}  label="Counties Covered"  value="15"      delay={0.8}  />

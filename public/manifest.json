@@ -1,6 +1,6 @@
 {
-  "name": "FarmPulse Liberia",
-  "short_name": "FarmPulse",
+  "name": "AgriHub Liberia",
+  "short_name": "AgriHub",
   "description": "Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers",
   "start_url": "/dashboard",
   "scope": "/",
