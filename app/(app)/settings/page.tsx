@@ -426,7 +426,7 @@ function PrivacyTab() {
         </h3>
         <div className="space-y-2 text-sm text-agri-muted dark:text-muted-foreground">
           <p>
-            AgriConnect Liberia collects minimal data to provide you with
+            FarmPulse Liberia collects minimal data to provide you with
             accurate market prices, weather forecasts, and farming
             recommendations tailored to your county and crops.
           </p>
@@ -498,7 +498,7 @@ function AboutTab() {
       <Logo size="lg" linkTo="" />
 
       <p className="mt-4 text-sm font-medium text-agri-text dark:text-foreground">
-        AgriConnect Liberia v1.0.0
+        FarmPulse Liberia v1.0.0
       </p>
       <p className="mt-1 text-sm text-agri-muted dark:text-muted-foreground">
         Built by Tech 231 Liberia Limited
