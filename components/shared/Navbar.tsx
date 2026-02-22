@@ -19,7 +19,10 @@ const navItems: NavItem[] = [
   {
     label: 'Product',
     children: [
+      { label: 'AI Crop Advisor', href: '/ai-advisor' },
+      { label: 'Marketplace', href: '/marketplace' },
       { label: 'Market Prices', href: '/market' },
+      { label: 'Inventory', href: '/inventory' },
       { label: 'Weather Forecasts', href: '/weather' },
       { label: 'Agronomy Tips', href: '/tips' },
       { label: 'My Farm', href: '/my-farm' },
@@ -113,7 +116,7 @@ export default function Navbar() {
             <Leaf className="w-4 h-4 text-[#D8F3DC]" />
           </div>
           <span className="font-bold text-lg text-[#1B4332] tracking-tight">
-            Farm<span className="text-[#2D6A4F]">Pulse</span>
+            Agri <span className="text-[#2D6A4F]">Hub</span>
           </span>
         </Link>
 
