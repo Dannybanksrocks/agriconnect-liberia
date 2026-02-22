@@ -11,9 +11,10 @@ const steps = [
     icon: UserPlus,
     title: 'Create your farm profile',
     description:
-      'Select your county, crops, and farm size. AgriHub personalises prices and forecasts to your exact location in minutes.',
+      'Select your county, crops, and farm size. Agri Hub personalises prices and forecasts to your exact location in minutes.',
     cta: 'Get started free',
     href: '/auth/register',
+    image: '/images/farmer-checking-phone.jpg',
   },
   {
     number: '02',
@@ -23,6 +24,7 @@ const steps = [
       'See today\'s crop prices, a 7-day weather forecast, and the latest agronomy tips — on any device, even without internet.',
     cta: null,
     href: null,
+    image: '/images/liberia-community-farming.jpg',
   },
   {
     number: '03',
@@ -32,6 +34,7 @@ const steps = [
       'Sell at the right market, plant at the right time, and protect your harvest with data that used to be available only to large agribusinesses.',
     cta: null,
     href: null,
+    image: '/images/harvest-celebration.jpg',
   },
 ]
 
@@ -68,6 +71,18 @@ export default function HowItWorksSection() {
                 transition={{ duration: 0.55, delay: i * 0.18 }}
                 className="relative flex flex-col items-start md:items-center md:text-center"
               >
+                {/* Step Image */}
+                {step.image && (
+                  <div className="relative w-full h-48 rounded-xl overflow-hidden mb-6 shadow-lg">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1B4332]/60 to-transparent" />
+                  </div>
+                )}
+                
                 {/* Number circle */}
                 <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full bg-[#1B4332] text-white shadow-lg shadow-[#1B4332]/20 mb-6">
                   <div className="flex flex-col items-center leading-none">
