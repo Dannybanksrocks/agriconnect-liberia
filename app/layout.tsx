@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
+import { PWAProvider } from '@/components/shared/PWAProvider'
+import PWAInstallBanner from '@/components/shared/PWAInstallBanner'
 import './globals.css'
 
 const inter = Inter({
@@ -12,26 +14,18 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'AgriConnect Liberia',
-    template: '%s | AgriConnect Liberia',
+    default: 'AgriHub Liberia',
+    template: '%s | AgriHub Liberia',
   },
   description:
     'Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers. Giving every Liberian farmer the data advantage.',
-  keywords: [
-    'agriculture',
-    'Liberia',
-    'market prices',
-    'weather',
-    'farming',
-    'agronomy',
-    'crops',
-  ],
+  keywords: ['agriculture', 'Liberia', 'market prices', 'weather', 'farming', 'agronomy', 'crops'],
   authors: [{ name: 'Tech 231 Liberia Ltd' }],
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
-    title: 'AgriConnect',
+    statusBarStyle: 'black-translucent',
+    title: 'AgriHub',
   },
 }
 
@@ -51,11 +45,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={`${inter.variable} antialiased`} suppressHydrationWarning>
-        {children}
-        <Toaster position="top-right" richColors closeButton />
+        <PWAProvider>
+          {children}
+          <PWAInstallBanner />
+          <Toaster position="top-right" richColors closeButton />
+        </PWAProvider>
       </body>
     </html>
   )

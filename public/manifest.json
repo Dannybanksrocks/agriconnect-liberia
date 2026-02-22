@@ -1,27 +1,26 @@
 {
-  "name": "Agri Hub Liberia",
-  "short_name": "Agri Hub",
+  "name": "AgriHub Liberia",
+  "short_name": "AgriHub",
   "description": "Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers",
-  "start_url": "/dashboard",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#F8FAF5",
-  "theme_color": "#2E7D32",
+  "background_color": "#1B4332",
+  "theme_color": "#1B4332",
   "lang": "en",
   "categories": ["agriculture", "weather", "finance", "utilities"],
   "icons": [
-    { "src": "/icons/icon-72x72.png", "sizes": "72x72", "type": "image/png" },
-    { "src": "/icons/icon-96x96.png", "sizes": "96x96", "type": "image/png" },
-    { "src": "/icons/icon-128x128.png", "sizes": "128x128", "type": "image/png" },
-    { "src": "/icons/icon-144x144.png", "sizes": "144x144", "type": "image/png" },
-    { "src": "/icons/icon-152x152.png", "sizes": "152x152", "type": "image/png" },
-    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icons/icon-384x384.png", "sizes": "384x384", "type": "image/png" },
-    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+    { "src": "/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "form_factor": "narrow" }
   ],
   "shortcuts": [
-    { "name": "Market Prices", "url": "/market", "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }] },
-    { "name": "Weather", "url": "/weather", "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }] }
+    { "name": "Market Prices", "short_name": "Market", "url": "/market", "icons": [{ "src": "/logo.png", "sizes": "192x192" }] },
+    { "name": "Weather", "short_name": "Weather", "url": "/weather", "icons": [{ "src": "/logo.png", "sizes": "192x192" }] },
+    { "name": "Shop", "short_name": "Shop", "url": "/shop", "icons": [{ "src": "/logo.png", "sizes": "192x192" }] }
   ]
 }
