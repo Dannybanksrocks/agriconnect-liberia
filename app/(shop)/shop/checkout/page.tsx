@@ -9,13 +9,13 @@ import { useShopStore } from '@/lib/store/useShopStore'
 import PaymentMethodSelector from '@/components/shop/PaymentMethodSelector'
 import type { MobileMoneyProvider } from '@/lib/types/shop'
 
-const USD_RATE = 189
-
 export default function CheckoutPage() {
   const router = useRouter()
   const cartItems = useShopStore((s) => s.cartItems)
   const addresses = useShopStore((s) => s.addresses)
-  const placeOrder = useShopStore((s) => s.placeOrder)
+  const addOrder = useShopStore((s) => s.addOrder)
+  const clearCart = useShopStore((s) => s.clearCart)
+  const consumer = useShopStore((s) => s.consumer)
   const [paymentProvider, setPaymentProvider] = useState<MobileMoneyProvider | ''>('')
   const [paymentPhone, setPaymentPhone] = useState('')
   const [paymentPhoneError, setPaymentPhoneError] = useState('')
@@ -25,6 +25,7 @@ export default function CheckoutPage() {
   const subtotal = cartItems.reduce((s, c) => s + c.pricePerUnitLRD * c.quantity, 0)
   const deliveryFee = cartItems.filter((c) => c.fulfillmentType === 'delivery').length > 0 ? 150 : 0
   const total = subtotal + deliveryFee
+  const USD_RATE = 189
 
   const hasDelivery = cartItems.some((c) => c.fulfillmentType === 'delivery')
 
@@ -39,7 +40,36 @@ export default function CheckoutPage() {
     if (!valid) return
     setIsPlacing(true)
     await new Promise((r) => setTimeout(r, 1200))
-    const orderId = placeOrder({ paymentProvider, paymentPhone, deliveryAddressId: selectedAddr })
+    const orderId = `order_${Date.now()}`
+    const deliveryAddr = addresses.find((a) => a.id === selectedAddr)
+    addOrder({
+      id: orderId,
+      consumerId: consumer?.id ?? 'guest',
+      items: cartItems.map((c) => ({
+        listingId: c.listingId,
+        cropName: c.cropName,
+        emoji: c.emoji,
+        quantity: c.quantity,
+        unit: c.unit,
+        pricePerUnitLRD: c.pricePerUnitLRD,
+        farmerName: c.farmerName,
+        farmerId: c.listingId,
+        farmerPhone: c.farmerPhone,
+      })),
+      status: 'placed',
+      fulfillmentType: cartItems[0]?.fulfillmentType ?? 'delivery',
+      paymentMethod: paymentProvider as MobileMoneyProvider,
+      paymentStatus: 'pending',
+      mobileMoneyNumber: paymentPhone,
+      totalLRD: total,
+      totalUSD: parseFloat((total / USD_RATE).toFixed(2)),
+      deliveryFee,
+      deliveryAddress: deliveryAddr,
+      statusHistory: [{ status: 'placed', timestamp: new Date().toISOString() }],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    })
+    clearCart()
     toast.success('Order placed! You will receive an SMS confirmation.')
     router.push(`/shop/orders/${orderId}`)
     setIsPlacing(false)
