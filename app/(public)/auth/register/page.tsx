@@ -276,7 +276,7 @@ export default function RegisterPage() {
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 mt-auto">
           <p className="text-xs text-white/50">
-            You can also access AgriHub via USSD: <span className="text-white/80 font-mono">*347#</span>
+            You can also access Agri Hub via USSD: <span className="text-white/80 font-mono">*347#</span>
           </p>
         </div>
       </div>
@@ -308,7 +308,7 @@ export default function RegisterPage() {
                       {isCompleted ? <Check className="h-3 w-3" /> : stepNum}
                     </div>
                   </div>
-                  {i < 4 && (
+                          {i < 5 && (
                     <div
                       className={`flex-1 h-0.5 mx-1 rounded-full transition-colors ${
                         step > stepNum ? 'bg-green-600' : 'bg-gray-200'
@@ -509,7 +509,7 @@ export default function RegisterPage() {
                   {step === 3 && (
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-gray-900">Account Type</h2>
-              <p className="text-sm text-gray-500">How will you use AgriHub?</p>
+              <p className="text-sm text-gray-500">How will you use Agri Hub?</p>
 
                       <div className="space-y-3">
                         {[
@@ -545,8 +545,140 @@ export default function RegisterPage() {
                     </div>
                   )}
 
-                  {/* STEP 4: Preferences */}
+                  {/* STEP 4: Payment Setup */}
                   {step === 4 && (
+                    <div className="space-y-4">
+                      <h2 className="text-xl font-bold text-gray-900">Payment Setup</h2>
+                      <p className="text-sm text-gray-500">How would you like to receive payments from buyers?</p>
+
+                      <div className="rounded-xl bg-green-50 border border-green-200 p-4">
+                        <p className="text-xs text-green-800 leading-relaxed">
+                          <strong>Agri Hub uses mobile money</strong> — no bank account needed. Buyers pay directly to your wallet when your produce is sold through the marketplace.
+                        </p>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">Mobile Money Provider</label>
+                        <div className="space-y-2">
+                          {MOBILE_MONEY_PROVIDERS.map((provider) => (
+                            <label
+                              key={provider.value}
+                              className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition ${
+                                formData.mobileMoneyProvider === provider.value
+                                  ? 'border-green-500 bg-green-50'
+                                  : 'border-gray-200 hover:bg-gray-50'
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                value={provider.value}
+                                checked={formData.mobileMoneyProvider === provider.value}
+                                onChange={() => updateField('mobileMoneyProvider', provider.value)}
+                                className="mt-0.5 h-4 w-4 text-green-600 focus:ring-green-500 accent-green-600"
+                              />
+                              <div className="flex-1">
+                                <p className="text-sm font-semibold text-gray-900">{provider.label}</p>
+                                <p className="text-xs text-gray-500 mt-0.5">{provider.desc}</p>
+                              </div>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {formData.mobileMoneyProvider && formData.mobileMoneyProvider !== 'none' && (
+                        <>
+                          <div className="space-y-1.5">
+                            <label htmlFor="mobileMoneyNumber" className="text-sm font-medium text-gray-700">
+                              Mobile Money Number
+                            </label>
+                            <div className="relative flex">
+                              <span className="inline-flex items-center px-3 h-11 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-sm font-medium text-gray-500">+231</span>
+                              <div className="relative flex-1">
+                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                                <input
+                                  id="mobileMoneyNumber"
+                                  type="tel"
+                                  placeholder="770 123 456"
+                                  value={formData.mobileMoneyNumber}
+                                  onChange={(e) => updateField('mobileMoneyNumber', e.target.value)}
+                                  className="w-full h-11 pl-10 pr-4 rounded-r-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition text-sm"
+                                />
+                              </div>
+                            </div>
+                            {errors.mobileMoneyNumber && <p className="text-xs text-red-600">{errors.mobileMoneyNumber}</p>}
+                            <p className="text-xs text-gray-500">This is the number buyers will use to pay you</p>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label htmlFor="accountName" className="text-sm font-medium text-gray-700">
+                              Account Name
+                            </label>
+                            <div className="relative">
+                              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                              <input
+                                id="accountName"
+                                type="text"
+                                placeholder="Name registered on mobile money"
+                                value={formData.accountName}
+                                onChange={(e) => updateField('accountName', e.target.value)}
+                                className={inputClass}
+                              />
+                            </div>
+                            {errors.accountName && <p className="text-xs text-red-600">{errors.accountName}</p>}
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-sm font-medium text-gray-700">Currency Preference</label>
+                            <div className="grid grid-cols-2 gap-2">
+                              {[
+                                { value: 'LRD', label: 'LRD (Liberian Dollars)', note: 'Most market transactions' },
+                                { value: 'USD', label: 'USD (US Dollars)', note: 'Export crops (rubber, cocoa)' },
+                              ].map((currency) => (
+                                <label
+                                  key={currency.value}
+                                  className={`p-3 rounded-lg border cursor-pointer transition ${
+                                    formData.currencyPreference === currency.value
+                                      ? 'border-green-500 bg-green-50'
+                                      : 'border-gray-200 hover:bg-gray-50'
+                                  }`}
+                                >
+                                  <input
+                                    type="radio"
+                                    value={currency.value}
+                                    checked={formData.currencyPreference === currency.value}
+                                    onChange={() => updateField('currencyPreference', currency.value)}
+                                    className="sr-only"
+                                  />
+                                  <p className="text-sm font-semibold text-gray-900">{currency.label}</p>
+                                  <p className="text-xs text-gray-500 mt-0.5">{currency.note}</p>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="rounded-lg bg-blue-50 border border-blue-200 p-3">
+                            <p className="text-xs text-blue-800 font-semibold mb-1">Payment Terms</p>
+                            <ul className="text-xs text-blue-700 space-y-1">
+                              <li>• Buyers pay via mobile money before or on delivery</li>
+                              <li>• Agri Hub does NOT hold funds — payments go directly to your wallet</li>
+                              <li>• Transaction confirmation sent via SMS to your registered number</li>
+                            </ul>
+                          </div>
+                        </>
+                      )}
+
+                      {formData.mobileMoneyProvider === 'none' && (
+                        <div className="rounded-lg bg-amber-50 border border-amber-200 p-3">
+                          <p className="text-xs text-amber-800 leading-relaxed">
+                            You can set up mobile money later from <strong>Settings → Payment</strong>. Having mobile money makes it easier to receive payments from buyers.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* STEP 5: Preferences */}
+                  {step === 5 && (
                     <div className="space-y-4">
                       <h2 className="text-xl font-bold text-gray-900">Preferences</h2>
                       <p className="text-sm text-gray-500">Customize your experience</p>
@@ -595,7 +727,7 @@ export default function RegisterPage() {
 
               <div className="rounded-xl bg-green-50 border border-green-200 p-3">
                 <p className="text-xs text-green-800">
-                  You can also access AgriHub via USSD: <span className="font-mono font-bold">*347#</span>
+                  You can also access Agri Hub via USSD: <span className="font-mono font-bold">*347#</span>
                 </p>
               </div>
 
@@ -614,8 +746,8 @@ export default function RegisterPage() {
                     </div>
                   )}
 
-                  {/* STEP 5: Complete */}
-                  {step === 5 && (
+                  {/* STEP 6: Complete */}
+                  {step === 6 && (
                     <div className="text-center py-8 space-y-6">
                       <motion.div
                         initial={{ scale: 0 }}
@@ -626,7 +758,7 @@ export default function RegisterPage() {
                         <PartyPopper className="h-10 w-10 text-green-600" />
                       </motion.div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Welcome to AgriHub!</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Welcome to Agri Hub!</h2>
                         <p className="text-sm text-gray-500 mt-2">
                           Your account has been created successfully. You&apos;re now part of a community of {'>'}2,400 Liberian farmers.
                         </p>
