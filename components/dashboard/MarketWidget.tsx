@@ -73,9 +73,9 @@ function MiniSparkline({ data, positive }: { data: number[]; positive: boolean }
 
 export default function MarketWidget() {
   return (
-    <div className="rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card">
+    <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-agri-text dark:text-foreground">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-foreground">
           Market Prices
         </h2>
         <Link
@@ -89,23 +89,23 @@ export default function MarketWidget() {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-agri-border text-left text-xs font-medium uppercase tracking-wide text-agri-muted dark:border-border dark:text-muted-foreground">
+            <tr className="border-b border-gray-100 text-left text-xs font-medium uppercase tracking-wide text-gray-400 dark:border-border dark:text-muted-foreground">
               <th className="pb-2">Crop</th>
               <th className="pb-2 text-right">Price</th>
               <th className="hidden pb-2 text-right sm:table-cell">Trend</th>
               <th className="pb-2 text-right">Change</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-agri-border dark:divide-border">
+          <tbody className="divide-y divide-gray-100 dark:divide-border">
             {crops.map((crop) => (
               <tr key={crop.name} className="group">
                 <td className="py-3">
-                  <span className="flex items-center gap-2 font-medium text-agri-text dark:text-foreground">
+                  <span className="flex items-center gap-2 font-medium text-gray-900 dark:text-foreground">
                     <span className="text-base">{crop.emoji}</span>
                     {crop.name}
                   </span>
                 </td>
-                <td className="py-3 text-right font-medium text-agri-text dark:text-foreground">
+                <td className="py-3 text-right font-medium text-gray-900 dark:text-foreground">
                   {formatLRD(crop.price)}
                 </td>
                 <td className="hidden py-3 sm:table-cell">

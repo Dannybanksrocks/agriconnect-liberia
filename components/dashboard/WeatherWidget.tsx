@@ -47,9 +47,9 @@ export default function WeatherWidget() {
   const CurrentIcon = conditionIcons[currentCondition]
 
   return (
-    <div className="rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card">
+    <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-agri-text dark:text-foreground">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-foreground">
           Weather — {selectedCounty}
         </h2>
         <Link
@@ -63,10 +63,10 @@ export default function WeatherWidget() {
       <div className="mb-6 flex items-center gap-4">
         <CurrentIcon className={`h-14 w-14 ${conditionColors[currentCondition]}`} />
         <div>
-          <p className="text-4xl font-bold text-agri-text dark:text-foreground">
+          <p className="text-4xl font-bold text-gray-900 dark:text-foreground">
             29°C
           </p>
-          <p className="text-sm text-agri-muted dark:text-muted-foreground">
+          <p className="text-sm text-gray-500 dark:text-muted-foreground">
             Partly Cloudy
           </p>
         </div>
@@ -82,17 +82,17 @@ export default function WeatherWidget() {
           return (
             <div
               key={day.day}
-              className="flex min-w-[4.5rem] flex-col items-center gap-1.5 rounded-xl border border-agri-border bg-agri-hover px-3 py-2.5 dark:border-border dark:bg-muted"
+              className="flex min-w-[4.5rem] flex-col items-center gap-1.5 rounded-xl border border-gray-100 bg-gray-50 px-3 py-2.5 dark:border-border dark:bg-muted"
             >
-              <span className="text-xs font-medium text-agri-muted dark:text-muted-foreground">
+              <span className="text-xs font-medium text-gray-500 dark:text-muted-foreground">
                 {day.day}
               </span>
               <DayIcon className={`h-5 w-5 ${conditionColors[day.condition]}`} />
               <div className="flex gap-1 text-xs">
-                <span className="font-semibold text-agri-text dark:text-foreground">
+                <span className="font-semibold text-gray-900 dark:text-foreground">
                   {day.high}°
                 </span>
-                <span className="text-agri-muted dark:text-muted-foreground">
+                <span className="text-gray-400 dark:text-muted-foreground">
                   {day.low}°
                 </span>
               </div>
