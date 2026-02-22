@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { motion } from 'framer-motion'
 import { Eye, EyeOff, Mail, Lock, Phone, ArrowRight } from 'lucide-react'
 import Logo from '@/components/shared/Logo'
 import PoweredBy from '@/components/shared/PoweredBy'
@@ -42,66 +41,49 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col lg:flex-row bg-gradient-to-br from-primary-dark to-primary dark:from-[#0a1f0a] dark:to-[#0F1A0F]">
+    <div className="min-h-dvh flex flex-col lg:flex-row bg-white">
       {/* Left panel — desktop only */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center px-12 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-white/20 blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-secondary/30 blur-3xl" />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 max-w-md text-center space-y-8"
-        >
-          <Logo size="lg" variant="white" linkTo="/" />
-
-          <p className="text-xl font-medium leading-relaxed text-white/90">
-            Empowering Liberian farmers with technology
-          </p>
-
-          <div className="mt-10 bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-            <p className="italic text-white/90 leading-relaxed">
-              &ldquo;AgriConnect helped me find the best price for my rice
-              harvest. I earned 40% more this season!&rdquo;
+      <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center px-12 bg-gray-50 border-r border-gray-100">
+        <div className="max-w-md w-full space-y-8">
+          <div>
+            <Logo size="lg" linkTo="/" />
+            <p className="mt-4 text-lg font-medium text-gray-900 leading-snug">
+              The smart farming platform for Liberia
             </p>
-            <div className="mt-4 flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary-dark font-bold text-sm">
+            <p className="mt-2 text-gray-500">
+              Real-time market prices, weather forecasts, and expert agronomy tips — all in one place.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <p className="text-gray-700 leading-relaxed text-sm italic">
+              &ldquo;AgriConnect helped me find the best price for my rice harvest. I earned 40% more this season!&rdquo;
+            </p>
+            <div className="mt-4 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs font-bold">
                 FK
               </div>
-              <div className="text-left">
-                <p className="font-semibold text-sm">Fatu Kamara</p>
-                <p className="text-xs text-white/70">
-                  Rice farmer, Bong County
-                </p>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Fatu Kamara</p>
+                <p className="text-xs text-gray-500">Rice farmer, Bong County</p>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Right panel / mobile full-page */}
-      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="w-full max-w-md bg-white dark:bg-card rounded-2xl shadow-xl p-6 sm:p-8 space-y-6"
-        >
-          <div className="flex justify-center lg:hidden">
-            <Logo size="lg" linkTo="/" />
-          </div>
-          <div className="hidden lg:flex justify-center">
+      {/* Right panel */}
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12">
+        <div className="w-full max-w-md space-y-6">
+          <div className="flex justify-center lg:hidden mb-2">
             <Logo size="lg" linkTo="/" />
           </div>
 
-          <div className="text-center space-y-1">
-            <h1 className="text-2xl font-bold text-agri-text dark:text-foreground">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Welcome back
             </h1>
-            <p className="text-sm text-agri-muted dark:text-muted-foreground">
+            <p className="mt-1 text-sm text-gray-500">
               Rice prices just updated. Sign in to check.
             </p>
           </div>
@@ -109,59 +91,49 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email / Phone */}
             <div className="space-y-1.5">
-              <label
-                htmlFor="emailOrPhone"
-                className="text-sm font-medium text-agri-text dark:text-foreground"
-              >
+              <label htmlFor="emailOrPhone" className="text-sm font-medium text-gray-700">
                 Email or Phone
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-agri-muted dark:text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   id="emailOrPhone"
                   type="text"
                   placeholder="you@example.com or +231..."
                   {...register('emailOrPhone')}
-                  className="w-full h-12 pl-10 pr-4 rounded-xl border border-agri-border dark:border-border bg-white dark:bg-background text-agri-text dark:text-foreground placeholder:text-agri-muted/60 dark:placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                  className="w-full h-11 pl-10 pr-4 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition text-sm"
                 />
               </div>
               {errors.emailOrPhone && (
-                <p className="text-xs text-danger">{errors.emailOrPhone.message}</p>
+                <p className="text-xs text-red-600">{errors.emailOrPhone.message}</p>
               )}
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label
-                htmlFor="password"
-                className="text-sm font-medium text-agri-text dark:text-foreground"
-              >
+              <label htmlFor="password" className="text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-agri-muted dark:text-muted-foreground" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   {...register('password')}
-                  className="w-full h-12 pl-10 pr-12 rounded-xl border border-agri-border dark:border-border bg-white dark:bg-background text-agri-text dark:text-foreground placeholder:text-agri-muted/60 dark:placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                  className="w-full h-11 pl-10 pr-12 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition text-sm"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-agri-muted dark:text-muted-foreground hover:text-agri-text dark:hover:text-foreground transition"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-danger">{errors.password.message}</p>
+                <p className="text-xs text-red-600">{errors.password.message}</p>
               )}
             </div>
 
@@ -171,15 +143,13 @@ export default function LoginPage() {
                 <input
                   type="checkbox"
                   {...register('rememberMe')}
-                  className="h-4 w-4 rounded border-agri-border text-primary focus:ring-primary accent-primary"
+                  className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500 accent-green-600"
                 />
-                <span className="text-sm text-agri-muted dark:text-muted-foreground">
-                  Remember me
-                </span>
+                <span className="text-sm text-gray-600">Remember me</span>
               </label>
               <Link
                 href="/auth/forgot-password"
-                className="text-sm font-medium text-primary hover:text-primary-dark dark:text-primary-light dark:hover:text-primary transition"
+                className="text-sm font-medium text-green-600 hover:text-green-700 transition"
               >
                 Forgot password?
               </Link>
@@ -189,10 +159,10 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-12 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full h-11 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
             >
               {isSubmitting ? (
-                <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 'Sign In'
               )}
@@ -201,38 +171,36 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-agri-border dark:bg-border" />
-            <span className="text-xs text-agri-muted dark:text-muted-foreground">
-              or
-            </span>
-            <div className="flex-1 h-px bg-agri-border dark:bg-border" />
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="text-xs text-gray-400">or</span>
+            <div className="flex-1 h-px bg-gray-200" />
           </div>
 
           {/* OTP Button */}
           <button
             type="button"
-            className="w-full h-12 border border-agri-border dark:border-border text-agri-text dark:text-foreground font-semibold rounded-xl hover:bg-agri-hover dark:hover:bg-muted transition flex items-center justify-center gap-2"
+            className="w-full h-11 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition flex items-center justify-center gap-2 text-sm"
           >
             <Phone className="h-4 w-4" />
             Continue with Phone OTP
           </button>
 
           {/* Register link */}
-          <p className="text-center text-sm text-agri-muted dark:text-muted-foreground">
+          <p className="text-center text-sm text-gray-500">
             New farmer?{' '}
             <Link
               href="/auth/register"
-              className="font-semibold text-primary hover:text-primary-dark dark:text-primary-light dark:hover:text-primary transition inline-flex items-center gap-1"
+              className="font-semibold text-green-600 hover:text-green-700 transition inline-flex items-center gap-1"
             >
               Create account <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </p>
 
           {/* PoweredBy */}
-          <div className="pt-4 border-t border-agri-border dark:border-border flex justify-center">
+          <div className="pt-4 border-t border-gray-100 flex justify-center">
             <PoweredBy size="sm" />
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

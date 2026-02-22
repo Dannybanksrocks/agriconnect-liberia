@@ -3,40 +3,31 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
-import { TrendingUp, Cloud, BookOpen } from 'lucide-react'
+import { TrendingUp, CloudSun, BookOpen } from 'lucide-react'
 
 const features = [
   {
     icon: TrendingUp,
-    iconBg: 'bg-primary/10',
-    iconColor: 'text-primary',
     title: 'Market Prices',
-    subtitle: 'Know the price before you sell',
     description:
-      'Compare crop prices across all 15 counties in real time. Never undersell your harvest again.',
-    cta: 'View Prices →',
+      'Compare crop prices across all 15 counties in real time. Know the best market before you travel — never undersell your harvest again.',
+    cta: 'View Prices',
     href: '/market',
   },
   {
-    icon: Cloud,
-    iconBg: 'bg-accent/10',
-    iconColor: 'text-accent',
+    icon: CloudSun,
     title: 'Weather Forecasts',
-    subtitle: 'Plan your season with confidence',
     description:
-      'County-specific 7-day forecasts with agricultural alerts. Know when to plant, when to harvest.',
-    cta: 'Check Weather →',
+      'County-specific 7-day forecasts with agricultural alerts. Know exactly when to plant, irrigate, and harvest for maximum yield.',
+    cta: 'Check Weather',
     href: '/weather',
   },
   {
     icon: BookOpen,
-    iconBg: 'bg-secondary/10',
-    iconColor: 'text-secondary-dark',
     title: 'Agronomy Tips',
-    subtitle: 'Expert guidance in your language',
     description:
-      'Step-by-step farming guides for Liberia\'s most important crops — available offline, with audio.',
-    cta: 'Browse Tips →',
+      "Step-by-step farming guides for Liberia's most important crops — available offline, with audio support in local languages.",
+    cta: 'Browse Tips',
     href: '/tips',
   },
 ]
@@ -46,43 +37,41 @@ export default function FeaturesSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="w-full py-20 md:py-28 bg-agri-bg">
+    <section className="w-full py-20 md:py-28 bg-white">
       <div className="container">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-agri-text mb-3">
-            Everything you need to farm smarter
+          <p className="text-sm font-semibold tracking-widest text-green-600 uppercase mb-4">
+            Platform Features
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+            Everything a Liberian farmer needs
           </h2>
-          <p className="text-lg text-agri-muted max-w-xl mx-auto">
-            Powerful tools designed specifically for Liberian farmers
+          <p className="mt-3 text-lg text-gray-500 max-w-xl mx-auto">
+            Powerful tools designed specifically for the Liberian agricultural context
           </p>
         </div>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((feature, i) => {
             const Icon = feature.icon
             return (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="group rounded-2xl p-8 bg-white shadow-sm border border-agri-border hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div
-                  className={`w-14 h-14 rounded-full ${feature.iconBg} flex items-center justify-center mb-5`}
-                >
-                  <Icon className={`w-7 h-7 ${feature.iconColor}`} />
+                <div className="rounded-xl bg-green-50 p-3 w-12 h-12 flex items-center justify-center mb-6">
+                  <Icon className="w-5 h-5 text-green-600" />
                 </div>
-
-                <h3 className="text-xl font-bold text-agri-text mb-1">{feature.title}</h3>
-                <p className="text-sm font-medium text-primary mb-3">{feature.subtitle}</p>
-                <p className="text-agri-muted leading-relaxed mb-6">{feature.description}</p>
-
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-500 leading-relaxed mb-6 text-sm">{feature.description}</p>
                 <Link
                   href={feature.href}
-                  className="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+                  className="inline-flex items-center text-sm font-semibold text-green-600 hover:text-green-700 transition-colors"
                 >
-                  {feature.cta}
+                  {feature.cta} →
                 </Link>
               </motion.div>
             )

@@ -20,8 +20,8 @@ interface StatEntry {
 const stats: StatEntry[] = [
   {
     icon: TrendingUp,
-    iconBg: 'bg-primary-50',
-    iconColor: 'text-primary',
+    iconBg: 'bg-green-50',
+    iconColor: 'text-green-600',
     label: "Today's Rice Price",
     value: 'L$ 320.00',
     subValue: 'per kg',
@@ -32,7 +32,7 @@ const stats: StatEntry[] = [
   {
     icon: Cloud,
     iconBg: 'bg-blue-50',
-    iconColor: 'text-accent',
+    iconColor: 'text-blue-500',
     label: 'Current Weather',
     value: '29°C',
     subValue: 'Partly Cloudy',
@@ -42,7 +42,7 @@ const stats: StatEntry[] = [
   {
     icon: Bell,
     iconBg: 'bg-amber-50',
-    iconColor: 'text-warning',
+    iconColor: 'text-amber-500',
     label: 'Active Alerts',
     value: '3',
     subValue: 'unread',
@@ -51,7 +51,7 @@ const stats: StatEntry[] = [
   {
     icon: BookOpen,
     iconBg: 'bg-green-50',
-    iconColor: 'text-success',
+    iconColor: 'text-green-600',
     label: 'Saved Tips',
     value: '7',
     subValue: 'articles',

@@ -10,7 +10,7 @@ import LandingFooter from '@/components/landing/LandingFooter'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-agri-bg dark:bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <HeroSection />
       <StatsBar />

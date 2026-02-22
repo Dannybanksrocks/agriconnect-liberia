@@ -9,8 +9,6 @@ interface Tile {
   subtitle: string
   icon: LucideIcon
   href: string
-  bg: string
-  text: string
 }
 
 const tiles: Tile[] = [
@@ -19,32 +17,24 @@ const tiles: Tile[] = [
     subtitle: 'Track crop prices & trends',
     icon: TrendingUp,
     href: '/market',
-    bg: 'bg-primary',
-    text: 'text-white',
   },
   {
     label: 'Weather',
     subtitle: 'Forecasts & rain alerts',
     icon: Cloud,
     href: '/weather',
-    bg: 'bg-accent',
-    text: 'text-white',
   },
   {
     label: 'My Farm',
     subtitle: 'Manage crops & harvest',
     icon: Sprout,
     href: '/my-farm',
-    bg: 'bg-secondary',
-    text: 'text-secondary-foreground',
   },
   {
     label: 'Agronomy Tips',
     subtitle: 'Guides & best practices',
     icon: BookOpen,
     href: '/tips',
-    bg: 'bg-primary-50',
-    text: 'text-primary',
   },
 ]
 
@@ -57,12 +47,14 @@ export default function QuickAccessGrid() {
           <Link
             key={tile.label}
             href={tile.href}
-            className={`flex flex-col gap-2 rounded-2xl p-6 transition-all duration-200 hover:scale-[1.02] hover:shadow-md ${tile.bg} ${tile.text}`}
+            className="flex flex-col gap-3 rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
           >
-            <Icon className="h-7 w-7" />
+            <div className="w-9 h-9 rounded-lg bg-green-50 flex items-center justify-center">
+              <Icon className="h-4 w-4 text-green-600" />
+            </div>
             <div>
-              <p className="font-semibold">{tile.label}</p>
-              <p className="text-xs opacity-80">{tile.subtitle}</p>
+              <p className="text-sm font-semibold text-gray-900">{tile.label}</p>
+              <p className="text-xs text-gray-500 mt-0.5">{tile.subtitle}</p>
             </div>
           </Link>
         )

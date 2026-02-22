@@ -1,7 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Star } from 'lucide-react'
 
 const testimonials = [
   {
@@ -10,6 +9,7 @@ const testimonials = [
     name: 'Fatu Kamara',
     role: 'Rice Farmer',
     county: 'Bong County',
+    initials: 'FK',
   },
   {
     quote:
@@ -17,6 +17,7 @@ const testimonials = [
     name: 'Musu Kollie',
     role: 'Vegetable Farmer',
     county: 'Nimba County',
+    initials: 'MK',
   },
   {
     quote:
@@ -24,104 +25,70 @@ const testimonials = [
     name: 'Kou Siaffa',
     role: 'Cassava Farmer',
     county: 'Lofa County',
+    initials: 'KS',
   },
 ]
 
 export default function TestimonialsSection() {
-  const [current, setCurrent] = useState(0)
-
-  const next = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % testimonials.length)
-  }, [])
-
-  useEffect(() => {
-    const timer = setInterval(next, 5000)
-    return () => clearInterval(timer)
-  }, [next])
-
-  const t = testimonials[current]
-
   return (
     <>
-      {/* Testimonials Carousel */}
-      <section className="w-full py-20 md:py-28 bg-white">
+      {/* Testimonials */}
+      <section className="w-full py-20 md:py-28 bg-gray-50">
         <div className="container">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-agri-text mb-3">
+            <p className="text-sm font-semibold tracking-widest text-green-600 uppercase mb-4">
+              Testimonials
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
               Voices from the field
             </h2>
-            <p className="text-lg text-agri-muted">
+            <p className="mt-3 text-lg text-gray-500">
               Real stories from Liberian farmers using AgriConnect
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <div className="relative min-h-[260px] flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                  className="text-center px-4"
-                >
-                  {/* Quote icon */}
-                  <svg
-                    className="w-10 h-10 mx-auto mb-6 text-primary/20"
-                    fill="currentColor"
-                    viewBox="0 0 32 32"
-                    aria-hidden="true"
-                  >
-                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                  </svg>
-
-                  <p className="text-xl md:text-2xl italic text-agri-text leading-relaxed mb-8">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-
-                  <div>
-                    <p className="font-bold text-agri-text">{t.name}</p>
-                    <p className="text-sm text-agri-muted">
-                      {t.role}, {t.county}
-                    </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-gray-700 leading-relaxed text-sm flex-1 mb-6">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                    {t.initials}
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Dot navigation */}
-            <div className="flex items-center justify-center gap-2 mt-8">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  aria-label={`Go to testimonial ${i + 1}`}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    i === current
-                      ? 'bg-primary w-8'
-                      : 'bg-agri-border hover:bg-agri-muted'
-                  }`}
-                />
-              ))}
-            </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900">{t.name}</p>
+                    <p className="text-xs text-gray-500">{t.role}, {t.county}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* USSD Callout */}
-      <section className="w-full py-16 md:py-20 bg-primary-dark">
+      <section className="w-full py-16 md:py-20 bg-green-600">
         <div className="container text-center">
           <h2 className="text-3xl font-bold text-white mb-3">
             No smartphone? No problem.
           </h2>
-          <p className="text-white/80 text-lg mb-8 max-w-lg mx-auto">
+          <p className="text-green-100 text-lg mb-8 max-w-lg mx-auto">
             Access AgriConnect on any mobile phone — no internet needed.
           </p>
-          <div className="text-6xl md:text-7xl font-bold text-secondary mb-4">
+          <div className="font-mono text-5xl md:text-6xl font-bold text-white mb-4">
             *347#
           </div>
-          <p className="text-white/60 text-sm">
+          <p className="text-green-200 text-sm">
             Works on MTN, Orange, and Lonestar networks across Liberia
           </p>
         </div>
