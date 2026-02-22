@@ -1,4 +1,5 @@
 import type { MarketplaceListing } from '@/lib/types'
+import { getCropImage } from '@/lib/constants/cropImages'
 
 export const marketplaceListings: MarketplaceListing[] = [
   {
@@ -23,7 +24,7 @@ export const marketplaceListings: MarketplaceListing[] = [
     description: 'Premium white rice from Bong County. Freshly harvested, clean and dry. Perfect for retail or wholesale. Free delivery within Gbarnga.',
     location: 'Gbarnga, Bong County',
     county: 'Bong',
-    photos: ['/images/rice-harvest-1.jpg'],
+    photos: ['/images/rice-harvest-1.jpg', getCropImage('Rice')],
     status: 'available',
     views: 245,
     inquiries: 12,
@@ -52,7 +53,7 @@ export const marketplaceListings: MarketplaceListing[] = [
     description: 'Fresh hot peppers from Nimba County. Very spicy and flavorful. Great for market vendors and restaurants. Contact for bulk pricing.',
     location: 'Sanniquellie, Nimba County',
     county: 'Nimba',
-    photos: ['/images/pepper-harvest-1.jpg'],
+    photos: ['/images/pepper-harvest-1.jpg', getCropImage('Hot Pepper')],
     status: 'available',
     views: 189,
     inquiries: 8,
@@ -81,7 +82,7 @@ export const marketplaceListings: MarketplaceListing[] = [
     description: 'Fresh cassava tubers ready for processing or direct sale. Ideal for gari production. Large volume available.',
     location: 'Voinjama, Lofa County',
     county: 'Lofa',
-    photos: ['/images/cassava-harvest-1.jpg'],
+    photos: ['/images/cassava-harvest-1.jpg', getCropImage('Cassava')],
     status: 'available',
     views: 312,
     inquiries: 15,
@@ -110,7 +111,7 @@ export const marketplaceListings: MarketplaceListing[] = [
     description: 'High-quality rubber latex from mature plantation. Consistent quality and regular supply available. Looking for long-term buyer relationships.',
     location: 'Greenville, Sinoe County',
     county: 'Sinoe',
-    photos: ['/images/rubber-harvest-1.jpg'],
+    photos: [getCropImage('Rubber Latex')],
     status: 'available',
     views: 428,
     inquiries: 22,
@@ -139,7 +140,7 @@ export const marketplaceListings: MarketplaceListing[] = [
     description: 'Fresh ripe plantains perfect for frying or boiling. Excellent quality, uniform size. Delivery available to Monrovia.',
     location: 'Buchanan, Grand Bassa County',
     county: 'Grand Bassa',
-    photos: ['/images/plantain-harvest-1.jpg'],
+    photos: ['/images/plantain-harvest-1.jpg', getCropImage('Plantain')],
     status: 'available',
     views: 156,
     inquiries: 6,
@@ -168,7 +169,7 @@ export const marketplaceListings: MarketplaceListing[] = [
     description: 'Fermented and dried cocoa beans. Export quality. Looking for serious buyers with export capabilities or local processors.',
     location: 'Zwedru, Grand Gedeh County',
     county: 'Grand Gedeh',
-    photos: ['/images/cocoa-harvest-1.jpg'],
+    photos: [getCropImage('Cocoa Beans')],
     status: 'available',
     views: 524,
     inquiries: 31,

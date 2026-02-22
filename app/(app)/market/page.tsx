@@ -7,6 +7,7 @@ import PricesTable from '@/components/market/PricesTable'
 import PriceTrendChart from '@/components/market/PriceTrendChart'
 import TopMoversWidget from '@/components/market/TopMoversWidget'
 import LiberiaCountyMap from '@/components/market/LiberiaCountyMap'
+import HotDeals from '@/components/market/HotDeals'
 import { getMarketPrices } from '@/lib/api/market'
 import { formatRelativeTime } from '@/lib/utils/formatters'
 import type { MarketPrice } from '@/lib/types'
@@ -76,6 +77,7 @@ export default function MarketPage() {
 
   return (
     <div className="space-y-6">
+      <HotDeals />
       <PageHeader
         title="Market Prices"
         description={

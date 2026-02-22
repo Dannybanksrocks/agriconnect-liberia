@@ -33,7 +33,6 @@ const navItems: NavItem[] = [
       { label: 'About Us', href: '/about' },
       { label: 'Our Mission', href: '/about#mission' },
       { label: 'Contact', href: '/contact' },
-      { label: 'Team', href: '/about#team' },
     ],
   },
   {

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { TrendingUp, TrendingDown, Minus, MapPin } from 'lucide-react'
+import { TrendingUp, TrendingDown, Minus, MapPin, Info } from 'lucide-react'
 import { formatLRD } from '@/lib/utils/formatters'
 
 interface LiberiaCountyMapProps {
@@ -10,373 +10,471 @@ interface LiberiaCountyMapProps {
   selectedCrop: string
 }
 
-interface CountyPosition {
+interface CountyShape {
   id: string
   name: string
   abbr: string
-  x: number
-  y: number
-  region: 'coastal' | 'interior' | 'southeast'
+  d: string
+  labelX: number
+  labelY: number
 }
 
-const COUNTY_POSITIONS: CountyPosition[] = [
-  { id: 'grand-cape-mount', name: 'Grand Cape Mount', abbr: 'GCM', x: 8,  y: 22, region: 'coastal' },
-  { id: 'bomi',             name: 'Bomi',             abbr: 'BO',  x: 22, y: 28, region: 'coastal' },
-  { id: 'montserrado',      name: 'Montserrado',      abbr: 'MO',  x: 22, y: 42, region: 'coastal' },
-  { id: 'gbarpolu',         name: 'Gbarpolu',         abbr: 'GB',  x: 28, y: 14, region: 'interior' },
-  { id: 'lofa',             name: 'Lofa',             abbr: 'LO',  x: 42, y: 6,  region: 'interior' },
-  { id: 'bong',             name: 'Bong',             abbr: 'BG',  x: 48, y: 28, region: 'interior' },
-  { id: 'margibi',          name: 'Margibi',          abbr: 'MG',  x: 36, y: 46, region: 'coastal' },
-  { id: 'grand-bassa',      name: 'Grand Bassa',      abbr: 'GB2', x: 48, y: 54, region: 'coastal' },
-  { id: 'nimba',            name: 'Nimba',            abbr: 'NI',  x: 65, y: 16, region: 'interior' },
-  { id: 'river-cess',       name: 'River Cess',       abbr: 'RC',  x: 56, y: 62, region: 'coastal' },
-  { id: 'sinoe',            name: 'Sinoe',            abbr: 'SI',  x: 64, y: 72, region: 'southeast' },
-  { id: 'grand-gedeh',      name: 'Grand Gedeh',      abbr: 'GG',  x: 76, y: 40, region: 'southeast' },
-  { id: 'river-gee',        name: 'River Gee',        abbr: 'RG',  x: 78, y: 62, region: 'southeast' },
-  { id: 'grand-kru',        name: 'Grand Kru',        abbr: 'GK',  x: 72, y: 80, region: 'southeast' },
-  { id: 'maryland',         name: 'Maryland',         abbr: 'MD',  x: 86, y: 74, region: 'southeast' },
+const COUNTY_SHAPES: CountyShape[] = [
+  {
+    id: 'grand-cape-mount',
+    name: 'Grand Cape Mount',
+    abbr: 'GCM',
+    d: 'M5,32 L82,8 L128,58 L112,168 L50,178 L5,138 Z',
+    labelX: 58,
+    labelY: 96,
+  },
+  {
+    id: 'gbarpolu',
+    name: 'Gbarpolu',
+    abbr: 'GP',
+    d: 'M82,8 L218,2 L238,98 L172,138 L128,58 Z',
+    labelX: 162,
+    labelY: 62,
+  },
+  {
+    id: 'lofa',
+    name: 'Lofa',
+    abbr: 'LF',
+    d: 'M218,2 L372,2 L388,82 L298,120 L238,98 Z',
+    labelX: 296,
+    labelY: 52,
+  },
+  {
+    id: 'bomi',
+    name: 'Bomi',
+    abbr: 'BM',
+    d: 'M5,138 L50,178 L112,168 L120,228 L60,245 L5,202 Z',
+    labelX: 56,
+    labelY: 190,
+  },
+  {
+    id: 'montserrado',
+    name: 'Montserrado',
+    abbr: 'MO',
+    d: 'M5,202 L60,245 L74,272 L44,292 L5,265 Z',
+    labelX: 32,
+    labelY: 248,
+  },
+  {
+    id: 'bong',
+    name: 'Bong',
+    abbr: 'BG',
+    d: 'M112,168 L128,58 L172,138 L238,98 L298,120 L312,208 L248,242 L175,255 L120,228 Z',
+    labelX: 210,
+    labelY: 168,
+  },
+  {
+    id: 'margibi',
+    name: 'Margibi',
+    abbr: 'MG',
+    d: 'M60,245 L120,228 L175,255 L165,308 L98,318 L70,288 Z',
+    labelX: 112,
+    labelY: 278,
+  },
+  {
+    id: 'nimba',
+    name: 'Nimba',
+    abbr: 'NI',
+    d: 'M298,120 L388,82 L462,82 L465,188 L398,232 L312,208 Z',
+    labelX: 385,
+    labelY: 155,
+  },
+  {
+    id: 'grand-bassa',
+    name: 'Grand Bassa',
+    abbr: 'GB',
+    d: 'M5,265 L44,292 L70,288 L98,318 L165,308 L202,348 L155,388 L80,372 L38,325 Z',
+    labelX: 88,
+    labelY: 332,
+  },
+  {
+    id: 'river-cess',
+    name: 'River Cess',
+    abbr: 'RC',
+    d: 'M165,308 L175,255 L248,242 L268,295 L255,365 L202,348 Z',
+    labelX: 215,
+    labelY: 308,
+  },
+  {
+    id: 'grand-gedeh',
+    name: 'Grand Gedeh',
+    abbr: 'GG',
+    d: 'M312,208 L398,232 L465,188 L485,295 L452,355 L362,355 L302,312 Z',
+    labelX: 395,
+    labelY: 278,
+  },
+  {
+    id: 'sinoe',
+    name: 'Sinoe',
+    abbr: 'SI',
+    d: 'M255,365 L268,295 L302,312 L362,355 L355,415 L290,452 L242,452 Z',
+    labelX: 300,
+    labelY: 392,
+  },
+  {
+    id: 'river-gee',
+    name: 'River Gee',
+    abbr: 'RG',
+    d: 'M362,355 L452,355 L472,415 L405,452 L355,415 Z',
+    labelX: 412,
+    labelY: 395,
+  },
+  {
+    id: 'grand-kru',
+    name: 'Grand Kru',
+    abbr: 'GK',
+    d: 'M202,348 L255,365 L242,452 L290,452 L285,480 L202,480 L160,458 L155,388 Z',
+    labelX: 215,
+    labelY: 428,
+  },
+  {
+    id: 'maryland',
+    name: 'Maryland',
+    abbr: 'MD',
+    d: 'M405,452 L472,415 L490,472 L450,480 L355,462 L355,415 Z',
+    labelX: 418,
+    labelY: 452,
+  },
 ]
 
-const CONNECTIONS = [
-  ['grand-cape-mount', 'bomi'],
-  ['bomi', 'montserrado'],
-  ['bomi', 'gbarpolu'],
-  ['gbarpolu', 'lofa'],
-  ['gbarpolu', 'bong'],
-  ['lofa', 'bong'],
-  ['lofa', 'nimba'],
-  ['bong', 'nimba'],
-  ['bong', 'margibi'],
-  ['bong', 'grand-bassa'],
-  ['margibi', 'montserrado'],
-  ['margibi', 'grand-bassa'],
-  ['grand-bassa', 'river-cess'],
-  ['nimba', 'grand-gedeh'],
-  ['river-cess', 'sinoe'],
-  ['sinoe', 'grand-kru'],
-  ['sinoe', 'river-gee'],
-  ['grand-gedeh', 'river-gee'],
-  ['river-gee', 'maryland'],
-  ['grand-kru', 'maryland'],
-]
-
-function getPriceRatio(price: number, min: number, max: number): number {
+function getPriceRatio(price: number, min: number, max: number) {
   if (max === min) return 0.5
   return (price - min) / (max - min)
 }
 
-function getPriceGradient(ratio: number): { color: string; glow: string; bg: string } {
-  if (ratio < 0.25)  return { color: '#10b981', glow: 'rgba(16,185,129,0.6)',  bg: 'rgba(16,185,129,0.15)' }
-  if (ratio < 0.5)   return { color: '#34d399', glow: 'rgba(52,211,153,0.5)',  bg: 'rgba(52,211,153,0.12)' }
-  if (ratio < 0.75)  return { color: '#f59e0b', glow: 'rgba(245,158,11,0.6)',  bg: 'rgba(245,158,11,0.15)' }
-  return               { color: '#ef4444', glow: 'rgba(239,68,68,0.65)',   bg: 'rgba(239,68,68,0.15)' }
-}
-
-function getNodeSize(ratio: number): number {
-  return 32 + ratio * 20
+function getPriceStyle(ratio: number) {
+  if (ratio < 0.25) return { fill: '#064e3b', stroke: '#10b981', glow: '#10b981' }
+  if (ratio < 0.5)  return { fill: '#065f46', stroke: '#34d399', glow: '#34d399' }
+  if (ratio < 0.75) return { fill: '#78350f', stroke: '#f59e0b', glow: '#f59e0b' }
+  return               { fill: '#7f1d1d', stroke: '#ef4444', glow: '#ef4444' }
 }
 
 export default function LiberiaCountyMap({ prices, selectedCrop }: LiberiaCountyMapProps) {
-  const [hoveredCounty, setHoveredCounty] = useState<string | null>(null)
-  const [selectedCounty, setSelectedCounty] = useState<string | null>(null)
+  const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const [pinnedId, setPinnedId]   = useState<string | null>(null)
 
   const priceValues = Object.values(prices).filter((v) => v > 0)
-  const minPrice = priceValues.length ? Math.min(...priceValues) : 0
-  const maxPrice = priceValues.length ? Math.max(...priceValues) : 0
+  const minPrice    = priceValues.length ? Math.min(...priceValues) : 0
+  const maxPrice    = priceValues.length ? Math.max(...priceValues) : 0
 
-  const ranked = useMemo(() => {
-    return [...COUNTY_POSITIONS]
-      .filter((c) => (prices[c.name] ?? 0) > 0)
-      .sort((a, b) => (prices[b.name] ?? 0) - (prices[a.name] ?? 0))
-      .slice(0, 5)
-  }, [prices])
+  const ranked = useMemo(
+    () =>
+      [...COUNTY_SHAPES]
+        .filter((c) => (prices[c.name] ?? 0) > 0)
+        .sort((a, b) => (prices[b.name] ?? 0) - (prices[a.name] ?? 0))
+        .slice(0, 5),
+    [prices]
+  )
 
-  const activeCounty = hoveredCounty ?? selectedCounty
+  const activeId = hoveredId ?? pinnedId
+  const activeCounty = COUNTY_SHAPES.find((c) => c.id === activeId)
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="rounded-2xl border border-white/10 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #0a0f1a 0%, #0d1526 50%, #0a1020 100%)' }}
+      transition={{ duration: 0.45 }}
+      className="rounded-2xl overflow-hidden border border-white/10"
+      style={{ background: 'linear-gradient(160deg,#060d1a 0%,#0a1628 60%,#060d1a 100%)' }}
     >
       {/* Header */}
-      <div className="flex items-start justify-between px-5 pt-5 pb-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-emerald-400" />
-            <h3 className="font-bold text-white text-sm">
-              Price Map — <span className="text-emerald-400">{selectedCrop || 'Select a crop'}</span>
+      <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
+        <div className="flex items-center gap-2">
+          <MapPin className="w-4 h-4 text-emerald-400" />
+          <div>
+            <h3 className="text-sm font-bold text-white leading-tight">
+              Liberia Price Map
             </h3>
+            <p className="text-[10px] text-white/35 leading-tight">
+              {selectedCrop ? `Showing: ${selectedCrop}` : 'Select a crop from the table'}
+            </p>
           </div>
-          <p className="text-xs text-white/40 mt-0.5 ml-6">
-            County price comparison · All 15 counties
-          </p>
         </div>
-        <div className="flex items-center gap-3 text-[10px] text-white/50">
+        <div className="flex items-center gap-3 text-[10px] text-white/40">
           {[
             { color: '#10b981', label: 'Low' },
             { color: '#f59e0b', label: 'Mid' },
             { color: '#ef4444', label: 'High' },
           ].map(({ color, label }) => (
-            <div key={label} className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 6px ${color}` }} />
+            <span key={label} className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-sm" style={{ backgroundColor: color }} />
               {label}
-            </div>
+            </span>
           ))}
         </div>
       </div>
 
-      <div className="flex gap-0">
-        {/* Map Area */}
-        <div className="flex-1 relative px-3 pb-3">
-          {/* Subtle grid */}
+      <div className="flex">
+        {/* SVG Map */}
+        <div className="flex-1 p-3 relative">
+          {/* Faint grid */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-[0.04]"
+            className="absolute inset-0 pointer-events-none opacity-[0.03]"
             style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.8) 1px, transparent 0)',
-              backgroundSize: '28px 28px',
+              backgroundImage:
+                'linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px)',
+              backgroundSize: '32px 32px',
             }}
           />
 
-          <div className="relative" style={{ aspectRatio: '4/3' }}>
-            {/* SVG layer — connections + glow lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="glow-line">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              {CONNECTIONS.map(([aId, bId]) => {
-                const a = COUNTY_POSITIONS.find((c) => c.id === aId)
-                const b = COUNTY_POSITIONS.find((c) => c.id === bId)
-                if (!a || !b) return null
-                const aActive = activeCounty === aId
-                const bActive = activeCounty === bId
-                const isActive = aActive || bActive
-                const aPrice = prices[a.name] ?? 0
-                const bPrice = prices[b.name] ?? 0
-                const avgRatio = aPrice && bPrice
-                  ? getPriceRatio((aPrice + bPrice) / 2, minPrice, maxPrice)
-                  : -1
-                const lineColor = avgRatio >= 0
-                  ? getPriceGradient(avgRatio).color
-                  : '#ffffff'
-                return (
-                  <line
-                    key={`${aId}-${bId}`}
-                    x1={`${a.x}%`} y1={`${a.y}%`}
-                    x2={`${b.x}%`} y2={`${b.y}%`}
-                    stroke={isActive ? lineColor : 'rgba(255,255,255,0.08)'}
-                    strokeWidth={isActive ? 1.5 : 0.8}
-                    strokeDasharray={isActive ? 'none' : '3 4'}
-                    filter={isActive ? 'url(#glow-line)' : undefined}
-                    style={{ transition: 'all 0.2s ease' }}
-                  />
-                )
-              })}
-            </svg>
+          <svg
+            viewBox="0 0 500 492"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full"
+            style={{ filter: 'drop-shadow(0 4px 24px rgba(0,0,0,0.6))' }}
+          >
+            <defs>
+              <filter id="county-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="county-glow-strong" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="7" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-            {/* County nodes */}
-            {COUNTY_POSITIONS.map((county, i) => {
+            {COUNTY_SHAPES.map((county, i) => {
               const price = prices[county.name] ?? 0
               const ratio = price ? getPriceRatio(price, minPrice, maxPrice) : -1
-              const { color, glow, bg } = ratio >= 0 ? getPriceGradient(ratio) : { color: '#4b5563', glow: 'rgba(75,85,99,0.3)', bg: 'rgba(75,85,99,0.1)' }
-              const size = ratio >= 0 ? getNodeSize(ratio) : 32
-              const isHovered = hoveredCounty === county.id
-              const isSelected = selectedCounty === county.id
-              const isActive = isHovered || isSelected
+              const style = ratio >= 0 ? getPriceStyle(ratio) : { fill: '#1e293b', stroke: '#334155', glow: '#334155' }
+              const isActive = activeId === county.id
+              const isPinned = pinnedId === county.id
 
               return (
-                <motion.div
+                <g
                   key={county.id}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.04, type: 'spring', stiffness: 260, damping: 20 }}
-                  className="absolute cursor-pointer"
-                  style={{
-                    left: `${county.x}%`,
-                    top: `${county.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: isActive ? 20 : 10,
-                  }}
-                  onMouseEnter={() => setHoveredCounty(county.id)}
-                  onMouseLeave={() => setHoveredCounty(null)}
-                  onClick={() => setSelectedCounty(isSelected ? null : county.id)}
+                  onMouseEnter={() => setHoveredId(county.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  onClick={() => setPinnedId(isPinned ? null : county.id)}
+                  style={{ cursor: 'pointer' }}
                 >
-                  {/* Outer pulse ring — only for high price counties */}
-                  {ratio > 0.65 && (
-                    <motion.div
-                      animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background: `radial-gradient(circle, ${glow} 0%, transparent 70%)`,
-                        width: size + 16,
-                        height: size + 16,
-                        top: -(8),
-                        left: -(8),
-                      }}
-                    />
-                  )}
-
-                  {/* Active glow halo */}
+                  {/* Glow backdrop for active */}
                   {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.7 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="absolute rounded-full pointer-events-none"
-                      style={{
-                        width: size + 20,
-                        height: size + 20,
-                        top: -10,
-                        left: -10,
-                        background: `radial-gradient(circle, ${glow} 0%, transparent 70%)`,
-                      }}
+                    <path
+                      d={county.d}
+                      fill={style.glow}
+                      opacity={0.3}
+                      filter="url(#county-glow-strong)"
                     />
                   )}
 
-                  {/* Node circle */}
-                  <motion.div
-                    animate={{ scale: isActive ? 1.25 : 1 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                    className="relative flex items-center justify-center rounded-full font-bold text-white select-none"
+                  <motion.path
+                    d={county.d}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: i * 0.03, duration: 0.4 }}
+                    fill={isActive ? `${style.fill}` : style.fill}
+                    stroke={style.stroke}
+                    strokeWidth={isActive ? 2 : 0.8}
+                    opacity={isActive ? 1 : 0.82}
+                    filter={isActive ? 'url(#county-glow)' : undefined}
                     style={{
-                      width: size,
-                      height: size,
-                      fontSize: size > 44 ? 10 : 9,
-                      background: isActive
-                        ? `radial-gradient(circle at 35% 35%, ${color}dd, ${color}88)`
-                        : `radial-gradient(circle at 35% 35%, ${color}99, ${color}44)`,
-                      border: `1.5px solid ${color}${isActive ? 'ff' : '66'}`,
-                      boxShadow: isActive
-                        ? `0 0 20px ${glow}, 0 0 40px ${bg}, inset 0 1px 0 rgba(255,255,255,0.2)`
-                        : `0 0 8px ${bg}`,
+                      transition: 'fill 0.2s, stroke-width 0.15s, opacity 0.15s',
                     }}
+                  />
+
+                  {/* Pinned badge ring */}
+                  {isPinned && (
+                    <path
+                      d={county.d}
+                      fill="none"
+                      stroke={style.glow}
+                      strokeWidth={3}
+                      strokeDasharray="6 3"
+                      opacity={0.9}
+                    />
+                  )}
+
+                  {/* Abbreviation label */}
+                  <text
+                    x={county.labelX}
+                    y={county.labelY}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill={isActive ? '#ffffff' : 'rgba(255,255,255,0.65)'}
+                    fontSize={ratio >= 0 ? 9 : 8}
+                    fontWeight={isActive ? 700 : 500}
+                    fontFamily="system-ui, sans-serif"
+                    style={{ pointerEvents: 'none', transition: 'fill 0.15s' }}
                   >
                     {county.abbr}
-                  </motion.div>
+                  </text>
 
-                  {/* Price badge on selected */}
+                  {/* Price label when active */}
                   {isActive && price > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -4, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
+                    <text
+                      x={county.labelX}
+                      y={county.labelY + 11}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fill={style.glow}
+                      fontSize={7.5}
+                      fontWeight={700}
+                      fontFamily="system-ui, sans-serif"
+                      style={{ pointerEvents: 'none' }}
                     >
-                      <div
-                        className="rounded-lg px-2.5 py-1.5 text-center whitespace-nowrap shadow-2xl"
-                        style={{
-                          background: 'rgba(10,15,26,0.95)',
-                          border: `1px solid ${color}66`,
-                          boxShadow: `0 4px 24px rgba(0,0,0,0.6), 0 0 12px ${bg}`,
-                        }}
-                      >
-                        <p className="text-[10px] font-semibold text-white">{county.name}</p>
-                        <p className="text-[11px] font-bold mt-0.5" style={{ color }}>{formatLRD(price)}</p>
-                        <p className="text-[9px] text-white/40 mt-0.5">
-                          Rank #{ranked.findIndex((r) => r.id === county.id) + 1 || '—'} of {priceValues.length}
-                        </p>
-                      </div>
-                      {/* Arrow */}
-                      <div
-                        className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
-                        style={{ background: 'rgba(10,15,26,0.95)', borderRight: `1px solid ${color}44`, borderBottom: `1px solid ${color}44` }}
-                      />
-                    </motion.div>
+                      {formatLRD(price)}
+                    </text>
                   )}
-                </motion.div>
+                </g>
               )
             })}
-          </div>
+
+            {/* Ocean coast tint */}
+            <rect x="0" y="0" width="500" height="492" fill="none" stroke="rgba(56,189,248,0.15)" strokeWidth="1.5" rx="4" />
+          </svg>
+
+          {/* Floating tooltip for hovered county */}
+          <AnimatePresence>
+            {activeCounty && (
+              <motion.div
+                key={activeCounty.id}
+                initial={{ opacity: 0, scale: 0.92, y: 4 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{ duration: 0.15 }}
+                className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-none z-20"
+              >
+                {(() => {
+                  const price = prices[activeCounty.name] ?? 0
+                  const ratio = price ? getPriceRatio(price, minPrice, maxPrice) : -1
+                  const style = ratio >= 0 ? getPriceStyle(ratio) : { fill: '#1e293b', stroke: '#334155', glow: '#334155' }
+                  const rank = ranked.findIndex((r) => r.id === activeCounty.id) + 1
+                  return (
+                    <div
+                      className="rounded-xl px-4 py-3 text-center shadow-2xl"
+                      style={{
+                        background: 'rgba(6,13,26,0.96)',
+                        border: `1px solid ${style.glow}44`,
+                        boxShadow: `0 8px 32px rgba(0,0,0,0.7), 0 0 20px ${style.glow}22`,
+                        minWidth: 140,
+                      }}
+                    >
+                      <p className="text-[11px] font-bold text-white">{activeCounty.name}</p>
+                      {price > 0 ? (
+                        <>
+                          <p className="text-[15px] font-black mt-0.5" style={{ color: style.glow }}>
+                            {formatLRD(price)}
+                          </p>
+                          {rank > 0 && (
+                            <p className="text-[10px] text-white/30 mt-0.5">
+                              Rank #{rank} of {priceValues.length}
+                            </p>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-[10px] text-white/30 mt-1 flex items-center gap-1 justify-center">
+                          <Info className="w-3 h-3" /> No price data
+                        </p>
+                      )}
+                      {pinnedId === activeCounty.id && (
+                        <p className="text-[9px] text-white/20 mt-1">Click to unpin</p>
+                      )}
+                    </div>
+                  )
+                })()}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        {/* Right sidebar — Top 5 ranking */}
-        <div className="w-[130px] shrink-0 pr-4 pt-1 pb-4 flex flex-col gap-1.5">
-          <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-1">Top Prices</p>
+        {/* Right sidebar — rankings */}
+        <div className="w-[128px] shrink-0 pr-3 py-3 flex flex-col gap-1.5">
+          <p className="text-[9px] font-semibold text-white/25 uppercase tracking-widest mb-0.5">
+            Top Prices
+          </p>
+
           <AnimatePresence mode="popLayout">
             {ranked.length === 0 ? (
-              <p className="text-[10px] text-white/20 italic">Select a crop</p>
+              <p className="text-[10px] text-white/20 italic leading-relaxed">
+                Select a crop to see county rankings
+              </p>
             ) : (
               ranked.map((county, i) => {
                 const price = prices[county.name] ?? 0
                 const ratio = getPriceRatio(price, minPrice, maxPrice)
-                const { color } = getPriceGradient(ratio)
+                const { glow } = getPriceStyle(ratio)
                 const isTop = i === 0
                 return (
-                  <motion.div
+                  <motion.button
                     key={county.id}
                     layout
-                    initial={{ opacity: 0, x: 12 }}
+                    initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 12 }}
+                    exit={{ opacity: 0, x: 10 }}
                     transition={{ delay: i * 0.05 }}
-                    className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-1.5 transition-colors"
+                    onClick={() => setPinnedId(county.id === pinnedId ? null : county.id)}
+                    className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-left w-full transition-colors"
                     style={{
-                      background: isTop ? `${color}18` : 'rgba(255,255,255,0.03)',
-                      border: isTop ? `1px solid ${color}33` : '1px solid transparent',
+                      background: pinnedId === county.id
+                        ? `${glow}22`
+                        : isTop
+                        ? `${glow}12`
+                        : 'rgba(255,255,255,0.02)',
+                      border: isTop ? `1px solid ${glow}28` : '1px solid transparent',
                     }}
-                    onClick={() => setSelectedCounty(county.id === selectedCounty ? null : county.id)}
                   >
                     <span
                       className="text-[10px] font-black w-4 shrink-0"
-                      style={{ color: isTop ? color : 'rgba(255,255,255,0.3)' }}
+                      style={{ color: isTop ? glow : 'rgba(255,255,255,0.25)' }}
                     >
                       #{i + 1}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[10px] font-semibold text-white/80 truncate leading-tight">{county.name}</p>
-                      <p className="text-[10px] font-bold leading-tight" style={{ color }}>{formatLRD(price)}</p>
+                      <p className="text-[9px] font-semibold text-white/70 truncate leading-snug">
+                        {county.name}
+                      </p>
+                      <p className="text-[10px] font-bold leading-snug" style={{ color: glow }}>
+                        {formatLRD(price)}
+                      </p>
                     </div>
                     {isTop ? (
-                      <TrendingUp className="w-3 h-3 shrink-0" style={{ color }} />
+                      <TrendingUp className="w-3 h-3 shrink-0" style={{ color: glow }} />
                     ) : i === ranked.length - 1 ? (
-                      <TrendingDown className="w-3 h-3 shrink-0 text-white/20" />
+                      <TrendingDown className="w-3 h-3 shrink-0 text-white/15" />
                     ) : (
-                      <Minus className="w-3 h-3 shrink-0 text-white/20" />
+                      <Minus className="w-2.5 h-2.5 shrink-0 text-white/15" />
                     )}
-                  </motion.div>
+                  </motion.button>
                 )
               })
             )}
           </AnimatePresence>
 
-          {/* Price spread stat */}
+          {/* Spread bar */}
           {minPrice > 0 && maxPrice > 0 && (
             <div
-              className="mt-2 rounded-lg px-2 py-2 text-[10px]"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+              className="mt-auto rounded-lg p-2 text-[9px]"
+              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
             >
-              <p className="text-white/30 mb-1 uppercase tracking-widest text-[9px]">Spread</p>
-              <div className="flex justify-between text-white/60">
-                <span className="text-emerald-400 font-bold">{formatLRD(minPrice)}</span>
-                <span className="text-white/20">→</span>
-                <span className="text-red-400 font-bold">{formatLRD(maxPrice)}</span>
+              <p className="text-white/25 uppercase tracking-widest mb-1.5">Price Range</p>
+              <div className="h-1.5 rounded-full mb-1.5 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+                <div className="h-full rounded-full" style={{ background: 'linear-gradient(90deg,#10b981,#f59e0b,#ef4444)' }} />
               </div>
-              {/* Gradient bar */}
-              <div className="mt-1.5 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
-                <div
-                  className="h-full rounded-full"
-                  style={{ background: 'linear-gradient(90deg, #10b981, #f59e0b, #ef4444)', width: '100%' }}
-                />
+              <div className="flex justify-between">
+                <span className="text-emerald-400 font-bold">{formatLRD(minPrice)}</span>
+                <span className="text-red-400 font-bold">{formatLRD(maxPrice)}</span>
               </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Bottom hint */}
-      <div className="px-5 py-2 border-t border-white/5 flex items-center justify-between">
-        <p className="text-[10px] text-white/20">Hover or click a county to see details</p>
-        <p className="text-[10px] text-white/20">
-          {priceValues.length}/{COUNTY_POSITIONS.length} counties with data
-        </p>
+      <div className="px-4 py-2 border-t border-white/5 flex justify-between text-[9px] text-white/20">
+        <span>Hover or click a county · click again to unpin</span>
+        <span>{priceValues.length} / 15 counties</span>
       </div>
     </motion.div>
   )
