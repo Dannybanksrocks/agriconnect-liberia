@@ -188,6 +188,7 @@ export function login(
 export interface RegisterData {
   fullName: string
   phone: string
+  whatsappNumber?: string
   email?: string
   password: string
   county: string
@@ -197,6 +198,11 @@ export interface RegisterData {
   language: string
   farmName?: string
   accountType?: string
+  familiarWithApps?: string
+  mobileMoneyProvider?: string
+  mobileMoneyNumber?: string
+  accountName?: string
+  currencyPreference?: string
   priceAlerts?: boolean
   weatherAlerts?: boolean
 }
@@ -216,6 +222,12 @@ export function register(
     return { success: false, error: 'An account with this phone number already exists' }
   }
 
+  // Determine role from accountType
+  let role: User['role'] = 'farmer'
+  if (data.accountType === 'extension-officer') role = 'extension-officer'
+  else if (data.accountType === 'buyer') role = 'buyer'
+  else if (data.accountType === 'supplier') role = 'supplier'
+
   const newUser: AuthUser = {
     id: `user-${Date.now()}`,
     name: data.fullName,
@@ -225,7 +237,7 @@ export function register(
     county: data.county,
     farmSizeAcres: data.farmSize,
     primaryCrops: data.crops,
-    role: (data.accountType === 'extension-officer' ? 'extension-officer' : 'farmer') as User['role'],
+    role,
     language: (data.language === 'english' ? 'en' : data.language) as User['language'],
     status: 'active',
     joinedAt: new Date().toISOString(),

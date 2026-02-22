@@ -126,6 +126,8 @@ export default function RegisterPage() {
   useEffect(() => {
     if (isAuthenticated && user && step !== 6) {
       if (user.role === 'admin') router.replace('/admin/dashboard')
+      else if (user.role === 'extension-officer') router.replace('/admin/farmers')
+      else if (user.role === 'buyer') router.replace('/marketplace')
       else router.replace('/dashboard')
     }
   }, [isAuthenticated, user, router, step])
