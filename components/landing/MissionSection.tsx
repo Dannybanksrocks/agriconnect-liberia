@@ -51,7 +51,7 @@ export default function MissionSection() {
                 </h3>
                 <p className="text-white/60 text-sm leading-relaxed mb-6">
                   For too long, large agribusinesses had exclusive access to price data, weather forecasts, and agronomy expertise. 
-                  FarmPulse puts the same tools in every farmer&apos;s hands — for free.
+                  AgriHub puts the same tools in every farmer&apos;s hands — for free.
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="text-center">
@@ -75,7 +75,7 @@ export default function MissionSection() {
             {/* Floating quote card */}
             <div className="absolute -bottom-12 -right-4 lg:-right-8 bg-white border border-stone-200 rounded-2xl px-5 py-4 shadow-lg max-w-[240px] z-20">
               <p className="text-xs text-stone-600 italic leading-relaxed">
-                &ldquo;I earned L$8,000 more on my rice harvest after using FarmPulse.&rdquo;
+                &ldquo;I earned L$8,000 more on my rice harvest after using AgriHub.&rdquo;
               </p>
               <div className="flex items-center gap-2 mt-3">
                 <div className="w-6 h-6 rounded-full bg-[#1B4332] text-white text-[9px] font-bold flex items-center justify-center">FK</div>
@@ -91,7 +91,7 @@ export default function MissionSection() {
             transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#2D6A4F] uppercase bg-[#D8F3DC] px-4 py-1.5 rounded-full mb-4">
-              Why FarmPulse
+              Why AgriHub
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight leading-snug mb-4">
               Built for Liberia.
