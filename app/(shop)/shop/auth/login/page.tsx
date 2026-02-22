@@ -52,6 +52,9 @@ export default function ShopLoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-stone-50 to-green-50 px-4">
       <div className="w-full max-w-md">
+        <div className="mb-4">
+          <BackButton href="/shop" label="Back to Shop" />
+        </div>
         <div className="text-center mb-8">
           <Link href="/shop" className="inline-flex items-center gap-2 mb-4">
             <div className="w-10 h-10 rounded-xl bg-[#1B4332] flex items-center justify-center">
