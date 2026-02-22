@@ -10,6 +10,7 @@ import { Eye, EyeOff, User, Phone, Mail, Lock, MapPin, ArrowRight, Leaf } from '
 import { toast } from 'sonner'
 import { useShopStore } from '@/lib/store/useShopStore'
 import type { ConsumerUser } from '@/lib/types/shop'
+import BackButton from '@/components/shared/BackButton'
 
 const LIBERIA_COUNTIES = [
   'Bomi', 'Bong', 'Gbarpolu', 'Grand Bassa', 'Grand Cape Mount',
@@ -76,6 +77,9 @@ export default function ShopRegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-stone-50 to-green-50 px-4 py-10">
       <div className="w-full max-w-md">
+        <div className="mb-4">
+          <BackButton href="/shop/auth/login" label="Back to Sign In" />
+        </div>
         <div className="text-center mb-8">
           <Link href="/shop" className="inline-flex items-center gap-2 mb-4">
             <div className="w-10 h-10 rounded-xl bg-[#1B4332] flex items-center justify-center">
