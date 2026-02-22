@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
       { label: 'Market Prices', href: '/market' },
       { label: 'Weather Forecasts', href: '/weather' },
       { label: 'Agronomy Tips', href: '/tips' },
-      { label: 'Marketplace', href: '/marketplace' },
+      { label: 'USSD Guide', href: '/resources/ussd' },
     ],
   },
   {
@@ -31,6 +31,7 @@ const navItems: NavItem[] = [
       { label: 'About Us', href: '/about' },
       { label: 'Our Mission', href: '/about#mission' },
       { label: 'Contact', href: '/contact' },
+      { label: 'Team', href: '/about#team' },
     ],
   },
   {
@@ -38,7 +39,8 @@ const navItems: NavItem[] = [
     children: [
       { label: 'Admin Portal', href: '/admin' },
       { label: 'Farmer Guide', href: '/resources/guide' },
-      { label: 'USSD Guide', href: '/resources/ussd' },
+      { label: 'USSD Access', href: '/resources/ussd' },
+      { label: 'API Docs', href: '/resources/api' },
     ],
   },
 ]

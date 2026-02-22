@@ -24,13 +24,11 @@ import { useAuth } from '@/lib/auth'
 
 const sidebarItems = [
   { label: 'Dashboard', icon: Home, href: '/dashboard' },
-  { label: 'AI Advisor', icon: Sparkles, href: '/ai-advisor' },
-  { label: 'Marketplace', icon: ShoppingCart, href: '/marketplace' },
-  { label: 'Inventory', icon: Package, href: '/inventory' },
   { label: 'Market Prices', icon: TrendingUp, href: '/market' },
   { label: 'Weather', icon: Cloud, href: '/weather' },
   { label: 'Agronomy Tips', icon: BookOpen, href: '/tips' },
   { label: 'My Farm', icon: Sprout, href: '/my-farm' },
+  { label: 'Marketplace', icon: ShoppingCart, href: '/marketplace' },
   { label: 'Alerts', icon: Bell, href: '/alerts' },
   { label: 'Settings', icon: Settings, href: '/settings' },
 ]
