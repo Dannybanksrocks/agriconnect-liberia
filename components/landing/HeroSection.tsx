@@ -155,10 +155,11 @@ export default function HeroSection() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="#how-it-works"
-              className="inline-flex items-center gap-2 border border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-xl text-base transition-all"
+              href="/shop"
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white hover:bg-white/20 font-semibold px-8 py-4 rounded-xl text-base transition-all"
             >
-              See How It Works
+              <ArrowUpRight className="w-4 h-4" />
+              Shop Fresh Produce
             </Link>
           </motion.div>
 

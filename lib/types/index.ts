@@ -137,7 +137,7 @@ export interface User {
   county: string
   farmSizeAcres: number
   primaryCrops: string[]
-  role: 'farmer' | 'admin' | 'extension-officer' | 'buyer' | 'supplier'
+  role: 'farmer' | 'admin' | 'extension-officer' | 'buyer' | 'supplier' | 'consumer'
   language: 'en' | 'kpelle' | 'bassa' | 'mende' | 'vai'
   status: 'active' | 'inactive' | 'suspended'
   joinedAt: string

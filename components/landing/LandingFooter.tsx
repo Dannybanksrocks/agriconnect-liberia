@@ -6,11 +6,11 @@ import PoweredBy from '@/components/shared/PoweredBy'
 
 const productLinks = [
   { label: 'Market Prices', href: '/market' },
-  { label: 'Marketplace', href: '/marketplace' },
+  { label: 'Marketplace (Farmers)', href: '/marketplace' },
+  { label: 'Shop Fresh Produce', href: '/shop' },
   { label: 'Weather Forecasts', href: '/weather' },
   { label: 'Agronomy Tips', href: '/tips' },
   { label: 'AI Crop Advisor', href: '/ai-advisor' },
-  { label: 'My Farm', href: '/my-farm' },
 ]
 
 const companyLinks = [
