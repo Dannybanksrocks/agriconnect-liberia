@@ -58,7 +58,7 @@ export default function RootLayout({
       <head>
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
-      <body className={`${inter.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${inter.variable} ${dmSans.variable} antialiased`} suppressHydrationWarning>
         {children}
         <Toaster position="top-right" richColors closeButton />
       </body>
