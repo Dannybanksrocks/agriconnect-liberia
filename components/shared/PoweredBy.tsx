@@ -9,14 +9,14 @@ export default function PoweredBy({
   variant = 'stacked',
   size = 'md',
 }: PoweredByProps) {
-  const logoSize = size === 'sm' ? 18 : 24
+  const logoSize = size === 'sm' ? 36 : 48
   const textClass = size === 'sm' ? 'text-xs' : 'text-sm'
   const isHorizontal = variant === 'horizontal'
 
   return (
     <div
       className={`flex ${
-        isHorizontal ? 'flex-row items-center gap-6' : 'flex-col gap-2'
+        isHorizontal ? 'flex-row items-center gap-6' : 'flex-col gap-3'
       } ${textClass} text-agri-muted dark:text-muted-foreground`}
     >
       <div className="flex items-center gap-2">
@@ -31,11 +31,11 @@ export default function PoweredBy({
       </div>
       <div className="flex items-center gap-2">
         <Image
-          src="/ministry-commerce-logo.svg"
+          src="/ministry-commerce-logo.jpg"
           alt="Ministry of Commerce & Industry"
           width={logoSize}
           height={logoSize}
-          className="shrink-0"
+          className="shrink-0 rounded-full"
         />
         <span>Supported by Ministry of Commerce &amp; Industry</span>
       </div>

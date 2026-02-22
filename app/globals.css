@@ -8,31 +8,31 @@
   --font-display: var(--font-inter), sans-serif;
   --font-label: var(--font-inter), sans-serif;
 
-  /* ── Primary: professional green ── */
-  --color-primary: #16A34A;
-  --color-primary-light: #22C55E;
-  --color-primary-dark: #15803D;
+  /* ── AGRIFRAM: Forest greens ── */
+  --color-primary: #2D6A4F;
+  --color-primary-light: #52B788;
+  --color-primary-dark: #1B4332;
   --color-primary-foreground: #FFFFFF;
-  --color-primary-50: #F0FDF4;
-  --color-primary-100: #DCFCE7;
-  --color-primary-200: #BBF7D0;
-  --color-primary-500: #22C55E;
-  --color-primary-600: #16A34A;
-  --color-primary-700: #15803D;
-  --color-primary-800: #166534;
-  --color-primary-900: #14532D;
+  --color-primary-50: #D8F3DC;
+  --color-primary-100: #B7E4C7;
+  --color-primary-200: #95D5B2;
+  --color-primary-500: #52B788;
+  --color-primary-600: #2D6A4F;
+  --color-primary-700: #1B4332;
+  --color-primary-800: #143626;
+  --color-primary-900: #0D2818;
 
-  /* ── Secondary: warm amber ── */
-  --color-secondary: #F59E0B;
-  --color-secondary-light: #FCD34D;
-  --color-secondary-dark: #D97706;
-  --color-secondary-foreground: #FFFFFF;
-  --color-secondary-50: #FFFBEB;
-  --color-secondary-100: #FEF3C7;
-  --color-secondary-400: #FBBF24;
-  --color-secondary-600: #D97706;
-  --color-secondary-700: #B45309;
-  --color-secondary-800: #92400E;
+  /* ── Secondary: warm gold/amber ── */
+  --color-secondary: #E9C46A;
+  --color-secondary-light: #F4D58D;
+  --color-secondary-dark: #C9A227;
+  --color-secondary-foreground: #1B4332;
+  --color-secondary-50: #FEF9E7;
+  --color-secondary-100: #FCF0C0;
+  --color-secondary-400: #F0CC5C;
+  --color-secondary-600: #C9A227;
+  --color-secondary-700: #A67C00;
+  --color-secondary-800: #7D5C00;
 
   /* ── Accent: sky blue ── */
   --color-accent: #0EA5E9;
@@ -40,16 +40,21 @@
   --color-accent-dark: #0284C7;
   --color-accent-foreground: #FFFFFF;
 
-  /* ── Agri neutrals: clean white ── */
+  /* ── AGRIFRAM surface tokens ── */
   --color-agri-bg: #FFFFFF;
   --color-agri-surface: #FFFFFF;
-  --color-agri-text: #111827;
+  --color-agri-cream: #F8F3E8;
+  --color-agri-text: #1A2E1A;
   --color-agri-muted: #6B7280;
-  --color-agri-border: #E5E7EB;
-  --color-agri-hover: #F9FAFB;
+  --color-agri-border: #E0DDD6;
+  --color-agri-hover: #F0EDE4;
+  --color-agri-gold: #E9C46A;
+  --color-agri-forest: #1B4332;
+  --color-agri-forest-deep: #0D2818;
+  --color-agri-mint: #D8F3DC;
 
-  --color-success: #16A34A;
-  --color-warning: #D97706;
+  --color-success: #2D6A4F;
+  --color-warning: #C9A227;
   --color-danger: #DC2626;
 
   --color-background: var(--background);
@@ -74,11 +79,11 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  --color-chart-1: #2D6A4F;
+  --color-chart-2: #E9C46A;
+  --color-chart-3: #52B788;
+  --color-chart-4: #95D5B2;
+  --color-chart-5: #C9A227;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -114,70 +119,60 @@
 :root {
   --radius: 0.625rem;
   --background: #FFFFFF;
-  --foreground: #111827;
+  --foreground: #1A2E1A;
   --card: #FFFFFF;
-  --card-foreground: #111827;
+  --card-foreground: #1A2E1A;
   --popover: #FFFFFF;
-  --popover-foreground: #111827;
-  --primary: #16A34A;
+  --popover-foreground: #1A2E1A;
+  --primary: #2D6A4F;
   --primary-foreground: #FFFFFF;
-  --secondary: #F59E0B;
-  --secondary-foreground: #FFFFFF;
-  --muted: #F9FAFB;
+  --secondary: #E9C46A;
+  --secondary-foreground: #1B4332;
+  --muted: #F8F3E8;
   --muted-foreground: #6B7280;
-  --accent: #0EA5E9;
-  --accent-foreground: #FFFFFF;
+  --accent: #52B788;
+  --accent-foreground: #1B4332;
   --destructive: #DC2626;
-  --border: #E5E7EB;
-  --input: #E5E7EB;
-  --ring: #16A34A;
-  --chart-1: #16A34A;
-  --chart-2: #F59E0B;
-  --chart-3: #0EA5E9;
-  --chart-4: #22C55E;
-  --chart-5: #D97706;
+  --border: #E0DDD6;
+  --input: #E0DDD6;
+  --ring: #2D6A4F;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #111827;
-  --sidebar-primary: #16A34A;
+  --sidebar-foreground: #1A2E1A;
+  --sidebar-primary: #2D6A4F;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F0FDF4;
-  --sidebar-accent-foreground: #15803D;
-  --sidebar-border: #E5E7EB;
-  --sidebar-ring: #16A34A;
+  --sidebar-accent: #D8F3DC;
+  --sidebar-accent-foreground: #1B4332;
+  --sidebar-border: #E0DDD6;
+  --sidebar-ring: #2D6A4F;
 }
 
 .dark {
-  --background: #0A0F0A;
-  --foreground: #F9FAFB;
-  --card: #111827;
-  --card-foreground: #F9FAFB;
-  --popover: #111827;
-  --popover-foreground: #F9FAFB;
-  --primary: #22C55E;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F59E0B;
-  --secondary-foreground: #FFFFFF;
-  --muted: #1F2937;
-  --muted-foreground: #9CA3AF;
-  --accent: #38BDF8;
-  --accent-foreground: #FFFFFF;
+  --background: #0D2818;
+  --foreground: #F0EDE4;
+  --card: #143626;
+  --card-foreground: #F0EDE4;
+  --popover: #143626;
+  --popover-foreground: #F0EDE4;
+  --primary: #52B788;
+  --primary-foreground: #0D2818;
+  --secondary: #E9C46A;
+  --secondary-foreground: #0D2818;
+  --muted: #1B4332;
+  --muted-foreground: #95D5B2;
+  --accent: #95D5B2;
+  --accent-foreground: #0D2818;
   --destructive: #EF4444;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #22C55E;
-  --chart-1: #22C55E;
-  --chart-2: #FCD34D;
-  --chart-3: #38BDF8;
-  --chart-4: #4ADE80;
-  --chart-5: #FCA5A5;
-  --sidebar: #111827;
-  --sidebar-foreground: #F9FAFB;
-  --sidebar-primary: #22C55E;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #1F2937;
-  --sidebar-accent-foreground: #BBF7D0;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #22C55E;
+  --border: rgba(255,255,255,0.08);
+  --input: rgba(255,255,255,0.12);
+  --ring: #52B788;
+  --sidebar: #143626;
+  --sidebar-foreground: #F0EDE4;
+  --sidebar-primary: #52B788;
+  --sidebar-primary-foreground: #0D2818;
+  --sidebar-accent: #1B4332;
+  --sidebar-accent-foreground: #B7E4C7;
+  --sidebar-border: rgba(255,255,255,0.08);
+  --sidebar-ring: #52B788;
 }
 
 @layer base {
@@ -200,6 +195,11 @@
     padding-inline: 2rem;
   }
 }
+
+/* AGRIFRAM decorative helpers */
+.agri-cream-bg { background-color: #F8F3E8; }
+.agri-forest-bg { background-color: #1B4332; }
+.agri-deep-bg  { background-color: #0D2818; }
 
 .float-delay-0   { animation-delay: 0s; }
 .float-delay-150 { animation-delay: 1.5s; }

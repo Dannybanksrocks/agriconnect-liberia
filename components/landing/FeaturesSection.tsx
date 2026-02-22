@@ -8,27 +8,33 @@ import { TrendingUp, CloudSun, BookOpen } from 'lucide-react'
 const features = [
   {
     icon: TrendingUp,
-    title: 'Market Prices',
+    tag: 'Market Intelligence',
+    title: 'Know Your Prices Before You Travel',
     description:
-      'Compare crop prices across all 15 counties in real time. Know the best market before you travel — never undersell your harvest again.',
-    cta: 'View Prices',
+      'Compare crop prices across all 15 counties in real time. Never leave the farm without knowing exactly where to sell for the highest return.',
+    cta: 'View Market Prices',
     href: '/market',
+    accent: '#D8F3DC',
   },
   {
     icon: CloudSun,
-    title: 'Weather Forecasts',
+    tag: 'Weather Intelligence',
+    title: 'Plan Every Season With Confidence',
     description:
-      'County-specific 7-day forecasts with agricultural alerts. Know exactly when to plant, irrigate, and harvest for maximum yield.',
+      'County-specific 7-day forecasts with planting windows and rainfall alerts. Know precisely when to sow, irrigate, and harvest.',
     cta: 'Check Weather',
     href: '/weather',
+    accent: '#FEF9E7',
   },
   {
     icon: BookOpen,
-    title: 'Agronomy Tips',
+    tag: 'Agronomy Knowledge',
+    title: 'Expert Tips In Your Language',
     description:
-      "Step-by-step farming guides for Liberia's most important crops — available offline, with audio support in local languages.",
+      "Step-by-step farming guides for Liberia's most important crops — offline-capable, with audio in local dialects.",
     cta: 'Browse Tips',
     href: '/tips',
+    accent: '#D8F3DC',
   },
 ]
 
@@ -39,39 +45,56 @@ export default function FeaturesSection() {
   return (
     <section className="w-full py-20 md:py-28 bg-white">
       <div className="container">
-        <div className="text-center mb-14">
-          <p className="text-sm font-semibold tracking-widest text-green-600 uppercase mb-4">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#2D6A4F] uppercase bg-[#D8F3DC] px-4 py-1.5 rounded-full mb-4">
             Platform Features
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight">
             Everything a Liberian farmer needs
           </h2>
-          <p className="mt-3 text-lg text-gray-500 max-w-xl mx-auto">
-            Powerful tools designed specifically for the Liberian agricultural context
+          <p className="mt-3 text-lg text-stone-500 max-w-xl mx-auto">
+            Powerful data tools built specifically for the Liberian agricultural context
           </p>
         </div>
 
+        {/* Cards */}
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((feature, i) => {
             const Icon = feature.icon
             return (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 28 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+                transition={{ duration: 0.55, delay: i * 0.13 }}
+                className="group relative bg-white border border-stone-200 rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="rounded-xl bg-green-50 p-3 w-12 h-12 flex items-center justify-center mb-6">
-                  <Icon className="w-5 h-5 text-green-600" />
+                {/* Top colour accent strip */}
+                <div
+                  className="absolute top-0 left-6 right-6 h-0.5 rounded-b-full"
+                  style={{ backgroundColor: feature.accent === '#FEF9E7' ? '#E9C46A' : '#52B788' }}
+                />
+
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+                  style={{ backgroundColor: feature.accent }}
+                >
+                  <Icon className="w-5 h-5 text-[#1B4332]" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-500 leading-relaxed mb-6 text-sm">{feature.description}</p>
+
+                <p className="text-xs font-bold text-[#2D6A4F] tracking-widest uppercase mb-2">
+                  {feature.tag}
+                </p>
+                <h3 className="text-lg font-bold text-[#1A2E1A] mb-3 leading-snug">{feature.title}</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mb-6">{feature.description}</p>
+
                 <Link
                   href={feature.href}
-                  className="inline-flex items-center text-sm font-semibold text-green-600 hover:text-green-700 transition-colors"
+                  className="inline-flex items-center gap-1 text-sm font-semibold text-[#2D6A4F] group-hover:text-[#1B4332] transition-colors"
                 >
-                  {feature.cta} →
+                  {feature.cta}
+                  <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
                 </Link>
               </motion.div>
             )

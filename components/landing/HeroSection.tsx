@@ -2,104 +2,100 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Globe, TrendingUp, CloudSun, ArrowUpRight } from 'lucide-react'
+import { Leaf, TrendingUp, CloudSun, Users, ArrowRight, ArrowUpRight } from 'lucide-react'
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28 },
   visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay, ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number] },
+    opacity: 1, y: 0,
+    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   }),
 }
 
-function DashboardMockup() {
+/* ── Decorative SVG leaf shapes ── */
+function LeafBlob({ className }: { className?: string }) {
   return (
-    <div className="w-full max-w-3xl mx-auto rounded-2xl border border-gray-100 bg-white shadow-2xl overflow-hidden">
-      {/* Mock browser bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100 bg-gray-50">
-        <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-red-300" />
-          <div className="w-3 h-3 rounded-full bg-yellow-300" />
-          <div className="w-3 h-3 rounded-full bg-green-300" />
+    <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path
+        d="M 0,100 C 0,44.8 44.8,0 100,0 C 155.2,0 200,44.8 200,100 C 200,155.2 155.2,200 100,200 C 44.8,200 0,155.2 0,100 Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function WheatIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M16 28V8M16 8C16 8 10 10 8 16M16 8C16 8 22 10 24 16M16 14C16 14 11 15 9 20M16 14C16 14 21 15 23 20M16 20C16 20 12 20.5 11 24M16 20C16 20 20 20.5 21 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/* ── Floating stat card ── */
+function FloatStatCard({ icon: Icon, label, value, trend, delay }: {
+  icon: React.ComponentType<{ className?: string }>
+  label: string
+  value: string
+  trend?: string
+  delay: number
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay }}
+      className="flex-1 min-w-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white"
+    >
+      <div className="flex items-start justify-between mb-2">
+        <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
+          <Icon className="w-4 h-4 text-[#D8F3DC]" />
         </div>
-        <div className="flex-1 mx-4 h-6 rounded-md bg-gray-200 flex items-center px-3">
-          <span className="text-xs text-gray-400">app.agriconnect.lr/dashboard</span>
-        </div>
+        {trend && (
+          <span className="flex items-center gap-0.5 text-xs font-semibold text-[#D8F3DC]">
+            <ArrowUpRight className="w-3 h-3" />{trend}
+          </span>
+        )}
       </div>
-      {/* Dashboard content */}
-      <div className="p-5 bg-white">
-        {/* Stats row */}
-        <div className="grid grid-cols-4 gap-3 mb-4">
-          {[
-            { label: 'Rice Price', value: 'L$320/kg', trend: '+2.4%', positive: true },
-            { label: 'Weather', value: '29°C', trend: 'Partly Cloudy', positive: true },
-            { label: 'Active Alerts', value: '3', trend: 'Unread', positive: false },
-            { label: 'Saved Tips', value: '7', trend: 'Articles', positive: true },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl border border-gray-100 p-3 bg-white">
-              <p className="text-xs text-gray-500 mb-1">{s.label}</p>
-              <p className="text-base font-bold text-gray-900">{s.value}</p>
-              <p className={`text-xs mt-0.5 flex items-center gap-0.5 ${s.positive ? 'text-green-600' : 'text-amber-600'}`}>
-                {s.positive && <ArrowUpRight className="h-3 w-3" />}
-                {s.trend}
-              </p>
-            </div>
-          ))}
-        </div>
-        {/* Charts row */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="col-span-2 rounded-xl border border-gray-100 p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs font-semibold text-gray-700">Market Prices</p>
-              <TrendingUp className="h-4 w-4 text-green-600" />
-            </div>
-            <div className="flex items-end gap-1 h-14">
-              {[40, 55, 45, 70, 65, 80, 75, 90, 85, 100, 88, 95].map((h, i) => (
-                <div key={i} className="flex-1 rounded-sm bg-green-100" style={{ height: `${h}%` }}>
-                  <div className="w-full rounded-sm bg-green-500" style={{ height: `${Math.min(h, 55)}%` }} />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-xl border border-gray-100 p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs font-semibold text-gray-700">Weather</p>
-              <CloudSun className="h-4 w-4 text-amber-500" />
-            </div>
-            <div className="flex flex-col gap-2">
-              {['Mon', 'Tue', 'Wed', 'Thu'].map((d, i) => (
-                <div key={d} className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500 w-7">{d}</span>
-                  <div className="flex-1 mx-2 h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                    <div className="h-full rounded-full bg-green-400" style={{ width: `${[70, 40, 85, 60][i]}%` }} />
-                  </div>
-                  <span className="text-xs font-medium text-gray-700">{[29, 27, 30, 28][i]}°</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <p className="text-2xl font-bold">{value}</p>
+      <p className="text-xs text-white/60 mt-0.5">{label}</p>
+    </motion.div>
   )
 }
 
 export default function HeroSection() {
   return (
-    <section className="w-full bg-white pt-24 pb-20 md:pt-32 md:pb-28">
-      <div className="container">
-        <div className="flex flex-col items-center text-center">
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#1B4332] flex flex-col">
+      {/* Background decorative blobs */}
+      <LeafBlob className="absolute -top-32 -right-32 w-[500px] h-[500px] text-[#2D6A4F]/40 pointer-events-none" />
+      <LeafBlob className="absolute -bottom-48 -left-48 w-[600px] h-[600px] text-[#143626]/60 pointer-events-none" />
+
+      {/* Subtle grid pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)`,
+          backgroundSize: '40px 40px',
+        }}
+      />
+
+      {/* Warm radial glow top-left */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(233,196,106,0.08) 0%, transparent 70%)' }}
+      />
+
+      <div className="container relative z-10 flex-1 flex flex-col justify-center pt-24 pb-16 md:pt-32 md:pb-24">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="inline-flex items-center gap-2 mb-8"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-green-50 border border-green-200 px-4 py-1.5 text-sm font-medium text-green-700">
-              <Globe className="h-3.5 w-3.5" />
-              Supported by Ministry of Commerce &amp; Industry
+            <span className="inline-flex items-center gap-2 bg-[#E9C46A]/15 border border-[#E9C46A]/30 text-[#E9C46A] rounded-full px-4 py-1.5 text-sm font-semibold">
+              <Leaf className="w-3.5 h-3.5" />
+              Supported by the Ministry of Commerce &amp; Industry
             </span>
           </motion.div>
 
@@ -109,42 +105,57 @@ export default function HeroSection() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight leading-[1.08] max-w-4xl"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.06]"
           >
-            The Smart Farming
-            <br />
-            Platform for Liberia
+            Growing Liberia&apos;s
+            <span className="block mt-1 text-[#95D5B2]">
+              Agricultural Future
+            </span>
           </motion.h1>
 
-          {/* Sub-headline */}
-          <motion.p
-            custom={0.25}
+          {/* Wheat decoration */}
+          <motion.div
+            custom={0.2}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-6 text-lg md:text-xl text-gray-500 max-w-2xl leading-relaxed"
+            className="flex justify-center gap-6 my-6 text-[#52B788]/50"
           >
-            Real-time market prices, accurate weather forecasts, and expert
-            agronomy tips — accessible on any phone, in your language.
+            <WheatIcon />
+            <WheatIcon />
+            <WheatIcon />
+          </motion.div>
+
+          {/* Subheadline */}
+          <motion.p
+            custom={0.3}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="text-base sm:text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed"
+          >
+            Real-time market prices, county-level weather forecasts, and expert agronomy tips — 
+            all in one platform built for Liberian farmers.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
-            custom={0.4}
+            custom={0.45}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link
               href="/auth/register"
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-sm transition-colors"
+              className="group inline-flex items-center gap-2 bg-[#E9C46A] hover:bg-[#F4D58D] text-[#1B4332] font-bold px-8 py-4 rounded-xl text-base shadow-lg shadow-[#E9C46A]/20 transition-all"
             >
-              Get Started Free
+              Start Farming Smarter
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="#how-it-works"
-              className="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center gap-2 border border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-xl text-base transition-all"
             >
               See How It Works
             </Link>
@@ -152,26 +163,36 @@ export default function HeroSection() {
 
           {/* Trust text */}
           <motion.p
-            custom={0.5}
+            custom={0.55}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-5 text-sm text-gray-400"
+            className="mt-5 text-sm text-white/40"
           >
-            Trusted by 2,400+ farmers across Liberia
+            Trusted by 2,400+ farmers across all 15 counties
           </motion.p>
-
-          {/* Dashboard mockup */}
-          <motion.div
-            custom={0.6}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-16 w-full"
-          >
-            <DashboardMockup />
-          </motion.div>
         </div>
+
+        {/* Floating stat cards */}
+        <motion.div
+          custom={0.65}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+        >
+          <FloatStatCard icon={Users}       label="Active Farmers"    value="2,400+"  trend="+18%"   delay={0.7}  />
+          <FloatStatCard icon={TrendingUp}  label="Counties Covered"  value="15"      delay={0.8}  />
+          <FloatStatCard icon={Leaf}        label="Crops Tracked"     value="50+"     delay={0.9}  />
+          <FloatStatCard icon={CloudSun}    label="Weather Forecasts" value="Daily"   delay={1.0}  />
+        </motion.div>
+      </div>
+
+      {/* Bottom wave into next section */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-10 sm:h-14">
+          <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#F8F3E8" />
+        </svg>
       </div>
     </section>
   )
