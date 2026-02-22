@@ -1,4 +1,5 @@
 import type { AgronomyTip } from '@/lib/types'
+import { getCategoryImage } from '@/lib/constants/cropImages'
 
 export const tips: AgronomyTip[] = [
   {

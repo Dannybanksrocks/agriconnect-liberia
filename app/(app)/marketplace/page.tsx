@@ -140,26 +140,20 @@ export default function MarketplacePage() {
 }
 
 function ListingCard({ listing }: { listing: MarketplaceListing }) {
-  const [imgError, setImgError] = useState(false)
+  const [imgSrc, setImgSrc] = useState(listing.photos[0] || getCropImage(listing.cropName))
   const whatsappUrl = `https://wa.me/${listing.farmerPhone.replace('+', '')}?text=Hi%2C%20I%27m%20interested%20in%20your%20${listing.cropName}%20listing%20on%20AgriHub`
 
   return (
     <Link href={`/marketplace/${listing.id}`} className="group">
       <div className="border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200">
         {/* Image */}
-        <div className="relative h-48 bg-gray-100 dark:bg-gray-800">
-          {listing.photos[0] && !imgError ? (
-            <img
-              src={listing.photos[0]}
-              alt={listing.cropName}
-              onError={() => setImgError(true)}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-6xl">
-              {listing.emoji}
-            </div>
-          )}
+        <div className="relative h-48 bg-gray-100 dark:bg-gray-800 overflow-hidden">
+          <img
+            src={imgSrc}
+            alt={listing.cropName}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={() => setImgSrc(listing.photos[1] ?? getCropImage(listing.cropName))}
+          />
           {listing.qualityVerified && (
             <div className="absolute top-3 right-3 bg-green-500 text-white rounded-full px-2 py-1 text-xs font-medium flex items-center gap-1">
               <CheckCircle className="w-3 h-3" />
