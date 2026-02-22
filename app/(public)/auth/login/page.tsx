@@ -10,6 +10,7 @@ import { Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react'
 import { toast } from 'sonner'
 import Logo from '@/components/shared/Logo'
 import PoweredBy from '@/components/shared/PoweredBy'
+import BackButton from '@/components/shared/BackButton'
 import { useAuth } from '@/lib/auth'
 
 const loginSchema = z.object({
@@ -110,9 +111,12 @@ function LoginFormContent() {
       {/* Right panel */}
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6">
-          <div className="flex justify-center lg:hidden mb-2">
+          <div className="flex items-center justify-between lg:hidden mb-2">
+            <BackButton href="/" label="Home" />
             <Logo size="lg" linkTo="/" />
+            <div className="w-16" />
           </div>
+          <BackButton href="/" label="Back to Home" className="hidden lg:inline-flex" />
 
           <div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
