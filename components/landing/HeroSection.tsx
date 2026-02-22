@@ -97,25 +97,12 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full px-4 py-2 text-xs font-medium mb-6"
           >
             <img src="/images/ministry-commerce-liberia.jpg" alt="Ministry of Commerce" className="w-5 h-5 rounded-full" />
-            Supported by Ministry of Commerce & Industry, Republic of Liberia
-          </motion.div>
-          
-          <motion.h1
-            custom={0.2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.1] tracking-tight"
-          >
-            <span className="inline-flex items-center gap-2 bg-[#E9C46A]/15 border border-[#E9C46A]/30 text-[#E9C46A] rounded-full px-4 py-1.5 text-sm font-semibold">
-              <Leaf className="w-3.5 h-3.5" />
-              Supported by the Ministry of Commerce &amp; Industry
-            </span>
+            Supported by Ministry of Commerce &amp; Industry, Republic of Liberia
           </motion.div>
 
           {/* Headline */}
           <motion.h1
-            custom={0.1}
+            custom={0.2}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
