@@ -12,6 +12,7 @@ import { toast } from 'sonner'
 import { marketplaceListings } from '@/lib/mock-data/marketplace'
 import { marketPrices } from '@/lib/mock-data/crops'
 import type { MarketplaceListing } from '@/lib/types'
+import BackButton from '@/components/shared/BackButton'
 
 function getMobileNetwork(phone: string): string {
   const n = phone.replace(/\D/g, '').slice(-9)
@@ -101,6 +102,7 @@ export default function ListingDetailPage({
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-10">
+      <div className="max-w-4xl mx-auto px-4 pt-4"><BackButton href="/marketplace" label="Back to Marketplace" /></div>
       <Link
         href="/marketplace"
         className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition"

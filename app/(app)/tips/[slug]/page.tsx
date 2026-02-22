@@ -10,6 +10,7 @@ import {
 import { toast } from 'sonner'
 import { getTipBySlug, getRelatedTips } from '@/lib/api/tips'
 import type { AgronomyTip } from '@/lib/types'
+import BackButton from '@/components/shared/BackButton'
 
 const CATEGORY_LABELS: Record<string, string> = {
   rice: 'Rice',
@@ -104,6 +105,7 @@ export default function TipDetailPage({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-12">
+      <div className="max-w-4xl mx-auto px-4 pt-4"><BackButton href="/tips" label="Back to Tips" /></div>
       {/* Back */}
       <Link
         href="/tips"
