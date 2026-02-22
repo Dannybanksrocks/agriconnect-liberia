@@ -139,6 +139,7 @@ export default function MarketplacePage() {
 }
 
 function ListingCard({ listing }: { listing: MarketplaceListing }) {
+  const [imgError, setImgError] = useState(false)
   const whatsappUrl = `https://wa.me/${listing.farmerPhone.replace('+', '')}?text=Hi%2C%20I%27m%20interested%20in%20your%20${listing.cropName}%20listing%20on%20AgriHub`
 
   return (
@@ -146,10 +147,11 @@ function ListingCard({ listing }: { listing: MarketplaceListing }) {
       <div className="border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200">
         {/* Image */}
         <div className="relative h-48 bg-gray-100 dark:bg-gray-800">
-          {listing.photos[0] ? (
+          {listing.photos[0] && !imgError ? (
             <img
               src={listing.photos[0]}
               alt={listing.cropName}
+              onError={() => setImgError(true)}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
             />
           ) : (
