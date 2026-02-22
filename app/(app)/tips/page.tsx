@@ -55,13 +55,13 @@ export default function TipsPage() {
       <CategoryGrid activeCategory={activeCategory} onSelect={setActiveCategory} />
 
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-agri-muted dark:text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search tips by keyword, crop, or topic…"
-          className="w-full rounded-xl border border-agri-border bg-white py-2.5 pl-10 pr-4 text-sm text-agri-text placeholder:text-agri-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border dark:bg-card dark:text-foreground dark:placeholder:text-muted-foreground"
+          className="w-full rounded-xl border border-border bg-card py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
       </div>
 

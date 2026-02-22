@@ -23,9 +23,7 @@ export default function MyFarmPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-agri-text dark:text-foreground">
-              My Crops
-            </h2>
+            <h2 className="section-heading">My Crops</h2>
             <button
               onClick={() => setModalOpen(true)}
               className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-dark"

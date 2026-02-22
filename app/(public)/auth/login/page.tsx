@@ -103,13 +103,7 @@ function LoginFormContent() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs text-white/40 font-medium mb-2">Demo Accounts</p>
-            <div className="space-y-2 text-xs text-white/60">
-              <p><span className="text-white/80 font-medium">Admin:</span> admin@farmpulse.lr / Admin@2024</p>
-              <p><span className="text-white/80 font-medium">Farmer:</span> fatu.kamara@gmail.com / Farmer@2024</p>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -127,15 +121,6 @@ function LoginFormContent() {
             <p className="mt-1 text-sm text-gray-500">
               Rice prices just updated. Sign in to check.
             </p>
-          </div>
-
-          {/* Mobile demo accounts hint */}
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-3 lg:hidden">
-            <p className="text-xs text-gray-500 font-medium mb-1">Demo Accounts</p>
-            <div className="space-y-1 text-xs text-gray-500">
-              <p><span className="font-medium text-gray-700">Admin:</span> admin@farmpulse.lr / Admin@2024</p>
-              <p><span className="font-medium text-gray-700">Farmer:</span> fatu.kamara@gmail.com / Farmer@2024</p>
-            </div>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

@@ -16,22 +16,15 @@ import RainfallChart from '@/components/weather/RainfallChart'
 export default function WeatherPage() {
   const { selectedCounty, setSelectedCounty } = useAppStore()
   const [forecast, setForecast] = useState<WeatherForecast | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading]   = useState(true)
 
   useEffect(() => {
     let cancelled = false
     setLoading(true)
-
     getWeatherForecast(selectedCounty).then((data) => {
-      if (!cancelled) {
-        setForecast(data)
-        setLoading(false)
-      }
+      if (!cancelled) { setForecast(data); setLoading(false) }
     })
-
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = true }
   }, [selectedCounty])
 
   return (
@@ -40,11 +33,7 @@ export default function WeatherPage() {
         title="Weather Forecast"
         description="Real-time weather data and agricultural advisories for your county"
         actions={
-          <CountySelector
-            value={selectedCounty}
-            onChange={setSelectedCounty}
-            size="lg"
-          />
+          <CountySelector value={selectedCounty} onChange={setSelectedCounty} size="lg" />
         }
       />
 
@@ -54,7 +43,6 @@ export default function WeatherPage() {
         <>
           <CurrentConditionsCard current={forecast.current} />
           <ForecastStrip daily={forecast.daily} />
-
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <HourlyChart hourly={forecast.hourly} />
@@ -63,14 +51,11 @@ export default function WeatherPage() {
               <AgriculturalAlerts agricultural={forecast.agricultural} />
             </div>
           </div>
-
           <RainfallChart data={forecast.rainfall30d} />
         </>
       ) : (
-        <div className="rounded-2xl border border-agri-border bg-white p-12 text-center dark:border-border dark:bg-card">
-          <p className="text-agri-muted dark:text-muted-foreground">
-            No weather data available for {selectedCounty}.
-          </p>
+        <div className="rounded-xl border border-border bg-card p-12 text-center">
+          <p className="body-text">No weather data available for {selectedCounty}.</p>
         </div>
       )}
     </div>
@@ -80,8 +65,7 @@ export default function WeatherPage() {
 function WeatherSkeleton() {
   return (
     <div className="space-y-6">
-      {/* Current conditions skeleton */}
-      <div className="rounded-2xl border border-agri-border bg-white p-6 dark:border-border dark:bg-card md:p-8">
+      <div className="rounded-xl border border-border bg-card p-6 md:p-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <Skeleton className="h-12 w-36" />
@@ -90,7 +74,7 @@ function WeatherSkeleton() {
           </div>
           <Skeleton className="h-20 w-20 rounded-full" />
         </div>
-        <div className="mt-6 grid grid-cols-2 gap-4 border-t border-agri-border pt-6 dark:border-border sm:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-6 sm:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="flex items-center gap-2.5">
               <Skeleton className="h-9 w-9 rounded-lg" />
@@ -103,8 +87,7 @@ function WeatherSkeleton() {
         </div>
       </div>
 
-      {/* Forecast strip skeleton */}
-      <div className="rounded-2xl border border-agri-border bg-white p-4 dark:border-border dark:bg-card md:p-6">
+      <div className="rounded-xl border border-border bg-card p-4 md:p-6">
         <Skeleton className="mb-4 h-6 w-32" />
         <div className="grid grid-cols-3 gap-3 md:grid-cols-7">
           {Array.from({ length: 7 }).map((_, i) => (
@@ -113,16 +96,15 @@ function WeatherSkeleton() {
         </div>
       </div>
 
-      {/* Charts skeleton */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <div className="rounded-2xl border border-agri-border bg-white p-4 dark:border-border dark:bg-card md:p-6">
+          <div className="rounded-xl border border-border bg-card p-4 md:p-6">
             <Skeleton className="mb-4 h-6 w-40" />
             <Skeleton className="h-[300px] rounded-lg" />
           </div>
         </div>
         <div>
-          <div className="rounded-2xl border border-agri-border bg-white p-4 dark:border-border dark:bg-card md:p-6">
+          <div className="rounded-xl border border-border bg-card p-4 md:p-6">
             <Skeleton className="mb-4 h-6 w-44" />
             <Skeleton className="h-5 w-full" />
             <Skeleton className="mt-3 h-5 w-full" />
@@ -132,8 +114,7 @@ function WeatherSkeleton() {
         </div>
       </div>
 
-      {/* Rainfall skeleton */}
-      <div className="rounded-2xl border border-agri-border bg-white p-4 dark:border-border dark:bg-card md:p-6">
+      <div className="rounded-xl border border-border bg-card p-4 md:p-6">
         <Skeleton className="mb-4 h-6 w-48" />
         <Skeleton className="h-[250px] rounded-lg" />
       </div>
