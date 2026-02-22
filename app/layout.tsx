@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, DM_Sans } from 'next/font/google'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const inter = Inter({
@@ -16,11 +17,11 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'AgriConnect Liberia',
-    template: '%s | AgriConnect Liberia',
+    default: 'FarmPulse Liberia',
+    template: '%s | FarmPulse Liberia',
   },
   description:
-    'Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers. Built by Tech 231 Liberia Ltd.',
+    'Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers. Giving every Liberian farmer the data advantage.',
   keywords: [
     'agriculture',
     'Liberia',
@@ -59,6 +60,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${dmSans.variable} antialiased`}>
         {children}
+        <Toaster position="top-right" richColors closeButton />
       </body>
     </html>
   )
