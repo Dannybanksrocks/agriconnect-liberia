@@ -23,7 +23,7 @@ export default function PWAInstallBanner() {
         </div>
         <div className="flex-1">
           <h3 className="font-semibold text-agri-text dark:text-foreground">
-            Add FarmPulse to your home screen
+            Add AgriHub to your home screen
           </h3>
           <p className="mt-0.5 text-sm text-agri-muted dark:text-muted-foreground">
             Get instant notifications for price changes and weather alerts
@@ -31,7 +31,7 @@ export default function PWAInstallBanner() {
           <div className="mt-3 flex items-center gap-2">
             <button
               className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-              aria-label="Install FarmPulse app"
+              aria-label="Install AgriHub app"
             >
               Install App
             </button>

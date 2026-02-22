@@ -50,7 +50,7 @@ const ussdMenu = [
   {
     option: '4',
     label: 'My Account',
-    description: 'Manage your FarmPulse profile',
+    description: 'Manage your AgriHub profile',
     sub: [
       '4.1 - My farm details',
       '4.2 - Alert settings',
@@ -86,10 +86,10 @@ export default function USSDGuidePage() {
               USSD Guide
             </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Access FarmPulse via USSD
+              Access AgriHub via USSD
             </h1>
             <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
-              No smartphone? No internet? No problem. Dial <span className="text-white font-mono font-bold">*347#</span> from any phone to access FarmPulse.
+              No smartphone? No internet? No problem. Dial <span className="text-white font-mono font-bold">*347#</span> from any phone to access AgriHub.
             </p>
           </motion.div>
         </div>
@@ -106,8 +106,8 @@ export default function USSDGuidePage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight">How to Get Started</h2>
-              <p className="mt-3 text-gray-500">Three simple steps to access FarmPulse on any phone</p>
+            <h2 className="text-3xl font-bold text-[#1B4332] tracking-tight">How to Get Started</h2>
+            <p className="mt-3 text-gray-500">Three simple steps to access AgriHub on any phone</p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -144,8 +144,8 @@ export default function USSDGuidePage() {
             >
               <div className="rounded-3xl bg-gray-900 p-4 shadow-2xl">
                 <div className="rounded-2xl bg-[#1B4332] p-6 text-white font-mono text-sm">
-                  <p className="text-green-300 font-bold mb-3">FarmPulse Liberia</p>
-                  <p className="text-white/70 mb-4">Welcome to FarmPulse! Select an option:</p>
+                  <p className="text-green-300 font-bold mb-3">AgriHub Liberia</p>
+                  <p className="text-white/70 mb-4">Welcome to AgriHub! Select an option:</p>
                   <div className="space-y-2 text-white/90">
                     <p>1. Market Prices</p>
                     <p>2. Weather Forecast</p>

@@ -17,8 +17,8 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'FarmPulse Liberia',
-    template: '%s | FarmPulse Liberia',
+    default: 'AgriHub Liberia',
+    template: '%s | AgriHub Liberia',
   },
   description:
     'Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers. Giving every Liberian farmer the data advantage.',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'FarmPulse',
+    title: 'AgriHub',
   },
 }
 

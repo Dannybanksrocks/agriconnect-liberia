@@ -11,7 +11,7 @@ const steps = [
     icon: UserPlus,
     title: 'Create your farm profile',
     description:
-      'Select your county, crops, and farm size. FarmPulse personalises prices and forecasts to your exact location in minutes.',
+      'Select your county, crops, and farm size. AgriHub personalises prices and forecasts to your exact location in minutes.',
     cta: 'Get started free',
     href: '/auth/register',
   },

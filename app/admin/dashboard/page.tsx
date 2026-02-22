@@ -104,7 +104,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-6">
       <PageHeader
         title="Admin Dashboard"
-        description="Overview of FarmPulse Liberia platform activity"
+        description="Overview of AgriHub Liberia platform activity"
       />
 
       {/* KPI Cards */}

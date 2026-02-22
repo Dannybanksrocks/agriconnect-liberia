@@ -426,7 +426,7 @@ function PrivacyTab() {
         </h3>
         <div className="space-y-2 text-sm text-agri-muted dark:text-muted-foreground">
           <p>
-            FarmPulse Liberia collects minimal data to provide you with
+            AgriHub Liberia collects minimal data to provide you with
             accurate market prices, weather forecasts, and farming
             recommendations tailored to your county and crops.
           </p>
@@ -497,9 +497,9 @@ function AboutTab() {
     <div className="flex flex-col items-center text-center">
       <Logo size="lg" linkTo="" />
 
-      <p className="mt-4 text-sm font-medium text-agri-text dark:text-foreground">
-        FarmPulse Liberia v1.0.0
-      </p>
+          <p className="mt-4 text-sm font-medium text-agri-text dark:text-foreground">
+            AgriHub Liberia v1.0.0
+          </p>
       <p className="mt-1 text-sm text-agri-muted dark:text-muted-foreground">
         Built by Tech 231 Liberia Limited
       </p>

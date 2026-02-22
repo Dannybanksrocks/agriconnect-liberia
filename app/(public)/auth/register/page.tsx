@@ -246,7 +246,7 @@ export default function RegisterPage() {
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 mt-auto">
           <p className="text-xs text-white/50">
-            You can also access FarmPulse via USSD: <span className="text-white/80 font-mono">*347#</span>
+            You can also access AgriHub via USSD: <span className="text-white/80 font-mono">*347#</span>
           </p>
         </div>
       </div>
@@ -477,9 +477,9 @@ export default function RegisterPage() {
 
                   {/* STEP 3: Account Type */}
                   {step === 3 && (
-                    <div className="space-y-4">
-                      <h2 className="text-xl font-bold text-gray-900">Account Type</h2>
-                      <p className="text-sm text-gray-500">How will you use FarmPulse?</p>
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-gray-900">Account Type</h2>
+              <p className="text-sm text-gray-500">How will you use AgriHub?</p>
 
                       <div className="space-y-3">
                         {[
@@ -563,11 +563,11 @@ export default function RegisterPage() {
                         </label>
                       </div>
 
-                      <div className="rounded-xl bg-green-50 border border-green-200 p-3">
-                        <p className="text-xs text-green-800">
-                          You can also access FarmPulse via USSD: <span className="font-mono font-bold">*347#</span>
-                        </p>
-                      </div>
+              <div className="rounded-xl bg-green-50 border border-green-200 p-3">
+                <p className="text-xs text-green-800">
+                  You can also access AgriHub via USSD: <span className="font-mono font-bold">*347#</span>
+                </p>
+              </div>
 
                       <div className="space-y-1.5">
                         <label className="flex items-start gap-2 cursor-pointer">
@@ -595,8 +595,8 @@ export default function RegisterPage() {
                       >
                         <PartyPopper className="h-10 w-10 text-green-600" />
                       </motion.div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Welcome to FarmPulse!</h2>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Welcome to AgriHub!</h2>
                         <p className="text-sm text-gray-500 mt-2">
                           Your account has been created successfully. You&apos;re now part of a community of {'>'}2,400 Liberian farmers.
                         </p>
