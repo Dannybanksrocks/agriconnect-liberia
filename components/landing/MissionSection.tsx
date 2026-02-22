@@ -73,7 +73,7 @@ export default function MissionSection() {
             </div>
 
             {/* Floating quote card */}
-            <div className="absolute -bottom-6 -right-4 lg:-right-8 bg-white border border-stone-200 rounded-2xl px-5 py-4 shadow-lg max-w-[240px]">
+            <div className="absolute -bottom-12 -right-4 lg:-right-8 bg-white border border-stone-200 rounded-2xl px-5 py-4 shadow-lg max-w-[240px] z-20">
               <p className="text-xs text-stone-600 italic leading-relaxed">
                 &ldquo;I earned L$8,000 more on my rice harvest after using FarmPulse.&rdquo;
               </p>
