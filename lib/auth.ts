@@ -14,9 +14,9 @@ export interface AuthUser extends User {
 const SEED_ACCOUNTS: AuthUser[] = [
   {
     id: 'admin-1',
-    name: 'Admin',
+    name: 'Super Admin',
     phone: '+231770000001',
-    email: 'admin@farmpulse.lr',
+    email: 'admin@agrihub.lr',
     password: 'Admin@2024',
     county: 'Montserrado',
     farmSizeAcres: 0,
@@ -30,9 +30,9 @@ const SEED_ACCOUNTS: AuthUser[] = [
     id: 'farmer-1',
     name: 'Fatu Kamara',
     phone: '+231770001001',
-    email: 'fatu.kamara@gmail.com',
+    email: 'fatu.kamara@agrihub.lr',
     password: 'Farmer@2024',
-    county: 'Bong',
+    county: 'Bong County',
     farmSizeAcres: 3.5,
     primaryCrops: ['Rice', 'Cassava'],
     role: 'farmer',
@@ -45,9 +45,9 @@ const SEED_ACCOUNTS: AuthUser[] = [
     id: 'farmer-2',
     name: 'Musu Kollie',
     phone: '+231770001002',
-    email: 'musu.kollie@gmail.com',
+    email: 'musu.kollie@agrihub.lr',
     password: 'Farmer@2024',
-    county: 'Nimba',
+    county: 'Nimba County',
     farmSizeAcres: 2.0,
     primaryCrops: ['Hot Pepper', 'Tomato', 'Okra'],
     role: 'farmer',
@@ -55,6 +55,36 @@ const SEED_ACCOUNTS: AuthUser[] = [
     status: 'active',
     joinedAt: '2024-03-10T10:30:00Z',
     farmName: 'Kollie Gardens',
+  },
+  {
+    id: 'extension-1',
+    name: 'James Flomo',
+    phone: '+231770003001',
+    email: 'james.flomo@agrihub.lr',
+    password: 'Officer@2024',
+    county: 'Lofa County',
+    farmSizeAcres: 0,
+    primaryCrops: [],
+    role: 'extension-officer',
+    language: 'en',
+    status: 'active',
+    joinedAt: '2024-01-20T09:00:00Z',
+  },
+  {
+    id: 'supplier-1',
+    name: 'GreenFields Ltd',
+    phone: '+231770004001',
+    email: 'greenfields@agrihub.lr',
+    password: 'Supplier@2024',
+    county: 'Montserrado',
+    farmSizeAcres: 0,
+    primaryCrops: [],
+    role: 'supplier',
+    language: 'en',
+    status: 'active',
+    joinedAt: '2024-02-01T10:00:00Z',
+    businessName: 'GreenFields Agricultural Supplies',
+    businessType: 'supplier',
   },
 ]
 
@@ -158,6 +188,7 @@ export function login(
 export interface RegisterData {
   fullName: string
   phone: string
+  whatsappNumber?: string
   email?: string
   password: string
   county: string
@@ -167,6 +198,11 @@ export interface RegisterData {
   language: string
   farmName?: string
   accountType?: string
+  familiarWithApps?: string
+  mobileMoneyProvider?: string
+  mobileMoneyNumber?: string
+  accountName?: string
+  currencyPreference?: string
   priceAlerts?: boolean
   weatherAlerts?: boolean
 }
@@ -186,6 +222,12 @@ export function register(
     return { success: false, error: 'An account with this phone number already exists' }
   }
 
+  // Determine role from accountType
+  let role: User['role'] = 'farmer'
+  if (data.accountType === 'extension-officer') role = 'extension-officer'
+  else if (data.accountType === 'buyer') role = 'buyer'
+  else if (data.accountType === 'supplier') role = 'supplier'
+
   const newUser: AuthUser = {
     id: `user-${Date.now()}`,
     name: data.fullName,
@@ -195,7 +237,7 @@ export function register(
     county: data.county,
     farmSizeAcres: data.farmSize,
     primaryCrops: data.crops,
-    role: (data.accountType === 'extension-officer' ? 'extension-officer' : 'farmer') as User['role'],
+    role,
     language: (data.language === 'english' ? 'en' : data.language) as User['language'],
     status: 'active',
     joinedAt: new Date().toISOString(),
@@ -272,6 +314,9 @@ export function useAuth() {
     isAuthenticated,
     isAdmin: user?.role === 'admin',
     isFarmer: user?.role === 'farmer',
+    isBuyer: user?.role === 'buyer',
+    isSupplier: user?.role === 'supplier',
+    isExtensionOfficer: user?.role === 'extension-officer',
     login: doLogin,
     register: doRegister,
     logout: doLogout,

@@ -3,38 +3,52 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
-import { TrendingUp, CloudSun, BookOpen } from 'lucide-react'
+import { TrendingUp, CloudSun, BookOpen, ShoppingCart } from 'lucide-react'
 
 const features = [
   {
     icon: TrendingUp,
     tag: 'Market Intelligence',
-    title: 'Know Your Prices Before You Travel',
+    title: 'Market Prices',
     description:
-      'Compare crop prices across all 15 counties in real time. Never leave the farm without knowing exactly where to sell for the highest return.',
+      'Know the price before you sell across all 15 counties',
     cta: 'View Market Prices',
     href: '/market',
     accent: '#D8F3DC',
+    image: '/images/liberia-market-scene.jpg',
   },
   {
     icon: CloudSun,
     tag: 'Weather Intelligence',
-    title: 'Plan Every Season With Confidence',
+    title: 'Weather Forecasts',
     description:
-      'County-specific 7-day forecasts with planting windows and rainfall alerts. Know precisely when to sow, irrigate, and harvest.',
+      'County-specific 7-day forecasts with planting alerts',
     cta: 'Check Weather',
     href: '/weather',
     accent: '#FEF9E7',
+    image: null,
   },
   {
     icon: BookOpen,
     tag: 'Agronomy Knowledge',
-    title: 'Expert Tips In Your Language',
+    title: 'Agronomy Tips',
     description:
-      "Step-by-step farming guides for Liberia's most important crops — offline-capable, with audio in local dialects.",
+      'Expert guidance in your language — available offline with audio',
     cta: 'Browse Tips',
     href: '/tips',
     accent: '#D8F3DC',
+    image: null,
+  },
+  {
+    icon: ShoppingCart,
+    tag: 'Direct Marketplace',
+    title: 'Marketplace',
+    description:
+      'Connect directly with buyers. No middlemen. Better prices.',
+    cta: 'Browse Marketplace',
+    href: '/marketplace',
+    accent: '#D8F3DC',
+    image: '/images/farmer-checking-phone.jpg',
   },
 ]
 
@@ -59,7 +73,7 @@ export default function FeaturesSection() {
         </div>
 
         {/* Cards */}
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, i) => {
             const Icon = feature.icon
             return (
@@ -68,34 +82,48 @@ export default function FeaturesSection() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: i * 0.13 }}
-                className="group relative bg-white border border-stone-200 rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="group relative bg-white border border-stone-200 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Top colour accent strip */}
                 <div
-                  className="absolute top-0 left-6 right-6 h-0.5 rounded-b-full"
+                  className="absolute top-0 left-6 right-6 h-0.5 rounded-b-full z-10"
                   style={{ backgroundColor: feature.accent === '#FEF9E7' ? '#E9C46A' : '#52B788' }}
                 />
 
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
-                  style={{ backgroundColor: feature.accent }}
-                >
-                  <Icon className="w-5 h-5 text-[#1B4332]" />
+                {/* Image if available */}
+                {feature.image && (
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <img
+                      src={feature.image}
+                      alt={feature.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  </div>
+                )}
+
+                <div className="p-8">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+                    style={{ backgroundColor: feature.accent }}
+                  >
+                    <Icon className="w-5 h-5 text-[#1B4332]" />
+                  </div>
+
+                  <p className="text-xs font-bold text-[#2D6A4F] tracking-widest uppercase mb-2">
+                    {feature.tag}
+                  </p>
+                  <h3 className="text-lg font-bold text-[#1A2E1A] mb-3 leading-snug">{feature.title}</h3>
+                  <p className="text-stone-500 text-sm leading-relaxed mb-6">{feature.description}</p>
+
+                  <Link
+                    href={feature.href}
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-[#2D6A4F] group-hover:text-[#1B4332] transition-colors"
+                  >
+                    {feature.cta}
+                    <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+                  </Link>
                 </div>
-
-                <p className="text-xs font-bold text-[#2D6A4F] tracking-widest uppercase mb-2">
-                  {feature.tag}
-                </p>
-                <h3 className="text-lg font-bold text-[#1A2E1A] mb-3 leading-snug">{feature.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed mb-6">{feature.description}</p>
-
-                <Link
-                  href={feature.href}
-                  className="inline-flex items-center gap-1 text-sm font-semibold text-[#2D6A4F] group-hover:text-[#1B4332] transition-colors"
-                >
-                  {feature.cta}
-                  <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-                </Link>
               </motion.div>
             )
           })}

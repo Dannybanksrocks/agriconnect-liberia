@@ -13,6 +13,9 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
+  ShoppingCart,
+  Sparkles,
+  Package,
 } from 'lucide-react'
 import Logo, { LogoIcon } from './Logo'
 import MobileBottomNav from './MobileBottomNav'
@@ -25,6 +28,7 @@ const sidebarItems = [
   { label: 'Weather', icon: Cloud, href: '/weather' },
   { label: 'Agronomy Tips', icon: BookOpen, href: '/tips' },
   { label: 'My Farm', icon: Sprout, href: '/my-farm' },
+  { label: 'Marketplace', icon: ShoppingCart, href: '/marketplace' },
   { label: 'Alerts', icon: Bell, href: '/alerts' },
   { label: 'Settings', icon: Settings, href: '/settings' },
 ]
