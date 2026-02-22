@@ -88,6 +88,20 @@ const SEED_ACCOUNTS: AuthUser[] = [
     businessName: 'Export Quality Traders',
     businessType: 'buyer',
   },
+  {
+    id: 'extension-1',
+    name: 'Moses Dolo',
+    phone: '+231770003001',
+    email: 'moses.dolo@agrihub.lr',
+    password: 'Extension@2024',
+    county: 'Lofa',
+    farmSizeAcres: 0,
+    primaryCrops: [],
+    role: 'extension-officer',
+    language: 'en',
+    status: 'active',
+    joinedAt: '2024-01-20T09:00:00Z',
+  },
 ]
 
 /* ── LocalStorage keys ─────────────────────────────────────────────────── */
