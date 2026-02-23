@@ -97,9 +97,9 @@ export default function HeroSection() {
             animate="visible"
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.06]"
           >
-            Giving every Liberian farmer
+            Empowering women farmers
             <span className="block mt-1 text-[#95D5B2]">
-              the data advantage
+              to lead Liberia&apos;s food future
             </span>
           </motion.h1>
 
@@ -124,8 +124,8 @@ export default function HeroSection() {
             animate="visible"
             className="text-base sm:text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed"
           >
-            Real-time market prices, county-level weather forecasts, and expert agronomy tips — 
-            all in one platform built for Liberian farmers.
+            Real-time market prices, county-level weather forecasts, and expert agronomy tips —
+            a platform built to put knowledge and economic power in the hands of women farmers across Liberia.
           </motion.p>
 
           {/* CTAs */}
@@ -140,7 +140,7 @@ export default function HeroSection() {
               href="/auth/register"
               className="group inline-flex items-center gap-2 bg-[#E9C46A] hover:bg-[#F4D58D] text-[#1B4332] font-bold px-8 py-4 rounded-xl text-base shadow-lg shadow-[#E9C46A]/20 transition-all"
             >
-              Start Farming Smarter
+              Join as a Woman Farmer
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
@@ -160,7 +160,7 @@ export default function HeroSection() {
             animate="visible"
             className="mt-5 text-sm text-white/60"
           >
-            Trusted by 2,400+ farmers across all 15 counties
+            Trusted by 2,400+ women farmers across all 15 counties
           </motion.p>
           <motion.p
             custom={0.6}
@@ -213,7 +213,7 @@ export default function HeroSection() {
           animate="visible"
           className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
         >
-          <FloatStatCard icon={Users}       label="Active Farmers"    value="2,400+"  trend="+18%"   delay={0.7}  />
+          <FloatStatCard icon={Users}       label="Women Farmers"     value="2,400+"  trend="+18%"   delay={0.7}  />
           <FloatStatCard icon={TrendingUp}  label="Counties Covered"  value="15"      delay={0.8}  />
           <FloatStatCard icon={Leaf}        label="Crops Tracked"     value="50+"     delay={0.9}  />
           <FloatStatCard icon={CloudSun}    label="Weather Forecasts" value="Daily"   delay={1.0}  />

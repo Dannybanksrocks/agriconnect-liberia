@@ -11,7 +11,7 @@ const features = [
     tag: 'Market Intelligence',
     title: 'Market Prices',
     description:
-      'Know the price before you sell across all 15 counties',
+      'Know the price before you sell — so no woman farmer is ever underpaid again',
     cta: 'View Market Prices',
     href: '/market',
     accent: '#D8F3DC',
@@ -44,7 +44,7 @@ const features = [
     tag: 'Direct Marketplace',
     title: 'Marketplace',
     description:
-      'Connect directly with buyers. No middlemen. Better prices.',
+      'Women farmers sell directly to buyers — no middlemen taking your earnings.',
     cta: 'Browse Marketplace',
     href: '/marketplace',
     accent: '#D8F3DC',
@@ -65,10 +65,10 @@ export default function FeaturesSection() {
             Platform Features
           </p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight">
-            Everything a Liberian farmer needs
+            Tools designed for women in Liberian agriculture
           </h2>
           <p className="mt-3 text-lg text-stone-500 max-w-xl mx-auto">
-            Powerful data tools built specifically for the Liberian agricultural context
+            Powerful data tools built to close the gender gap in Liberian agriculture — so women farmers compete, earn, and lead
           </p>
         </div>
 

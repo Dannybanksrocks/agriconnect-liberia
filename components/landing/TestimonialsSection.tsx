@@ -40,13 +40,13 @@ export default function TestimonialsSection() {
         <div className="container">
           <div className="text-center mb-14">
             <p className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#2D6A4F] uppercase bg-[#D8F3DC] px-4 py-1.5 rounded-full mb-4">
-              Farmer Stories
+              Women Farmer Stories
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight">
-              Voices from the field
+              Women&apos;s voices from the field
             </h2>
             <p className="mt-3 text-lg text-stone-500">
-              Real results from Liberian farmers using AgriHub
+              Real results from women farmers across Liberia using AgriHub
             </p>
           </div>
 

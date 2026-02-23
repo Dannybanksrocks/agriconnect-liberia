@@ -47,11 +47,11 @@ export default function MissionSection() {
               <div className="relative z-10">
                 <p className="text-[#95D5B2] text-xs font-bold uppercase tracking-widest mb-2">Our Mission</p>
                 <h3 className="text-2xl font-extrabold text-white leading-snug mb-4">
-                  Giving every Liberian farmer the data advantage
+                  Empowering women farmers to lead Liberia&apos;s food future
                 </h3>
                 <p className="text-white/60 text-sm leading-relaxed mb-6">
-                  For too long, large agribusinesses had exclusive access to price data, weather forecasts, and agronomy expertise. 
-                  Agri Hub puts the same tools in every farmer&apos;s hands — for free.
+                  For too long, women who grow the majority of Liberia&apos;s food were excluded from market data, expert guidance, and fair prices.
+                  Agri Hub puts the same tools in every woman farmer&apos;s hands — for free.
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="text-center">
@@ -95,10 +95,10 @@ export default function MissionSection() {
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight leading-snug mb-4">
               Built for Liberia.
-              <span className="block text-[#2D6A4F]">Designed for farmers.</span>
+              <span className="block text-[#2D6A4F]">Designed for women farmers.</span>
             </h2>
             <p className="text-stone-500 text-base leading-relaxed mb-8">
-              Every feature is tailored to the realities of Liberian agriculture — from USSD access on basic phones to county-level pricing that reflects your local market.
+              Every feature is built around the realities faced by women in Liberian agriculture — from USSD access on basic phones to county-level pricing that gives women farmers equal footing in every market.
             </p>
 
             <ul className="space-y-3 mb-10">
@@ -114,7 +114,7 @@ export default function MissionSection() {
               href="/auth/register"
               className="group inline-flex items-center gap-2 bg-[#1B4332] hover:bg-[#2D6A4F] text-white font-bold px-7 py-3.5 rounded-xl text-sm shadow-md shadow-[#1B4332]/20 transition-all"
             >
-              Join 2,400+ Farmers
+              Join 2,400+ Women Farmers
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>

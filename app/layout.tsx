@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { PWAProvider } from '@/components/shared/PWAProvider'
 import PWAInstallBanner from '@/components/shared/PWAInstallBanner'
 import './globals.css'
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
     template: '%s | AgriHub Liberia',
   },
   description:
-    'Real-time market prices, weather forecasts, and expert agronomy tips for Liberian farmers. Giving every Liberian farmer the data advantage.',
-  keywords: ['agriculture', 'Liberia', 'market prices', 'weather', 'farming', 'agronomy', 'crops'],
+    'Empowering women farmers in Liberia with real-time market prices, weather forecasts, and expert agronomy tips. Closing the gender gap in Liberian agriculture.',
+  keywords: ['agriculture', 'Liberia', 'women farmers', 'women empowerment', 'market prices', 'weather', 'farming', 'agronomy', 'crops', 'gender equality'],
   authors: [{ name: 'Tech 231 Liberia Ltd' }],
   manifest: '/manifest.json',
   icons: {
@@ -59,6 +60,7 @@ export default function RootLayout({
           {children}
           <PWAInstallBanner />
           <Toaster position="top-right" richColors closeButton />
+          <SpeedInsights />
         </PWAProvider>
       </body>
     </html>

@@ -50,7 +50,7 @@ export default function LandingFooter() {
             </Link>
 
             <p className="text-white/50 text-sm max-w-xs leading-relaxed">
-              Empowering Liberian farmers with real-time data — market prices, weather forecasts, and expert guidance.
+              Empowering Liberian women farmers with real-time data, market access, and expert guidance — because when women farmers thrive, all of Liberia benefits.
             </p>
 
             <div className="flex items-center gap-3">

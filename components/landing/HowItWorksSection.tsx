@@ -11,7 +11,7 @@ const steps = [
     icon: UserPlus,
     title: 'Create your farm profile',
     description:
-      'Select your county, crops, and farm size. Agri Hub personalises prices and forecasts to your exact location in minutes.',
+      'Select your county, crops, and farm size. Agri Hub personalises prices and forecasts to your exact location — built so every woman farmer can set up in minutes.',
     cta: 'Get started free',
     href: '/auth/register',
     image: '/images/farmer-checking-phone.jpg',
@@ -31,7 +31,7 @@ const steps = [
     icon: TrendingUp,
     title: 'Make smarter decisions',
     description:
-      'Sell at the right market, plant at the right time, and protect your harvest with data that used to be available only to large agribusinesses.',
+      'Sell at the right market, plant at the right time, and protect your harvest with data that used to be available only to large agribusinesses — now in every woman farmer\'s hands.',
     cta: null,
     href: null,
     image: '/images/harvest-celebration.jpg',
@@ -51,9 +51,9 @@ export default function HowItWorksSection() {
             How It Works
           </p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight">
-            Up and running in minutes
+            Your path to a stronger farm business
           </h2>
-          <p className="mt-3 text-lg text-stone-500">Three steps to a smarter farm</p>
+          <p className="mt-3 text-lg text-stone-500">Three steps every woman farmer can take today</p>
         </div>
 
         {/* Steps */}
