@@ -7,6 +7,16 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
 }
 
+// Capture the event at module-evaluation time (before React mounts)
+// so we never miss it if it fires early.
+let _earlyPrompt: BeforeInstallPromptEvent | null = null
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault()
+    _earlyPrompt = e as BeforeInstallPromptEvent
+  }, { once: true })
+}
+
 type IOSBrowser = 'safari' | 'chrome' | 'firefox' | 'edge' | 'other'
 
 interface PWAContextValue {
@@ -68,8 +78,14 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
     const wasDismissed = sessionStorage.getItem('pwa-banner-dismissed') === '1'
     setDismissed(wasDismissed)
 
+    // Pick up the event if it fired before this component mounted
+    if (_earlyPrompt) {
+      setDeferredPrompt(_earlyPrompt)
+    }
+
     const handler = (e: Event) => {
       e.preventDefault()
+      _earlyPrompt = e as BeforeInstallPromptEvent
       setDeferredPrompt(e as BeforeInstallPromptEvent)
     }
     window.addEventListener('beforeinstallprompt', handler)
@@ -80,7 +96,10 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
     if (!deferredPrompt) return
     await deferredPrompt.prompt()
     const choice = await deferredPrompt.userChoice
-    if (choice.outcome === 'accepted') setDeferredPrompt(null)
+    if (choice.outcome === 'accepted') {
+      _earlyPrompt = null
+      setDeferredPrompt(null)
+    }
   }, [deferredPrompt])
 
   const dismiss = useCallback(() => {

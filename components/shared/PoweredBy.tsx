@@ -29,16 +29,6 @@ export default function PoweredBy({
         />
         <span>Built by Tech 231 Liberia Limited</span>
       </div>
-      <div className="flex items-center gap-2">
-        <Image
-          src="/images/ministry-commerce-liberia.jpg"
-          alt="Ministry of Commerce & Industry"
-          width={logoSize}
-          height={logoSize}
-          className="shrink-0 rounded-full object-cover"
-        />
-        <span>Supported by Ministry of Commerce &amp; Industry</span>
-      </div>
     </div>
   )
 }

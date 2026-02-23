@@ -88,17 +88,6 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           {/* Left content */}
           <div className="text-center lg:text-left">
-          {/* Ministry of Commerce Badge */}
-          <motion.div
-            custom={0.1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full px-4 py-2 text-xs font-medium mb-6"
-          >
-            <img src="/images/ministry-commerce-liberia.jpg" alt="Ministry of Commerce" className="w-5 h-5 rounded-full" />
-            Supported by Ministry of Commerce &amp; Industry, Republic of Liberia
-          </motion.div>
 
           {/* Headline */}
           <motion.h1

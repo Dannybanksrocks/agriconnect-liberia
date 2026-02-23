@@ -140,13 +140,7 @@ export default function LandingFooter() {
       {/* Bottom bar */}
       <div className="border-t border-white/[0.06]">
         <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
-          <div className="flex flex-col gap-2">
-            <span>&copy; 2026 Tech 231 Liberia Limited. All rights reserved.</span>
-            <div className="flex items-center gap-2 text-white/40">
-              <img src="/images/ministry-commerce-liberia.jpg" alt="Ministry" className="w-4 h-4 rounded-full" />
-              <span>Supported by Ministry of Commerce & Industry, Republic of Liberia</span>
-            </div>
-          </div>
+          <span>&copy; 2026 Tech 231 Liberia Limited. All rights reserved.</span>
           <span>AgriHub Liberia v1.0.0</span>
         </div>
       </div>
