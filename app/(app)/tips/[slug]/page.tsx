@@ -105,14 +105,7 @@ export default function TipDetailPage({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-12">
-      <div className="max-w-4xl mx-auto px-4 pt-4"><BackButton href="/tips" label="Back to Tips" /></div>
-      {/* Back */}
-      <Link
-        href="/tips"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition"
-      >
-        <ChevronLeft className="w-4 h-4" /> Back to Tips
-      </Link>
+      <div className="px-4 pt-4"><BackButton href="/tips" label="Back to Tips" /></div>
 
       {/* Hero image */}
       <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
