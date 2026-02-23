@@ -6,14 +6,13 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '@/lib/hooks/useAuth'
 import {
-  Eye, EyeOff, User, Phone, MapPin, Check, ChevronRight, ChevronLeft,
-  Sprout, TrendingUp, MessageCircle, Leaf, CreditCard, Bell, Globe,
+  Eye, EyeOff, User, Check, ChevronRight, ChevronLeft,
+  Sprout, TrendingUp, MessageCircle, Leaf, CreditCard, Bell,
   Smartphone, Info, ArrowRight,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { countyNames } from '@/lib/mock-data/counties'
 import { LIBERIAN_CROPS, MOBILE_MONEY_PROVIDERS } from '@/lib/constants'
-import BackButton from '@/components/shared/BackButton'
 
 type FormData = {
   firstName: string
@@ -54,6 +53,23 @@ const inputClass =
   'w-full h-11 px-4 rounded-lg border border-stone-300 bg-white text-stone-800 placeholder:text-stone-400 focus:outline-none focus:border-[#2D6A4F] focus:ring-2 focus:ring-[#2D6A4F]/20 transition text-sm'
 const labelClass = 'block text-sm font-medium text-stone-700 mb-1.5'
 const errorClass = 'text-xs text-red-500 mt-1'
+
+function ToggleButton({ label, checked, onToggle }: Readonly<{ label: string; checked: boolean; onToggle: () => void }>) {
+  const base = 'w-11 h-6 rounded-full transition-colors flex-shrink-0 relative'
+  const span = 'block w-4 h-4 rounded-full bg-white shadow absolute top-1 transition-transform'
+  if (checked) {
+    return (
+      <button type="button" aria-label={`Toggle ${label}`} aria-pressed="true" onClick={onToggle} className={`${base} bg-[#1B4332]`}>
+        <span className={`${span} translate-x-6`} />
+      </button>
+    )
+  }
+  return (
+    <button type="button" aria-label={`Toggle ${label}`} aria-pressed="false" onClick={onToggle} className={`${base} bg-stone-300`}>
+      <span className={`${span} translate-x-1`} />
+    </button>
+  )
+}
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -101,7 +117,7 @@ export default function RegisterPage() {
     }
   }, [isAuthenticated, user, router, step])
 
-  const set = (field: keyof FormData, value: any) => {
+  const set = <K extends keyof FormData>(field: K, value: FormData[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     if (errors[field]) setErrors((prev) => { const e = { ...prev }; delete e[field]; return e })
   }
@@ -121,38 +137,56 @@ export default function RegisterPage() {
     }
   }
 
-  const validate = (s: number): boolean => {
+  const validateStep1 = (): Record<string, string> => {
     const e: Record<string, string> = {}
-    if (s === 1) {
-      if (!formData.firstName.trim()) e.firstName = 'First name is required'
-      if (!formData.lastName.trim()) e.lastName = 'Last name is required'
-      if (!formData.phone.trim()) e.phone = 'Phone number is required'
-      else if (!/^\d{8,10}$/.test(formData.phone)) e.phone = 'Enter 8-10 digits (without country code)'
-      if (!formData.county) e.county = 'Please select your county'
-      if (!formData.familiarWithApps) e.familiarWithApps = 'Please select one'
-      if (!formData.password) e.password = 'Password is required'
-      else if (formData.password.length < 6) e.password = 'Minimum 6 characters'
-      if (formData.password !== formData.confirmPassword) e.confirmPassword = 'Passwords do not match'
+    if (!formData.firstName.trim()) e.firstName = 'First name is required'
+    if (!formData.lastName.trim()) e.lastName = 'Last name is required'
+    if (!formData.phone.trim()) e.phone = 'Phone number is required'
+    else if (!/^\d{8,10}$/.test(formData.phone)) e.phone = 'Enter 8-10 digits (without country code)'
+    if (!formData.county) e.county = 'Please select your county'
+    if (!formData.familiarWithApps) e.familiarWithApps = 'Please select one'
+    if (!formData.password) e.password = 'Password is required'
+    else if (formData.password.length < 6) e.password = 'Minimum 6 characters'
+    if (formData.password !== formData.confirmPassword) e.confirmPassword = 'Passwords do not match'
+    return e
+  }
+
+  const validateStep2 = (): Record<string, string> => {
+    const e: Record<string, string> = {}
+    if (!formData.farmName.trim()) e.farmName = 'Farm name is required'
+    if (!formData.farmSize) e.farmSize = 'Please select farm size'
+    if (formData.crops.length === 0) e.crops = 'Add at least one crop'
+    if (!formData.experience) e.experience = 'Please select your experience level'
+    return e
+  }
+
+  const validateStep4 = (): Record<string, string> => {
+    const e: Record<string, string> = {}
+    if (formData.mobileMoneyProvider && formData.mobileMoneyProvider !== 'none') {
+      if (!formData.mobileMoneyNumber.trim()) e.mobileMoneyNumber = 'Mobile money number is required'
+      else if (!/^\d{8,10}$/.test(formData.mobileMoneyNumber)) e.mobileMoneyNumber = 'Enter 8-10 digits'
+      if (!formData.accountName.trim()) e.accountName = 'Account name is required'
     }
-    if (s === 2) {
-      if (!formData.farmName.trim()) e.farmName = 'Farm name is required'
-      if (!formData.farmSize) e.farmSize = 'Please select farm size'
-      if (formData.crops.length === 0) e.crops = 'Add at least one crop'
-      if (!formData.experience) e.experience = 'Please select your experience level'
+    return e
+  }
+
+  const validate = (s: number): boolean => {
+    const stepValidators: Record<number, () => Record<string, string>> = {
+      1: validateStep1,
+      2: validateStep2,
+      3: () => {
+        const e: Record<string, string> = {}
+        if (!formData.accountType) e.accountType = 'Please select an account type'
+        return e
+      },
+      4: validateStep4,
+      5: () => {
+        const e: Record<string, string> = {}
+        if (!formData.acceptTerms) e.acceptTerms = 'You must accept the terms and conditions'
+        return e
+      },
     }
-    if (s === 3) {
-      if (!formData.accountType) e.accountType = 'Please select an account type'
-    }
-    if (s === 4) {
-      if (formData.mobileMoneyProvider && formData.mobileMoneyProvider !== 'none') {
-        if (!formData.mobileMoneyNumber.trim()) e.mobileMoneyNumber = 'Mobile money number is required'
-        else if (!/^\d{8,10}$/.test(formData.mobileMoneyNumber)) e.mobileMoneyNumber = 'Enter 8-10 digits'
-        if (!formData.accountName.trim()) e.accountName = 'Account name is required'
-      }
-    }
-    if (s === 5) {
-      if (!formData.acceptTerms) e.acceptTerms = 'You must accept the terms and conditions'
-    }
+    const e = stepValidators[s]?.() ?? {}
     setErrors(e)
     return Object.keys(e).length === 0
   }
@@ -171,7 +205,7 @@ export default function RegisterPage() {
         email: undefined,
         password: formData.password,
         county: formData.county,
-        farmSize: parseFloat(formData.farmSize) || 0,
+        farmSize: Number.parseFloat(formData.farmSize) || 0,
         crops: formData.crops,
         experience: formData.experience,
         language: formData.language,
@@ -220,20 +254,25 @@ export default function RegisterPage() {
                 Agri <span className="text-[#74C69D]">Hub</span>
               </span>
             </Link>
-            <p className="text-[#74C69D]/70 text-xs mt-1">Liberia's Agricultural Platform</p>
+            <p className="text-[#74C69D]/70 text-xs mt-1">Liberia&apos;s Agricultural Platform</p>
           </div>
 
           <nav className="flex-1 space-y-1">
             {STEPS.map((s) => {
-              const Icon = s.icon
               const done = step > s.id
               const active = step === s.id
+              let containerClass = 'opacity-40'
+              if (active) containerClass = 'bg-white/10'
+              else if (done) containerClass = 'opacity-70'
+              let indicatorClass = 'bg-white/10 text-white/50'
+              if (done) indicatorClass = 'bg-[#52B788] text-white'
+              else if (active) indicatorClass = 'bg-white text-[#1B4332]'
               return (
                 <div
                   key={s.id}
-                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition ${active ? 'bg-white/10' : done ? 'opacity-70' : 'opacity-40'}`}
+                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition ${containerClass}`}
                 >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${done ? 'bg-[#52B788] text-white' : active ? 'bg-white text-[#1B4332]' : 'bg-white/10 text-white/50'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${indicatorClass}`}>
                     {done ? <Check className="w-4 h-4" /> : s.id}
                   </div>
                   <div>
@@ -272,12 +311,17 @@ export default function RegisterPage() {
           {/* Mobile step dots */}
           {step < 6 && (
             <div className="lg:hidden flex items-center justify-center gap-2 py-3 bg-stone-50 border-b border-stone-100">
-              {STEPS.map((s) => (
+              {STEPS.map((s) => {
+              let dotClass = 'w-2 h-2 bg-stone-300'
+              if (step === s.id) dotClass = 'w-6 h-2 bg-[#1B4332]'
+              else if (step > s.id) dotClass = 'w-2 h-2 bg-[#52B788]'
+              return (
                 <div
                   key={s.id}
-                  className={`rounded-full transition-all duration-300 ${step === s.id ? 'w-6 h-2 bg-[#1B4332]' : step > s.id ? 'w-2 h-2 bg-[#52B788]' : 'w-2 h-2 bg-stone-300'}`}
+                  className={`rounded-full transition-all duration-300 ${dotClass}`}
                 />
-              ))}
+              )
+            })}
             </div>
           )}
 
@@ -301,34 +345,34 @@ export default function RegisterPage() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className={labelClass}>First Name</label>
-                        <input className={inputClass} placeholder="e.g. Fatu" value={formData.firstName} onChange={(e) => set('firstName', e.target.value)} />
+                        <label htmlFor="firstName" className={labelClass}>First Name</label>
+                        <input id="firstName" className={inputClass} placeholder="e.g. Fatu" value={formData.firstName} onChange={(e) => set('firstName', e.target.value)} />
                         {errors.firstName && <p className={errorClass}>{errors.firstName}</p>}
                       </div>
                       <div>
-                        <label className={labelClass}>Last Name</label>
-                        <input className={inputClass} placeholder="e.g. Kamara" value={formData.lastName} onChange={(e) => set('lastName', e.target.value)} />
+                        <label htmlFor="lastName" className={labelClass}>Last Name</label>
+                        <input id="lastName" className={inputClass} placeholder="e.g. Kamara" value={formData.lastName} onChange={(e) => set('lastName', e.target.value)} />
                         {errors.lastName && <p className={errorClass}>{errors.lastName}</p>}
                       </div>
                     </div>
 
                     <div>
-                      <label className={labelClass}>Phone Number</label>
+                      <label htmlFor="phone" className={labelClass}>Phone Number</label>
                       <div className="flex gap-2">
                         <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-stone-300 bg-stone-50 text-stone-700 text-sm flex-shrink-0">
                           <span>🇱🇷</span>
                           <span>+231</span>
                         </div>
                         <div className="flex-1">
-                          <input className={inputClass} placeholder="770001234" value={formData.phone} onChange={(e) => set('phone', e.target.value.replace(/\D/g, ''))} />
+                          <input id="phone" className={inputClass} placeholder="770001234" value={formData.phone} onChange={(e) => set('phone', e.target.value.replaceAll(/\D/g, ''))} />
                         </div>
                       </div>
                       {errors.phone && <p className={errorClass}>{errors.phone}</p>}
                     </div>
 
                     <div>
-                      <label className={labelClass}>County</label>
-                      <select className={inputClass} value={formData.county} onChange={(e) => set('county', e.target.value)}>
+                      <label htmlFor="county" className={labelClass}>County</label>
+                      <select id="county" aria-label="County" className={inputClass} value={formData.county} onChange={(e) => set('county', e.target.value)}>
                         <option value="">Select your county</option>
                         {countyNames.map((c) => <option key={c} value={c}>{c}</option>)}
                       </select>
@@ -336,7 +380,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>Are you familiar with using mobile apps?</label>
+                      <p className={labelClass}>Are you familiar with using mobile apps?</p>
                       <div className="grid grid-cols-3 gap-3">
                         {['Yes', 'Somewhat', 'No'].map((opt) => (
                           <button
@@ -353,13 +397,13 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>WhatsApp Number <span className="text-stone-400">(optional)</span></label>
+                      <label htmlFor="whatsappNumber" className={labelClass}>WhatsApp Number <span className="text-stone-400">(optional)</span></label>
                       <div className="flex gap-2">
                         <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-stone-300 bg-stone-50 text-stone-700 text-sm flex-shrink-0">
                           <span>🇱🇷</span>
                           <span>+231</span>
                         </div>
-                        <input className={`${inputClass} flex-1`} placeholder="For buyer communications" value={formData.whatsappNumber} onChange={(e) => set('whatsappNumber', e.target.value.replace(/\D/g, ''))} />
+                        <input id="whatsappNumber" className={`${inputClass} flex-1`} placeholder="For buyer communications" value={formData.whatsappNumber} onChange={(e) => set('whatsappNumber', e.target.value.replaceAll(/\D/g, ''))} />
                       </div>
                     </div>
 
@@ -367,32 +411,34 @@ export default function RegisterPage() {
                       <p className="text-sm font-medium text-stone-700 mb-4">Create your password</p>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                          <label className={labelClass}>Password</label>
+                          <label htmlFor="password" className={labelClass}>Password</label>
                           <div className="relative">
                             <input
+                              id="password"
                               type={showPassword ? 'text' : 'password'}
                               className={`${inputClass} pr-10`}
                               placeholder="Min. 6 characters"
                               value={formData.password}
                               onChange={(e) => set('password', e.target.value)}
                             />
-                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
+                            <button type="button" aria-label={showPassword ? 'Hide password' : 'Show password'} onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
                               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                             </button>
                           </div>
                           {errors.password && <p className={errorClass}>{errors.password}</p>}
                         </div>
                         <div>
-                          <label className={labelClass}>Confirm Password</label>
+                          <label htmlFor="confirmPassword" className={labelClass}>Confirm Password</label>
                           <div className="relative">
                             <input
+                              id="confirmPassword"
                               type={showConfirmPassword ? 'text' : 'password'}
                               className={`${inputClass} pr-10`}
                               placeholder="Repeat password"
                               value={formData.confirmPassword}
                               onChange={(e) => set('confirmPassword', e.target.value)}
                             />
-                            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
+                            <button type="button" aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'} onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
                               {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                             </button>
                           </div>
@@ -412,14 +458,14 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>Farm Name</label>
-                      <input className={inputClass} placeholder="e.g. Kamara Family Farm" value={formData.farmName} onChange={(e) => set('farmName', e.target.value)} />
+                      <label htmlFor="farmName" className={labelClass}>Farm Name</label>
+                      <input id="farmName" className={inputClass} placeholder="e.g. Kamara Family Farm" value={formData.farmName} onChange={(e) => set('farmName', e.target.value)} />
                       {errors.farmName && <p className={errorClass}>{errors.farmName}</p>}
                     </div>
 
                     <div>
-                      <label className={labelClass}>Farm Size</label>
-                      <select className={inputClass} value={formData.farmSize} onChange={(e) => set('farmSize', e.target.value)}>
+                      <label htmlFor="farmSize" className={labelClass}>Farm Size</label>
+                      <select id="farmSize" aria-label="Farm Size" className={inputClass} value={formData.farmSize} onChange={(e) => set('farmSize', e.target.value)}>
                         <option value="">Select farm size</option>
                         <option value="0.5">Under 1 acre</option>
                         <option value="2">1–3 acres</option>
@@ -431,7 +477,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>What do you grow?</label>
+                      <p className={labelClass}>What do you grow?</p>
                       <div className="flex flex-wrap gap-2 mb-2">
                         {LIBERIAN_CROPS.map((crop) => (
                           <button
@@ -470,7 +516,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>How long have you been in agriculture?</label>
+                      <p className={labelClass}>How long have you been in agriculture?</p>
                       <div className="grid grid-cols-3 gap-3">
                         {[
                           { id: 'beginner', label: 'Beginner', sub: '< 1 year' },
@@ -492,8 +538,9 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>What are your goals with AgriHub? <span className="text-stone-400">(optional)</span></label>
+                      <label htmlFor="goals" className={labelClass}>What are your goals with AgriHub? <span className="text-stone-400">(optional)</span></label>
                       <textarea
+                        id="goals"
                         className={`${inputClass} h-20 py-3 resize-none`}
                         placeholder="e.g. Get better prices for my cassava, connect with buyers in Monrovia..."
                         value={formData.goals}
@@ -508,7 +555,7 @@ export default function RegisterPage() {
                   <div className="space-y-5">
                     <div>
                       <h2 className="text-2xl font-bold text-stone-800">Account Type</h2>
-                      <p className="text-stone-500 text-sm mt-1">Choose the role that best describes how you'll use AgriHub</p>
+                      <p className="text-stone-500 text-sm mt-1">Choose the role that best describes how you&apos;ll use AgriHub</p>
                     </div>
 
                     <div className="space-y-3">
@@ -558,7 +605,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>Mobile Money Provider</label>
+                      <p className={labelClass}>Mobile Money Provider</p>
                       <div className="space-y-2">
                         {MOBILE_MONEY_PROVIDERS.map((provider) => (
                           <button
@@ -585,17 +632,18 @@ export default function RegisterPage() {
                     {formData.mobileMoneyProvider && formData.mobileMoneyProvider !== 'none' && (
                       <>
                         <div>
-                          <label className={labelClass}>Mobile Money Number</label>
+                          <label htmlFor="mobileMoneyNumber" className={labelClass}>Mobile Money Number</label>
                           <div className="flex gap-2">
                             <div className="flex items-center gap-2 px-3 h-11 rounded-lg border border-stone-300 bg-stone-50 text-stone-700 text-sm flex-shrink-0">
                               <span>🇱🇷</span>
                               <span>+231</span>
                             </div>
                             <input
+                              id="mobileMoneyNumber"
                               className={`${inputClass} flex-1`}
                               placeholder="770001234"
                               value={formData.mobileMoneyNumber}
-                              onChange={(e) => set('mobileMoneyNumber', e.target.value.replace(/\D/g, ''))}
+                              onChange={(e) => set('mobileMoneyNumber', e.target.value.replaceAll(/\D/g, ''))}
                             />
                           </div>
                           <p className="text-xs text-stone-400 mt-1 flex items-center gap-1">
@@ -605,13 +653,13 @@ export default function RegisterPage() {
                         </div>
 
                         <div>
-                          <label className={labelClass}>Account Name</label>
-                          <input className={inputClass} placeholder="Name registered on mobile money" value={formData.accountName} onChange={(e) => set('accountName', e.target.value)} />
+                          <label htmlFor="accountName" className={labelClass}>Account Name</label>
+                          <input id="accountName" className={inputClass} placeholder="Name registered on mobile money" value={formData.accountName} onChange={(e) => set('accountName', e.target.value)} />
                           {errors.accountName && <p className={errorClass}>{errors.accountName}</p>}
                         </div>
 
                         <div>
-                          <label className={labelClass}>Currency Preference</label>
+                          <p className={labelClass}>Currency Preference</p>
                           <div className="grid grid-cols-2 gap-3">
                             {['LRD', 'USD'].map((cur) => (
                               <button
@@ -628,10 +676,10 @@ export default function RegisterPage() {
                         </div>
 
                         <div>
-                          <label className={labelClass}>Minimum payout threshold <span className="text-stone-400">(optional)</span></label>
+                          <label htmlFor="minPayoutThreshold" className={labelClass}>Minimum payout threshold <span className="text-stone-400">(optional)</span></label>
                           <div className="relative">
                             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">L$</span>
-                            <input className={`${inputClass} pl-8`} placeholder="e.g. 500" value={formData.minPayoutThreshold} onChange={(e) => set('minPayoutThreshold', e.target.value.replace(/\D/g, ''))} />
+                            <input id="minPayoutThreshold" className={`${inputClass} pl-8`} placeholder="e.g. 500" value={formData.minPayoutThreshold} onChange={(e) => set('minPayoutThreshold', e.target.value.replaceAll(/\D/g, ''))} />
                           </div>
                           <p className="text-xs text-stone-400 mt-1">Notify me when my balance reaches this amount</p>
                         </div>
@@ -663,7 +711,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div>
-                      <label className={labelClass}>Language Preference</label>
+                      <p className={labelClass}>Language Preference</p>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {[
                           { id: 'english', label: 'English' },
@@ -695,13 +743,11 @@ export default function RegisterPage() {
                             <p className="text-sm font-medium text-stone-700">{item.label}</p>
                             <p className="text-xs text-stone-400">{item.desc}</p>
                           </div>
-                          <button
-                            type="button"
-                            onClick={() => set(item.key, !formData[item.key])}
-                            className={`w-11 h-6 rounded-full transition-colors flex-shrink-0 relative ${formData[item.key] ? 'bg-[#1B4332]' : 'bg-stone-300'}`}
-                          >
-                            <span className={`block w-4 h-4 rounded-full bg-white shadow absolute top-1 transition-transform ${formData[item.key] ? 'translate-x-6' : 'translate-x-1'}`} />
-                          </button>
+                          <ToggleButton
+                            label={item.label}
+                            checked={Boolean(formData[item.key])}
+                            onToggle={() => set(item.key, !formData[item.key])}
+                          />
                         </div>
                       ))}
                     </div>
@@ -758,7 +804,7 @@ export default function RegisterPage() {
                         { label: 'County', value: formData.county },
                         { label: 'Account Type', value: formData.accountType.replace('-', ' ') },
                         { label: 'Primary Crops', value: formData.crops.slice(0, 3).join(', ') || '—' },
-                        { label: 'Mobile Money', value: selectedProvider?.id !== 'none' ? selectedProvider?.label || 'Not set up' : 'Not set up' },
+                        { label: 'Mobile Money', value: selectedProvider?.id === 'none' ? 'Not set up' : selectedProvider?.label ?? 'Not set up' },
                       ].map((row) => (
                         <div key={row.label} className="flex justify-between text-sm">
                           <span className="text-stone-400">{row.label}</span>
