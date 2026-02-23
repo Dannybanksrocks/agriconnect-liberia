@@ -75,7 +75,7 @@ export default function ShopFooter() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-          <p>© 2025 Tech 231 Liberia Limited · Built for the Ministry of Commerce & Industry</p>
+          <p>© 2025 Tech 231 Liberia Limited. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/terms" className="hover:text-white/70 transition">Terms</Link>
             <Link href="/privacy" className="hover:text-white/70 transition">Privacy</Link>

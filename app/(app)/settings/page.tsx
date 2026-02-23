@@ -508,10 +508,6 @@ function AboutTab() {
         <PoweredBy variant="stacked" />
       </div>
 
-      <p className="mt-4 text-sm text-agri-muted dark:text-muted-foreground">
-        Supported by Ministry of Commerce &amp; Industry, Republic of
-        Liberia
-      </p>
 
       <div className="mt-6 rounded-xl border border-primary/20 bg-primary-50 p-4 dark:border-primary/30 dark:bg-primary-900/20">
         <div className="flex items-center justify-center gap-2">
