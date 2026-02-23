@@ -38,6 +38,23 @@ const tabs: Tab[] = [
   { id: 'about', label: 'About', icon: Info },
 ]
 
+function ToggleSwitch({ label, checked, onToggle }: Readonly<{ label: string; checked: boolean; onToggle: () => void }>) {
+  const base = 'relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors'
+  const knob = 'pointer-events-none inline-block h-5 w-5 translate-y-0.5 rounded-full bg-white shadow-sm transition-transform'
+  if (checked) {
+    return (
+      <button type="button" role="switch" aria-label={label} aria-checked="true" onClick={onToggle} className={`${base} bg-primary`}>
+        <span className={`${knob} translate-x-5.5`} />
+      </button>
+    )
+  }
+  return (
+    <button type="button" role="switch" aria-label={label} aria-checked="false" onClick={onToggle} className={`${base} bg-gray-300 dark:bg-gray-600`}>
+      <span className={`${knob} translate-x-0.5`} />
+    </button>
+  )
+}
+
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('profile')
 
@@ -53,6 +70,7 @@ export default function SettingsPage() {
           const Icon = tab.icon
           return (
             <button
+              type="button"
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-1.5 whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
@@ -145,9 +163,9 @@ function ProfileTab() {
           type="email"
         />
         <div>
-          <label className="mb-1 block text-sm font-medium text-agri-text dark:text-foreground">
+          <p className="mb-1 block text-sm font-medium text-agri-text dark:text-foreground">
             County
-          </label>
+          </p>
           <CountySelector
             value={form.county}
             onChange={(v) => setForm({ ...form, county: v })}
@@ -166,6 +184,7 @@ function ProfileTab() {
 
       <div className="flex items-center gap-3">
         <button
+          type="button"
           onClick={handleSave}
           disabled={!hasChanges}
           className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50"
@@ -188,18 +207,20 @@ function FieldInput({
   value,
   onChange,
   type = 'text',
-}: {
+}: Readonly<{
   label: string
   value: string
   onChange: (v: string) => void
   type?: string
-}) {
+}>) {
+  const id = label.toLowerCase().replace(/\s+/g, '-')
   return (
     <div>
-      <label className="mb-1 block text-sm font-medium text-agri-text dark:text-foreground">
+      <label htmlFor={id} className="mb-1 block text-sm font-medium text-agri-text dark:text-foreground">
         {label}
       </label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -268,22 +289,11 @@ function NotificationsTab() {
                     )}
                   </div>
                 </div>
-                <button
-                  role="switch"
-                  aria-checked={isOn}
-                  onClick={() =>
-                    setEnabled((p) => ({ ...p, [row.id]: !p[row.id] }))
-                  }
-                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors ${
-                    isOn ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
-                  }`}
-                >
-                  <span
-                    className={`pointer-events-none inline-block h-5 w-5 translate-y-0.5 rounded-full bg-white shadow-sm transition-transform ${
-                      isOn ? 'translate-x-5.5' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
+                <ToggleSwitch
+                  label={row.label}
+                  checked={isOn}
+                  onToggle={() => setEnabled((p) => ({ ...p, [row.id]: !p[row.id] }))}
+                />
               </div>
             )
           })}
@@ -312,7 +322,7 @@ function NotificationsTab() {
                 onChange={() => setDelivery(m)}
                 className="sr-only"
               />
-              {m === 'push' ? 'Push' : m === 'sms' ? 'SMS' : 'Both'}
+              {{ push: 'Push', sms: 'SMS', both: 'Both' }[m]}
             </label>
           ))}
         </div>
@@ -369,21 +379,20 @@ function LanguageTab() {
         Select your preferred language for the app interface and alerts.
       </p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {languages.map((lang) => (
+        {languages.map((lang) => {
+          let btnCls = 'border-agri-border hover:border-primary/50 dark:border-border'
+          if (language === lang.id) btnCls = 'border-primary bg-primary/5 ring-2 ring-primary/20'
+          else if (!lang.available) btnCls = 'cursor-not-allowed border-agri-border opacity-60 dark:border-border'
+          return (
           <button
+            type="button"
             key={lang.id}
             onClick={() =>
               lang.available &&
               setLanguage(lang.id as typeof language)
             }
             disabled={!lang.available}
-            className={`relative rounded-xl border p-4 text-left transition-colors ${
-              language === lang.id
-                ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
-                : lang.available
-                  ? 'border-agri-border hover:border-primary/50 dark:border-border'
-                  : 'cursor-not-allowed border-agri-border opacity-60 dark:border-border'
-            }`}
+            className={`relative rounded-xl border p-4 text-left transition-colors ${btnCls}`}
           >
             <span className="text-sm font-semibold text-agri-text dark:text-foreground">
               {lang.label}
@@ -401,7 +410,8 @@ function LanguageTab() {
               </span>
             )}
           </button>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
@@ -445,15 +455,7 @@ function PrivacyTab() {
 
       <div className="border-t border-agri-border pt-6 dark:border-border">
         <h3 className="mb-2 font-semibold text-red-600">Danger Zone</h3>
-        {!showConfirm ? (
-          <button
-            onClick={() => setShowConfirm(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-red-300 px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-900/20"
-          >
-            <Trash2 className="h-4 w-4" />
-            Delete my account
-          </button>
-        ) : (
+        {showConfirm ? (
           <div className="rounded-xl border border-red-300 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/10">
             <p className="mb-3 text-sm text-red-700 dark:text-red-300">
               This action is permanent. Type{' '}
@@ -468,12 +470,14 @@ function PrivacyTab() {
             />
             <div className="flex gap-2">
               <button
+                type="button"
                 disabled={!canDelete}
                 className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Permanently Delete
               </button>
               <button
+                type="button"
                 onClick={() => {
                   setShowConfirm(false)
                   setConfirmText('')
@@ -484,6 +488,15 @@ function PrivacyTab() {
               </button>
             </div>
           </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setShowConfirm(true)}
+            className="inline-flex items-center gap-1.5 rounded-xl border border-red-300 px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-900/20"
+          >
+            <Trash2 className="h-4 w-4" />
+            Delete my account
+          </button>
         )}
       </div>
     </div>
@@ -521,14 +534,14 @@ function AboutTab() {
 
       <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
         {['Privacy Policy', 'Terms of Service', 'Support'].map((link) => (
-          <a
+          <button
             key={link}
-            href="#"
+            type="button"
             className="inline-flex items-center gap-1 text-primary transition-colors hover:underline"
           >
             {link}
             <ExternalLink className="h-3 w-3" />
-          </a>
+          </button>
         ))}
       </div>
     </div>

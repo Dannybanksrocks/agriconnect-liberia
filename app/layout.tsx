@@ -22,10 +22,20 @@ export const metadata: Metadata = {
   keywords: ['agriculture', 'Liberia', 'market prices', 'weather', 'farming', 'agronomy', 'crops'],
   authors: [{ name: 'Tech 231 Liberia Ltd' }],
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180' }],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'AgriHub',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
   },
 }
 
@@ -44,14 +54,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-title" content="AgriHub" />
-      </head>
       <body className={`${inter.variable} antialiased`} suppressHydrationWarning>
         <PWAProvider>
           {children}
