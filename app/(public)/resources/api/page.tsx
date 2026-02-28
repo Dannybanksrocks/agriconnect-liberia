@@ -1,11 +1,14 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, Code, Key, BookOpen, Zap } from 'lucide-react'
+import { buildMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: 'API Documentation',
   description: 'Agri Hub Liberia API documentation for developers',
-}
+  path: '/resources/api',
+  keywords: ['AgriHub API', 'Liberia agriculture API', 'developer documentation'],
+})
 
 export default function APIDocsPage() {
   return (
