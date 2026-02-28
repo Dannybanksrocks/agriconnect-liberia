@@ -6,10 +6,10 @@ const testimonials = [
   {
     quote:
       'AgriHub showed me that rice prices in Gbarnga market were L$40 higher than my village buyer. I transported my harvest and earned an extra L$8,000 that season.',
-    name: 'Fatu Kamara',
+    name: 'Samuel Kamara',
     role: 'Rice Farmer',
     county: 'Bong County',
-    initials: 'FK',
+    initials: 'SK',
     crop: 'Rice',
   },
   {
@@ -24,10 +24,10 @@ const testimonials = [
   {
     quote:
       'I followed the post-harvest storage tips and cut cassava losses from 40% to under 10%. Now I sell through the dry season when prices are highest.',
-    name: 'Kou Siaffa',
+    name: 'Daniel Siaffa',
     role: 'Cassava Farmer',
     county: 'Lofa County',
-    initials: 'KS',
+    initials: 'DS',
     crop: 'Cassava',
   },
 ]

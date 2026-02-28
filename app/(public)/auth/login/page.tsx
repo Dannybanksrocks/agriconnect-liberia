@@ -95,10 +95,10 @@ function LoginFormContent() {
             </p>
             <div className="mt-4 flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center text-xs font-bold">
-                FK
+                SK
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Fatu Kamara</p>
+                <p className="text-sm font-semibold text-white">Samuel Kamara</p>
                 <p className="text-xs text-white/50">Rice farmer, Bong County</p>
               </div>
             </div>
