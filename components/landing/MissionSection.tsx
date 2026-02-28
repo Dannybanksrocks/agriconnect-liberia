@@ -31,7 +31,6 @@ export default function MissionSection() {
           >
             {/* Main card */}
             <div className="relative bg-[#1B4332] rounded-3xl p-8 shadow-2xl shadow-[#1B4332]/20 overflow-hidden">
-              {/* Background pattern */}
               <div
                 className="absolute inset-0 pointer-events-none opacity-[0.06]"
                 style={{
@@ -39,19 +38,19 @@ export default function MissionSection() {
                   backgroundSize: '28px 28px',
                 }}
               />
-              {/* Gold glow */}
-              <div className="absolute top-0 right-0 w-48 h-48 pointer-events-none"
+              <div
+                className="absolute top-0 right-0 w-48 h-48 pointer-events-none"
                 style={{ background: 'radial-gradient(circle at 100% 0%, rgba(233,196,106,0.15) 0%, transparent 70%)' }}
               />
 
               <div className="relative z-10">
                 <p className="text-[#95D5B2] text-xs font-bold uppercase tracking-widest mb-2">Our Mission</p>
                 <h3 className="text-2xl font-extrabold text-white leading-snug mb-4">
-                  Empowering women farmers to lead Liberia&apos;s food future
+                  Empowering farmers to lead Liberia&apos;s food future
                 </h3>
                 <p className="text-white/60 text-sm leading-relaxed mb-6">
-                  For too long, women who grow the majority of Liberia&apos;s food were excluded from market data, expert guidance, and fair prices.
-                  Agri Hub puts the same tools in every woman farmer&apos;s hands — for free.
+                  For too long, many farmers across Liberia were excluded from market data, expert guidance, and fair prices.
+                  {' '}Agri Hub puts the same tools in every farmer&apos;s hands — for free.
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="text-center">
@@ -60,7 +59,7 @@ export default function MissionSection() {
                   </div>
                   <div className="h-10 w-px bg-white/10" />
                   <div className="text-center">
-                    <p className="text-3xl font-extrabold text-[#E9C46A]">3×</p>
+                    <p className="text-3xl font-extrabold text-[#E9C46A]">3x</p>
                     <p className="text-xs text-white/50 mt-0.5">Better price discovery</p>
                   </div>
                   <div className="h-10 w-px bg-white/10" />
@@ -72,7 +71,6 @@ export default function MissionSection() {
               </div>
             </div>
 
-            {/* Floating quote card - positioned below the main card */}
             <div className="absolute -bottom-6 left-4 lg:left-8 right-4 lg:right-auto lg:max-w-[280px] bg-white border border-stone-200 rounded-2xl px-5 py-4 shadow-xl z-20">
               <p className="text-xs text-stone-600 italic leading-relaxed">
                 &ldquo;I earned L$8,000 more on my rice harvest after using Agri Hub.&rdquo;
@@ -95,10 +93,10 @@ export default function MissionSection() {
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight leading-snug mb-4">
               Built for Liberia.
-              <span className="block text-[#2D6A4F]">Designed for women farmers.</span>
+              <span className="block text-[#2D6A4F]">Designed for farmers.</span>
             </h2>
             <p className="text-stone-500 text-base leading-relaxed mb-8">
-              Every feature is built around the realities faced by women in Liberian agriculture — from USSD access on basic phones to county-level pricing that gives women farmers equal footing in every market.
+              Every feature is built around the realities faced by farmers in Liberian agriculture — from USSD access on basic phones to county-level pricing that gives farmers equal footing in every market.
             </p>
 
             <ul className="space-y-3 mb-10">
@@ -114,7 +112,7 @@ export default function MissionSection() {
               href="/auth/register"
               className="group inline-flex items-center gap-2 bg-[#1B4332] hover:bg-[#2D6A4F] text-white font-bold px-7 py-3.5 rounded-xl text-sm shadow-md shadow-[#1B4332]/20 transition-all"
             >
-              Join 2,400+ Women Farmers
+              Join 2,400+ Farmers
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>

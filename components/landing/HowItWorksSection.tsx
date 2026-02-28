@@ -11,7 +11,7 @@ const steps = [
     icon: UserPlus,
     title: 'Create your farm profile',
     description:
-      'Select your county, crops, and farm size. Agri Hub personalises prices and forecasts to your exact location — built so every woman farmer can set up in minutes.',
+      "Select your county, crops, and farm size. Agri Hub personalises prices and forecasts to your exact location — built so every farmer can set up in minutes.",
     cta: 'Get started free',
     href: '/auth/register',
     image: '/images/farmer-checking-phone.jpg',
@@ -21,7 +21,7 @@ const steps = [
     icon: LayoutDashboard,
     title: 'Access your dashboard',
     description:
-      'See today\'s crop prices, a 7-day weather forecast, and the latest agronomy tips — on any device, even without internet.',
+      "See today's crop prices, a 7-day weather forecast, and the latest agronomy tips — on any device, even without internet.",
     cta: null,
     href: null,
     image: '/images/liberia-community-farming.jpg',
@@ -31,7 +31,7 @@ const steps = [
     icon: TrendingUp,
     title: 'Make smarter decisions',
     description:
-      'Sell at the right market, plant at the right time, and protect your harvest with data that used to be available only to large agribusinesses — now in every woman farmer\'s hands.',
+      "Sell at the right market, plant at the right time, and protect your harvest with data that used to be available only to large agribusinesses — now in every farmer's hands.",
     cta: null,
     href: null,
     image: '/images/harvest-celebration.jpg',
@@ -53,7 +53,7 @@ export default function HowItWorksSection() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight">
             Your path to a stronger farm business
           </h2>
-          <p className="mt-3 text-lg text-stone-500">Three steps every woman farmer can take today</p>
+          <p className="mt-3 text-lg text-stone-500">Three steps every farmer can take today</p>
         </div>
 
         {/* Steps */}
@@ -82,7 +82,7 @@ export default function HowItWorksSection() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1B4332]/60 to-transparent" />
                   </div>
                 )}
-                
+
                 {/* Number circle */}
                 <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full bg-[#1B4332] text-white shadow-lg shadow-[#1B4332]/20 mb-6">
                   <div className="flex flex-col items-center leading-none">

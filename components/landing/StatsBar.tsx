@@ -11,11 +11,11 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { numericValue: 2400, suffix: '+',  label: 'Women Farmers Registered' },
+  { numericValue: 2400, suffix: '+',  label: 'Farmers Registered' },
   { numericValue: 15,   suffix: '',   label: 'Counties Covered'         },
   { numericValue: 50,   suffix: '+',  label: 'Crops Tracked'            },
   { numericValue: 99.9, suffix: '%',  label: 'Platform Uptime', decimals: 1 },
-  { numericValue: 2.8,  suffix: 'M+', label: 'Women-Led Sales',  decimals: 1 },
+  { numericValue: 2.8,  suffix: 'M+', label: 'Farmer Sales',  decimals: 1 },
 ]
 
 function useCountUp(target: number, isInView: boolean, duration = 1600, decimals = 0) {

@@ -37,9 +37,7 @@ export default function LandingFooter() {
     <footer className="w-full bg-[#0D2818] text-white">
       <div className="container py-14 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
-          {/* Brand */}
           <div className="space-y-5">
-            {/* Logo */}
             <Link href="/" className="flex items-center gap-2 w-fit">
               <div className="w-8 h-8 rounded-lg bg-[#1B4332] flex items-center justify-center">
                 <Leaf className="w-4 h-4 text-[#95D5B2]" />
@@ -50,7 +48,7 @@ export default function LandingFooter() {
             </Link>
 
             <p className="text-white/50 text-sm max-w-xs leading-relaxed">
-              Empowering Liberian women farmers with real-time data, market access, and expert guidance — because when women farmers thrive, all of Liberia benefits.
+              Empowering Liberian farmers with real-time data, market access, and expert guidance — because when farmers thrive, all of Liberia benefits.
             </p>
 
             <div className="flex items-center gap-3">
@@ -70,7 +68,6 @@ export default function LandingFooter() {
             </div>
           </div>
 
-          {/* Product */}
           <div>
             <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-5">Product</h4>
             <ul className="space-y-3">
@@ -84,7 +81,6 @@ export default function LandingFooter() {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-5">Company</h4>
             <ul className="space-y-3">
@@ -98,7 +94,6 @@ export default function LandingFooter() {
             </ul>
           </div>
 
-          {/* Resources + Powered by */}
           <div className="space-y-6">
             <div>
               <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-5">Resources</h4>
@@ -118,7 +113,6 @@ export default function LandingFooter() {
           </div>
         </div>
 
-        {/* USSD mini callout */}
         <div className="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="font-mono text-2xl font-extrabold text-[#E9C46A]">*347#</div>
@@ -137,7 +131,6 @@ export default function LandingFooter() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-white/[0.06]">
         <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
           <span>&copy; 2026 Tech 231 Liberia Limited. All rights reserved.</span>

@@ -35,18 +35,17 @@ const testimonials = [
 export default function TestimonialsSection() {
   return (
     <>
-      {/* Testimonials */}
       <section className="w-full py-20 md:py-28 bg-white">
         <div className="container">
           <div className="text-center mb-14">
             <p className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#2D6A4F] uppercase bg-[#D8F3DC] px-4 py-1.5 rounded-full mb-4">
-              Women Farmer Stories
+              Farmer Stories
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1A2E1A] tracking-tight">
-              Women&apos;s voices from the field
+              Voices from the field
             </h2>
             <p className="mt-3 text-lg text-stone-500">
-              Real results from women farmers across Liberia using AgriHub
+              Real results from farmers across Liberia using AgriHub
             </p>
           </div>
 
@@ -56,19 +55,16 @@ export default function TestimonialsSection() {
                 key={t.name}
                 className="relative bg-white rounded-2xl border border-stone-200 p-7 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
               >
-                {/* Quote icon */}
                 <div className="absolute top-5 right-6 text-[#D8F3DC]">
                   <Quote className="w-8 h-8 fill-current" />
                 </div>
 
-                {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 text-[#E9C46A] fill-[#E9C46A]" />
                   ))}
                 </div>
 
-                {/* Crop tag */}
                 <span className="inline-flex items-center text-[10px] font-bold text-[#2D6A4F] uppercase tracking-wider bg-[#D8F3DC] px-2.5 py-0.5 rounded-full mb-4">
                   {t.crop} Farmer
                 </span>
@@ -92,9 +88,7 @@ export default function TestimonialsSection() {
         </div>
       </section>
 
-      {/* USSD Callout */}
       <section className="relative w-full py-16 md:py-20 bg-[#1B4332] overflow-hidden">
-        {/* Background pattern */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.04]"
           style={{
@@ -102,8 +96,8 @@ export default function TestimonialsSection() {
             backgroundSize: '32px 32px',
           }}
         />
-        {/* Gold glow */}
-        <div className="absolute inset-0 pointer-events-none"
+        <div
+          className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(233,196,106,0.1) 0%, transparent 60%)' }}
         />
 
