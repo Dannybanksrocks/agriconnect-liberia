@@ -118,7 +118,7 @@ export default function LandingFooter() {
             <div className="font-mono text-2xl font-extrabold text-[#E9C46A]">*347#</div>
             <p className="text-xs text-white/40">
               Dial from any phone · No smartphone or internet required<br />
-              Available on MTN, Orange &amp; Lonestar
+              Available on MTN &amp; Orange
             </p>
           </div>
           <Link

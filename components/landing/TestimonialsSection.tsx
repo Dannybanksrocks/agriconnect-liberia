@@ -109,7 +109,7 @@ export default function TestimonialsSection() {
             Access AgriHub from any mobile phone
           </h2>
           <p className="text-white/60 text-base mb-8 max-w-md mx-auto">
-            No internet? No problem. Just dial from MTN, Orange, or Lonestar — anywhere in Liberia.
+            No internet? No problem. Just dial from MTN or Orange anywhere in Liberia.
           </p>
           <div className="font-mono text-5xl md:text-7xl font-extrabold text-[#E9C46A] mb-3 tracking-tight">
             *347#
